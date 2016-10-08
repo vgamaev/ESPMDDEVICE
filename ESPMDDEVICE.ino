@@ -316,7 +316,7 @@ void IPAddressToString(IPAddress ip, String &StrIP)
    Serial.print("Convert "); 
    Serial.println(StrIP); 
 } 
-//=======================================WIFI================================================
+//=======================================WIFI==============================================
 void EnableAP(){
   if(Config.ap == "on"){
     const char *ssid1 = "MY_ESP";
