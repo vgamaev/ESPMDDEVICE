@@ -1,0 +1,28 @@
+#ifndef ESPWEB_h
+#define ESPWEB_h
+
+#include <ESP8266WebServer.h>
+#include "ESPEEPROM.h"
+#include "LAMP.h"
+#include "ESPWIFI.h"
+
+extern ESP8266WebServer server; // веб сервер
+
+bool WebAuth();
+
+// функция для главной страници
+void handleRoot();
+
+// Находим все точки доступа и записываем их названия в буфер вэб страници
+void WIFIScan(String & temp);
+
+// Раббираем ответ от ВЭБ страници конфигурвции.
+void WebParser();
+
+// функция для страници настройки устройства
+void handleSetup();
+
+// функция для недействительных запросов
+void handleNotFound();
+
+#endif
