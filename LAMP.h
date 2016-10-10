@@ -15,13 +15,13 @@ extern int button; // "Ловим" выключатель через GPIO0
 extern bool lamp_on;
 
 // Включаем лампу
-void turnOnLamp();
+void turnOnLamp(int pinlamp);
 
 // Выключаем лампу
-void turnOffLamp();
+void turnOffLamp(int pinlamp);
 
 // Изменяем состояние лампы
-void toggleLamp();
+void toggleLamp(int pinlamp);
 
 // Получаем от сервера команду включить
 void handleOn();

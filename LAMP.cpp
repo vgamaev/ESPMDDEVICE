@@ -3,27 +3,29 @@
 bool lamp_on =  false;
 
 // Включаем лампу
-void turnOnLamp() {
-  digitalWrite(lamp, HIGH);
-  Serial.println("LAMP ON");
+void turnOnLamp(int pinlamp) {
+  digitalWrite(pinlamp, HIGH);
+  Serial.print(pinlamp);
+  Serial.println(" PIN ON");
   sendServer(true);
   lamp_on = true;
 }
  
 // Выключаем лампу
-void turnOffLamp() {
-  digitalWrite(lamp, LOW);
-  Serial.println("LAMP OFF");
+void turnOffLamp(int pinlamp) {
+  digitalWrite(pinlamp, LOW);
+  Serial.print(pinlamp);
+  Serial.println(" PIN OFF");
   sendServer(false);
   lamp_on = false;
 }
 
 // Изменяем состояние лампы
-void toggleLamp() {
+void toggleLamp(int pinlamp) {
   if (lamp_on == true) {
-    turnOffLamp();
+    turnOffLamp(pinlamp);
    } else {
-    turnOnLamp();
+    turnOnLamp(pinlamp);
    
   }
 }
@@ -39,7 +41,7 @@ void handleOn() {
     server.send(401, "text/plain", message);
     return;
   }
-  turnOnLamp();
+  turnOnLamp(lamp);
   String message = "success";
   server.send(200, "text/plain", message);
 }
@@ -53,7 +55,7 @@ void handleOff() {
     server.send(401, "text/plain", message);
     return;
   }
-  turnOffLamp();
+  turnOffLamp(lamp);
   String message = "success";
   server.send(200, "text/plain", message);
 }
