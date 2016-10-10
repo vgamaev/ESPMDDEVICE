@@ -65,6 +65,7 @@ void setup(void) {
   server.on("/setup", handleSetup);
   server.on("/on", handleOn);
   server.on("/off", handleOff);
+  server.on("/ir",  handleIR);
  // server.on("/firmware", FirmwarePage);
  // serveUupdate();                        //Update firmware
     //server.on("/off", HTTP_POST, handleOff);
@@ -84,7 +85,6 @@ void loop(void) {
   server.handleClient();
 
   IRResiver();
-  IRTransmiter();
   // Проверяем нажатие выключателя
   button_state = digitalRead(button);
   if (button_state == HIGH && can_toggle) {
