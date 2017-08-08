@@ -43,8 +43,8 @@ void IRResiver()
 { 
   if (irrecv.decode(&results)) {
       Serial.println(results.value); //, HEX);
-      String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=m&m=IR_Decode&"+Config.property+"="+results.value;
-      //String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p="+Config.property+"&v="+results.value;
+      //String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=m&m=IR_Decode&"+Config.property+"="+results.value;
+      String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p="+Config.property+"&v="+results.value;
       Serial.println(post);
       http.begin(post);
       int httpCode = http.GET(); 
