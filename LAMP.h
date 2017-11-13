@@ -29,6 +29,9 @@ void handleOn();
 // Получаем от сервера команду выключить
 void handleOff();
 
+// Получаем от сервера команды управления реле
+void handleRelay();
+
 // Отправляем серверу MojorDomo события вкл./выкл.
 void sendServer(bool state);
 

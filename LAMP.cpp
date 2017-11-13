@@ -7,7 +7,7 @@ void turnOnLamp(int pinlamp) {
   digitalWrite(pinlamp, HIGH);
   Serial.print(pinlamp);
   Serial.println(" PIN ON");
-  sendServer(true);
+//  sendServer(true);                /// Возможно лишнее
   lamp_on = true;
 }
  
@@ -16,7 +16,7 @@ void turnOffLamp(int pinlamp) {
   digitalWrite(pinlamp, LOW);
   Serial.print(pinlamp);
   Serial.println(" PIN OFF");
-  sendServer(false);
+  //sendServer(false);
   lamp_on = false;
 }
 
@@ -26,8 +26,7 @@ void toggleLamp(int pinlamp) {
     turnOffLamp(pinlamp);
    } else {
     turnOnLamp(pinlamp);
-   
-  }
+   }
 }
 
 // Получаем от сервера команду включить
@@ -56,6 +55,45 @@ void handleOff() {
     return;
   }
   turnOffLamp(lamp);
+  String message = "success";
+  server.send(200, "text/plain", message);
+}
+
+// Получаем от сервера команды управления реле
+void handleRelay()
+{
+  int pinN=100;
+  String buf = server.arg("token");
+  Serial.println(buf);
+  if (Config.www_password != buf) {
+    String message = "access denied";
+    server.send(401, "text/plain", message);
+    return;
+  }
+  buf = server.arg("relay");
+  Serial.println(buf);
+
+  if (buf == "1")
+  {
+    
+  }else if(buf == "2")
+  {
+    
+  }else if(buf == "3")
+  {
+    
+  }
+
+  if(pinN!=100)
+  {
+    buf = server.arg("state");
+    Serial.println(buf);
+    
+    if (buf == "on")turnOnLamp(pinN);
+    else if(buf == "off")turnOnLamp(pinN);
+  }
+  
+  //turnOffLamp(lamp);
   String message = "success";
   server.send(200, "text/plain", message);
 }

@@ -1,5 +1,9 @@
 #include "ESPIR.h"
 
+#ifdef IR_RESIVER
+//http://192.168.1.138/ir?token=esp18266&ircode=3772818013
+//http://192.168.1.139/on?token=esp8266
+
 IRrecv irrecv(RECV_PIN);
 IRsend irsend(SEND_PIN); 
 
@@ -21,7 +25,7 @@ unsigned long StrToULong(char *str)
 void handleIR() {
   String buf = server.arg("token");
   Serial.println(buf);
-  // Serial.println("poken");
+  Serial.println("poken");
 
   if (Config.www_password != buf) {
     String message = "access denied";
@@ -66,4 +70,4 @@ void StartIR()
   irsend.begin();       // Start transmiter
 }
 
-
+#endif

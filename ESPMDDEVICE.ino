@@ -1,3 +1,5 @@
+
+#include "ESPMDDEVICE.H"
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
 //#include <WiFiClient.h>
@@ -5,21 +7,30 @@
 #include <ESP8266mDNS.h>
 
 #include "ESPEEPROM.h"
-#include "ESPIR.h"
+
+#ifdef IR_RESIVER
+  #include "ESPIR.h"
+#endif
+
 #include "LAMP.h"
 #include "ESPWIFI.h"
 #include "ESPWEB.h"
+#include "ADC.h"
 
+#ifdef IR_RESIVER
 //=== IR Resiver ==============================
-int RECV_PIN = 2; //an IR detector/demodulatord is connected to GPIO pin 2
-int SEND_PIN = 15; //an IR led is connected to GPIO pin 0
+  int RECV_PIN = 5; //an IR detector/demodulatord is connected to GPIO pin 2
+  int SEND_PIN = 15; //an IR led is connected to GPIO pin 0
+#endif
 
 //==== WIFI SWITCH =============================
 int lamp = 14; // Управляем реле через GPIO2
-int button = 18; // "Ловим" выключатель через GPIO0
+int button = 12; // "Ловим" выключатель через GPIO0
 
 //==============================================
 
+int adcValue = 0;
+int adcValueOld = 0;
 
 //extern "C" { // эта часть обязательна чтобы получить доступ к функции initVariant
 //#include "user_interface.h"
@@ -65,7 +76,10 @@ void setup(void) {
   server.on("/setup", handleSetup);
   server.on("/on", handleOn);
   server.on("/off", handleOff);
+  server.on("/relay", handleRelay);
+#ifdef IR_RESIVER 
   server.on("/ir",  handleIR);
+#endif
  // server.on("/firmware", FirmwarePage);
  // serveUupdate();                        //Update firmware
     //server.on("/off", HTTP_POST, handleOff);
@@ -73,10 +87,11 @@ void setup(void) {
   
   // Стартуем WEB сервер
   server.begin();
-  
+
+#ifdef IR_RESIVER 
   //Стартуем ИК приемопередатчик
   StartIR();
-  
+#endif  
   // посылаем начальный статус устройства
   //sendServer(false);
 }
@@ -84,8 +99,11 @@ void setup(void) {
 void loop(void) {
   server.handleClient();
 
-  IRResiver();
-  // Проверяем нажатие выключателя
+  adcRead();  // читаем вход ацп
+  #ifdef IR_RESIVER 
+    IRResiver();
+  #endif
+    // Проверяем нажатие выключателя
   button_state = digitalRead(button);
   if (button_state == HIGH && can_toggle) {
     toggleLamp(lamp);

@@ -1,6 +1,10 @@
 #ifndef ESPIR_h
 #define ESPIR_h
 
+#include "ESPMDDEVICE.H"
+
+#ifdef IR_RESIVER
+
 #include <Arduino.h>
 #include <IRremoteESP8266.h>
 #include <ESP8266WebServer.h>
@@ -19,4 +23,5 @@ void IRResiver();
 void IRTransmiter(unsigned long SendIRCode);
 void handleIR();
 
+#endif
 #endif
