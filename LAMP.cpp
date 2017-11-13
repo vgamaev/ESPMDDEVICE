@@ -1,31 +1,48 @@
 #include "LAMP.h"
 
-bool lamp_on =  false;
+int lamp_on[MAX_RELAY];
+
+// Инециализируем выходы для реле
+void RelayInit()
+{
+   RelayPin[0]=12;
+   RelayPin[1]=5;
+   RelayPin[2]=4;
+   
+  // Назначаем пины и их режимы.
+   for(int i=0; i<MAX_RELAY; i++ ) 
+   {
+      pinMode(RelayPin[i], OUTPUT);
+      turnOffLamp(i);
+   }
+}
 
 // Включаем лампу
-void turnOnLamp(int pinlamp) {
-  digitalWrite(pinlamp, HIGH);
-  Serial.print(pinlamp);
+void turnOnLamp(int nomer) 
+{
+  digitalWrite(RelayPin[nomer], HIGH);
+  Serial.print(RelayPin[nomer]);
   Serial.println(" PIN ON");
 //  sendServer(true);                /// Возможно лишнее
-  lamp_on = true;
+  lamp_on[nomer] = true;
 }
  
 // Выключаем лампу
-void turnOffLamp(int pinlamp) {
-  digitalWrite(pinlamp, LOW);
-  Serial.print(pinlamp);
+void turnOffLamp(int nomer) 
+{
+  digitalWrite(RelayPin[nomer], LOW);
+  Serial.print(RelayPin[nomer]);
   Serial.println(" PIN OFF");
   //sendServer(false);
-  lamp_on = false;
+  lamp_on[nomer] = false;
 }
 
 // Изменяем состояние лампы
-void toggleLamp(int pinlamp) {
-  if (lamp_on == true) {
-    turnOffLamp(pinlamp);
+void toggleLamp(int nomer) {
+  if (lamp_on[nomer] == true) {
+    turnOffLamp(nomer);
    } else {
-    turnOnLamp(pinlamp);
+    turnOnLamp(nomer);
    }
 }
 
@@ -40,7 +57,7 @@ void handleOn() {
     server.send(401, "text/plain", message);
     return;
   }
-  turnOnLamp(lamp);
+  turnOnLamp(RELAY_1);
   String message = "success";
   server.send(200, "text/plain", message);
 }
@@ -54,7 +71,7 @@ void handleOff() {
     server.send(401, "text/plain", message);
     return;
   }
-  turnOffLamp(lamp);
+  turnOffLamp(RELAY_1);
   String message = "success";
   server.send(200, "text/plain", message);
 }

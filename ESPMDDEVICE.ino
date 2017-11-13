@@ -24,8 +24,10 @@
 #endif
 
 //==== WIFI SWITCH =============================
-int lamp = 14; // Управляем реле через GPIO2
+//int lamp = 14; // Управляем реле через GPIO2
 int button = 12; // "Ловим" выключатель через GPIO0
+
+int RelayPin[MAX_RELAY];
 
 //==============================================
 
@@ -49,12 +51,9 @@ HTTPClient http; // веб клиент
 
 void setup(void) {
 
-  // Назначаем пины и их режимы.
- // pinMode(lamp, OUTPUT);
- // digitalWrite(lamp, LOW);           //Выключаем пин чтобы не мигала при старте
- // pinMode(button, INPUT_PULLUP); 
-  //turnOffLamp()
-  
+  RelayInit();
+  pinMode(button, INPUT_PULLUP); 
+    
   Serial.begin(9600);
   delay(10);
 
@@ -106,7 +105,7 @@ void loop(void) {
     // Проверяем нажатие выключателя
   button_state = digitalRead(button);
   if (button_state == HIGH && can_toggle) {
-    toggleLamp(lamp);
+    toggleLamp(RELAY_1);
     can_toggle = false;
     delay(500);
   } else if (button_state == LOW) {

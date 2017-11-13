@@ -29,11 +29,11 @@ void handleRoot() {
   String status = server.arg("status");
   if (web_button_state == false && status == "1")
   {
-    turnOnLamp(lamp);
+    turnOnLamp(RELAY_1);
     web_button_state = true;
   } else if (web_button_state == true && status == "0")
   {
-    turnOffLamp(lamp);
+    turnOffLamp(RELAY_1);
     web_button_state = false;
   }
   
@@ -49,11 +49,11 @@ void handleRoot() {
     <center><h1>Hello from ESP8266!</h1>\
     <h2><font color=red>LAMP Status: ";
 
-  if (lamp_on == true) temp += "ON"; else temp += "OFF";
+  if (lamp_on[RELAY_1] == true) temp += "ON"; else temp += "OFF";
 
   temp += "</font></h2>\
     <form  method=get name=form>";
-  if (lamp_on == true)
+  if (lamp_on[RELAY_1] == true)
   {
     temp += "<button name=status value=0 type=submit style=height:80px;width:150px>LED Off</button>";
   } else
