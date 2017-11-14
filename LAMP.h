@@ -11,16 +11,28 @@ extern ESP8266WebServer server; // веб сервер
 extern HTTPClient http; // веб клиент
 
 extern int RelayPin[]; 
-extern int button; // "Ловим" выключатель через GPIO0
-
 extern int lamp_on[];
+
+extern int ButtonPin[]; // "Ловим" выключатель через GPIO0
+extern int can_toggle[];
+extern int button_state[];
 
 #define RELAY_1 0
 #define RELAY_2 1
-#define RELAY_1 3
+#define RELAY_3 2
+
+#define BUTTON_1 0
+#define BUTTON_2 1
+#define BUTTON_3 2
 
 // Инециализируем выходы для реле
 void RelayInit();
+
+// Инециализируем входы для кнопок
+void ButtonInit();
+
+// Проверяем нажатие кнопок выключателя
+void ButtonRead();
 
 // Включаем лампу
 void turnOnLamp(int nomer);

@@ -25,24 +25,21 @@
 
 //==== WIFI SWITCH =============================
 //int lamp = 14; // Управляем реле через GPIO2
-int button = 12; // "Ловим" выключатель через GPIO0
+//int button = 12; // "Ловим" выключатель через GPIO0
 
 int RelayPin[MAX_RELAY];
+int lamp_on[MAX_RELAY];
+
+int ButtonPin[MAX_BUTTON];
+int can_toggle[MAX_BUTTON];
+int button_state[MAX_BUTTON];
 
 //==============================================
 
 int adcValue = 0;
 int adcValueOld = 0;
 
-//extern "C" { // эта часть обязательна чтобы получить доступ к функции initVariant
-//#include "user_interface.h"
-//}
-
 const char* serverIndex = "<form method='POST' action='/update' enctype='multipart/form-data'><input type='file' name='update'><input type='submit' value='Update'></form>";
-
-
-bool can_toggle = false;
-int button_state;
 
 ESP8266WebServer server (80) ; // веб сервер
 HTTPClient http; // веб клиент
@@ -52,8 +49,7 @@ HTTPClient http; // веб клиент
 void setup(void) {
 
   RelayInit();
-  pinMode(button, INPUT_PULLUP); 
-    
+  ButtonInit();
   Serial.begin(9600);
   delay(10);
 
@@ -102,14 +98,14 @@ void loop(void) {
   #ifdef IR_RESIVER 
     IRResiver();
   #endif
-    // Проверяем нажатие выключателя
-  button_state = digitalRead(button);
-  if (button_state == HIGH && can_toggle) {
+   // Проверяем нажатие кнопок выключателя
+  ButtonRead();
+  if (button_state[BUTTON_1] == HIGH && can_toggle[BUTTON_1]) {
     toggleLamp(RELAY_1);
-    can_toggle = false;
+    can_toggle[BUTTON_1] = false;
     delay(500);
-  } else if (button_state == LOW) {
-    can_toggle = true;
+  } else if (button_state[BUTTON_1] == LOW) {
+    can_toggle[BUTTON_1] = true;
   }
 }
 

@@ -1,7 +1,5 @@
 #include "LAMP.h"
 
-int lamp_on[MAX_RELAY];
-
 // Инециализируем выходы для реле
 void RelayInit()
 {
@@ -15,6 +13,29 @@ void RelayInit()
       pinMode(RelayPin[i], OUTPUT);
       turnOffLamp(i);
    }
+}
+
+// Инециализируем входы для кнопок
+void ButtonInit()
+{
+   ButtonPin[0]=0;
+   ButtonPin[1]=9;
+   ButtonPin[2]=10;
+   
+  // Назначаем пины и их режимы.
+   for(int i=0; i<MAX_BUTTON; i++ ) 
+   {
+      pinMode(ButtonPin[i], INPUT_PULLUP);
+      can_toggle[i]=0;
+      button_state[i]=0;
+   }
+}
+
+
+// Проверяем нажатие кнопок выключателя
+void ButtonRead()
+{
+  for(int i=0; i<3; i++) button_state[i] = digitalRead(ButtonPin[i]);
 }
 
 // Включаем лампу
