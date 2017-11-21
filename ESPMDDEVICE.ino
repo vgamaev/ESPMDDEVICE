@@ -15,7 +15,10 @@
 #include "LAMP.h"
 #include "ESPWIFI.h"
 #include "ESPWEB.h"
-#include "ADC.h"
+
+#ifdef ADC
+  #include "ADC.h"
+#endif
 
 #ifdef IR_RESIVER
 //=== IR Resiver ==============================
@@ -35,10 +38,10 @@ int can_toggle[MAX_BUTTON];
 int button_state[MAX_BUTTON];
 
 //==============================================
-
-int adcValue = 0;
-int adcValueOld = 0;
-
+#ifdef ADC
+  int adcValue = 0;
+  int adcValueOld = 0;
+#endif
 const char* serverIndex = "<form method='POST' action='/update' enctype='multipart/form-data'><input type='file' name='update'><input type='submit' value='Update'></form>";
 
 ESP8266WebServer server (80) ; // веб сервер
@@ -94,18 +97,13 @@ void setup(void) {
 void loop(void) {
   server.handleClient();
 
-  adcRead();  // читаем вход ацп
+  #ifdef ADC
+    adcRead();  // читаем вход ацп
+  #endif
+  
   #ifdef IR_RESIVER 
     IRResiver();
   #endif
-   // Проверяем нажатие кнопок выключателя
-  ButtonRead();
-  if (button_state[BUTTON_1] == HIGH && can_toggle[BUTTON_1]) {
-    toggleLamp(RELAY_1);
-    can_toggle[BUTTON_1] = false;
-    delay(500);
-  } else if (button_state[BUTTON_1] == LOW) {
-    can_toggle[BUTTON_1] = true;
-  }
+  ButtonSwitch();
 }
 

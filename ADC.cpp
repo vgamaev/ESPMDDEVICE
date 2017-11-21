@@ -1,5 +1,6 @@
 #include "ADC.h"
 
+#ifdef ADC
 
 void adcRead()
 {
@@ -22,4 +23,5 @@ void adcRead()
       }
     }
 }
+#endif
 

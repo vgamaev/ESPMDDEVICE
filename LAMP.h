@@ -28,6 +28,9 @@ extern int button_state[];
 // Инециализируем выходы для реле
 void RelayInit();
 
+// Обрабатываем нажатие кнопок
+void ButtonSwitch();
+
 // Инециализируем входы для кнопок
 void ButtonInit();
 
@@ -53,6 +56,6 @@ void handleOff();
 void handleRelay();
 
 // Отправляем серверу MojorDomo события вкл./выкл.
-void sendServer(bool state);
+void sendServer(bool state, int relay_n);
 
 #endif

@@ -35,7 +35,25 @@ void ButtonInit()
 // Проверяем нажатие кнопок выключателя
 void ButtonRead()
 {
-  for(int i=0; i<3; i++) button_state[i] = digitalRead(ButtonPin[i]);
+  for(int i=0; i<MAX_BUTTON; i++) button_state[i] = digitalRead(ButtonPin[i]);
+}
+
+// Обрабатываем нажатие кнопок
+void ButtonSwitch()
+{
+  // Проверяем нажатие кнопок выключателя
+  ButtonRead();
+  for(int i=0; i<MAX_BUTTON; i++)
+  {
+    if(button_state[i] == HIGH && can_toggle[i]) {
+      toggleLamp(i);
+      sendServer(lamp_on[i], i+1);
+      can_toggle[i] = false;
+      delay(500);
+    }else if (button_state[i] == LOW) {
+      can_toggle[i] = true;
+    }
+  }
 }
 
 // Включаем лампу
@@ -113,13 +131,13 @@ void handleRelay()
 
   if (buf == "1")
   {
-    
+    pinN=RELAY_1; 
   }else if(buf == "2")
   {
-    
+    pinN=RELAY_2;
   }else if(buf == "3")
   {
-    
+    pinN=RELAY_3; 
   }
 
   if(pinN!=100)
@@ -130,15 +148,13 @@ void handleRelay()
     if (buf == "on")turnOnLamp(pinN);
     else if(buf == "off")turnOnLamp(pinN);
   }
-  
-  //turnOffLamp(lamp);
   String message = "success";
   server.send(200, "text/plain", message);
 }
 
 // Отправляем серверу MojorDomo события вкл./выкл.
-void sendServer(bool state) {
-  String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p="+Config.property+"&v=";
+void sendServer(bool state, int relay_n) {
+  String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p="+Config.property+relay_n+"&v=";
   post += (state ? "1" : "0");
   Serial.println(post);
   http.begin(post);
