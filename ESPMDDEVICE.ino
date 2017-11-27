@@ -42,6 +42,12 @@ int button_state[MAX_BUTTON];
   int adcValue = 0;
   int adcValueOld = 0;
 #endif
+
+//=======================Светодиод WIFI=========================================
+long WiFiCheckinterval = 1000; //Интервал проверки WiFi потключения
+int WIFI_led = 13;             // Светодиод на выклчателе GPIO13
+//==============================================================================
+
 const char* serverIndex = "<form method='POST' action='/update' enctype='multipart/form-data'><input type='file' name='update'><input type='submit' value='Update'></form>";
 
 ESP8266WebServer server (80) ; // веб сервер
@@ -53,6 +59,9 @@ void setup(void) {
 
   RelayInit();
   ButtonInit();
+  pinMode(WIFI_led, OUTPUT);
+  digitalWrite(WIFI_led, HIGH);           //Выключаем пин чтобы не мигала при старте
+  
   Serial.begin(9600);
   delay(10);
 
@@ -96,7 +105,7 @@ void setup(void) {
 
 void loop(void) {
   server.handleClient();
-
+  WiFiLedStatus();
   #ifdef ADC
     adcRead();  // читаем вход ацп
   #endif

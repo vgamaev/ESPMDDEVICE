@@ -35,13 +35,27 @@ void ConectWIFI()
  // Потключаемся к  WIFI
   WiFi.begin(ssid, password);
 
-  // Ждем пока подключимся к WiFi
+ /* // Ждем пока подключимся к WiFi
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
-  }
+  }  */
   // Записываем текущий IP адресс
   if(Config.dhcp == "on")
     IPAddressToString(WiFi.localIP(),Config.ip);
 
   Serial.println(Config.ip);
+}
+
+//Индикация потключения по wifi
+void WiFiLedStatus()
+{
+  static long previousMillis = 0;                             
+  long currentMillis = millis();
+  
+  if(currentMillis - previousMillis > WiFiCheckinterval) 
+   {   
+      if(WiFi.status() == WL_CONNECTED) digitalWrite(WIFI_led, LOW);
+      else digitalWrite(WIFI_led, HIGH);
+      previousMillis = currentMillis; 
+   }
 }
