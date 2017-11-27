@@ -46,7 +46,7 @@ void handleRoot() {
     </style>\
   </head>\
   <body>\
-    <center><h1>Hello from ESP8266!</h1>\
+    <center><h1>WIFI Switch</h1>\
     <h2><font color=red>LAMP Status: ";
 
   if (lamp_on[RELAY_1] == true) temp += "ON"; else temp += "OFF";
@@ -60,6 +60,15 @@ void handleRoot() {
   {
     temp += "<button name=status value=1 type=submit style=height:80px;width:150px>LED On</button>";
   }
+  
+  if (lamp_on[RELAY_2] == true)
+  {
+    temp += "<button name=status value=0 type=submit style=height:80px;width:150px>LED Off</button>";
+  } else
+  {
+    temp += "<button name=status value=1 type=submit style=height:80px;width:150px>LED On</button>";
+  }
+  
   temp += "</form><br />\
   </center>\
 </html>" ;

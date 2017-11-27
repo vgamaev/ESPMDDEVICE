@@ -38,12 +38,12 @@ void ConectWIFI()
  /* // Ждем пока подключимся к WiFi
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
-  }  */
+  }  
   // Записываем текущий IP адресс
   if(Config.dhcp == "on")
     IPAddressToString(WiFi.localIP(),Config.ip);
 
-  Serial.println(Config.ip);
+  Serial.println(Config.ip);    */
 }
 
 //Индикация потключения по wifi
@@ -54,8 +54,18 @@ void WiFiLedStatus()
   
   if(currentMillis - previousMillis > WiFiCheckinterval) 
    {   
-      if(WiFi.status() == WL_CONNECTED) digitalWrite(WIFI_led, LOW);
-      else digitalWrite(WIFI_led, HIGH);
+      if(WiFi.status() == WL_CONNECTED && WIWI_Connect == 0) 
+      {  
+        digitalWrite(WIFI_led, LOW);
+        if(Config.dhcp == "on")    IPAddressToString(WiFi.localIP(),Config.ip);
+        Serial.println(Config.ip);
+        WIWI_Connect = 1;
+      }
+      else if(WiFi.status() != WL_CONNECTED)
+      {
+        digitalWrite(WIFI_led, HIGH);
+        WIWI_Connect = 0;
+      }
       previousMillis = currentMillis; 
    }
 }

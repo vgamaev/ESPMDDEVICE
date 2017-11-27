@@ -7,6 +7,8 @@
 extern long WiFiCheckinterval;  //Интервал проверки WiFi потключения
 extern int WIFI_led;          // Светодиод на выклчателе GPIO13
 
+extern int WIWI_Connect;
+
 // Функция конвертирует IP адрес в строку
 void IPAddressToString(IPAddress ip, String &StrIP);
 

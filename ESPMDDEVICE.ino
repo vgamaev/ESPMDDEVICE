@@ -46,6 +46,7 @@ int button_state[MAX_BUTTON];
 //=======================Светодиод WIFI=========================================
 long WiFiCheckinterval = 1000; //Интервал проверки WiFi потключения
 int WIFI_led = 13;             // Светодиод на выклчателе GPIO13
+int WIWI_Connect=0;
 //==============================================================================
 
 const char* serverIndex = "<form method='POST' action='/update' enctype='multipart/form-data'><input type='file' name='update'><input type='submit' value='Update'></form>";
