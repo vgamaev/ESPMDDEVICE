@@ -1,4 +1,3 @@
-
 #include "ESPMDDEVICE.H"
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
@@ -36,6 +35,7 @@ int lamp_on[MAX_RELAY];
 int ButtonPin[MAX_BUTTON];
 int can_toggle[MAX_BUTTON];
 int button_state[MAX_BUTTON];
+bool web_button_state[MAX_RELAY];
 
 //==============================================
 #ifdef ADC
@@ -62,6 +62,7 @@ void setup(void) {
   ButtonInit();
   pinMode(WIFI_led, OUTPUT);
   digitalWrite(WIFI_led, HIGH);           //Выключаем пин чтобы не мигала при старте
+  web_button_state_init();
   
   Serial.begin(9600);
   delay(10);

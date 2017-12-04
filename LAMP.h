@@ -16,6 +16,7 @@ extern int lamp_on[];
 extern int ButtonPin[]; // "Ловим" выключатель через GPIO0
 extern int can_toggle[];
 extern int button_state[];
+extern bool web_button_state[];
 
 #define RELAY_1 0
 #define RELAY_2 1

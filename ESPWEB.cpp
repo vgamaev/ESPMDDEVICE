@@ -1,7 +1,10 @@
 #include "ESPWEB.h"
 
-bool web_button_state = false;
-
+//===================================== Init button state ========================================================
+void web_button_state_init()
+{
+  for(int i=0; i<MAX_RELAY; i++ ) web_button_state[i]= false;
+}
 //===================================== WEB Auth=================================================================
 bool WebAuth() {
 
@@ -20,22 +23,40 @@ bool WebAuth() {
   } else return 1;
 }
 
-
+void WebButtonRead(String status, int RelayN)
+{
+  //Serial.print("status ");
+  //Serial.println(status);
+  //Serial.print("RelayN ");
+  //Serial.println(RelayN);
+  if (web_button_state[RelayN] == false && status == "1")
+    {
+      turnOnLamp(RelayN);
+      web_button_state[RelayN] = true;
+    } else if (web_button_state[RelayN] == true && status == "0") //&& lamp_on[RelayN] == true
+    {
+      turnOffLamp(RelayN);
+      web_button_state[RelayN] = false;
+    }
+}
 // функция для главной страници
 void handleRoot() {
 
   if(WebAuth()== 0) return; // Проверяем логин и пароль
   
-  String status = server.arg("status");
-  if (web_button_state == false && status == "1")
-  {
-    turnOnLamp(RELAY_1);
-    web_button_state = true;
-  } else if (web_button_state == true && status == "0")
-  {
-    turnOffLamp(RELAY_1);
-    web_button_state = false;
-  }
+  String status = server.arg("RELAY1");
+  Serial.print("status1 ");
+  Serial.println(status);
+  WebButtonRead(status, RELAY_1);
+  status = server.arg("RELAY2");
+   Serial.print("status2 ");
+  Serial.println(status);
+  WebButtonRead(status, RELAY_2);
+  status = server.arg("RELAY3");
+   Serial.print("status3 ");
+  Serial.println(status);
+  WebButtonRead(status, RELAY_3);
+  
   
   String temp = "<html>\
   <head>\
@@ -47,27 +68,37 @@ void handleRoot() {
   </head>\
   <body>\
     <center><h1>WIFI Switch</h1>\
-    <h2><font color=red>LAMP Status: ";
+    <h3><font color=red>LAMP Status: ";
 
-  if (lamp_on[RELAY_1] == true) temp += "ON"; else temp += "OFF";
-
-  temp += "</font></h2>\
+  if (lamp_on[RELAY_1] == true) temp += " LAMP1 ON | "; else temp += " LAMP1 OFF | ";
+  if (lamp_on[RELAY_2] == true) temp += " LAMP2 ON | "; else temp += " LAMP2 OFF | ";
+  if (lamp_on[RELAY_3] == true) temp += " LAMP3 ON | "; else temp += " LAMP3 OFF | ";
+  
+  temp += "</font></h3>\
     <form  method=get name=form>";
-  if (lamp_on[RELAY_1] == true)
+  if (web_button_state[RELAY_1] == true)
   {
-    temp += "<button name=status value=0 type=submit style=height:80px;width:150px>LED Off</button>";
+    temp += "<button name=RELAY1 value=0 type=submit style=height:80px;width:150px>LAMP1 On//Off</button>";
   } else
   {
-    temp += "<button name=status value=1 type=submit style=height:80px;width:150px>LED On</button>";
+    temp += "<button name=RELAY1 value=1 type=submit style=height:80px;width:150px>LAMP1 On/Off</button>";
   }
   
-  if (lamp_on[RELAY_2] == true)
+  if (web_button_state[RELAY_2] == true)
   {
-    temp += "<button name=status value=0 type=submit style=height:80px;width:150px>LED Off</button>";
+    temp += "<button name=RELAY2 value=0 type=submit style=height:80px;width:150px>LAMP2 On/Off</button>";
   } else
   {
-    temp += "<button name=status value=1 type=submit style=height:80px;width:150px>LED On</button>";
-  }
+    temp += "<button name=RELAY2 value=1 type=submit style=height:80px;width:150px>LAMP2 On/OFF</button>";
+  } 
+
+  if (web_button_state[RELAY_3] == true)
+  {
+    temp += "<button name=RELAY3 value=0 type=submit style=height:80px;width:150px>LAMP3 On/Off</button>";
+  } else
+  {
+    temp += "<button name=RELAY3 value=1 type=submit style=height:80px;width:150px>LAMP3 On/off</button>";
+  }  
   
   temp += "</form><br />\
   </center>\
@@ -230,7 +261,7 @@ void handleSetup() {
 // функция для недействительных запросов
 void handleNotFound() {
   Serial.println("not found 404");
-  String message = "not found";
+  String message = "Not found";
   server.send(404, "text/plain", message);
 }
 
