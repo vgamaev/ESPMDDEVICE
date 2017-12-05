@@ -8,13 +8,6 @@
 
 extern ESP8266WebServer server; // веб сервер
 
-extern bool web_button_state[];
-
-void WebButtonRead(String status, int RelayN);
-
-//Init button state
-void web_button_state_init();
-
 bool WebAuth();
 
 // функция для главной страници

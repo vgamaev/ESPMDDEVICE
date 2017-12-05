@@ -6,9 +6,12 @@
 #include <ESP8266WebServer.h>
 #include "ESPEEPROM.h"
 #include "ESPMDDEVICE.H"
+#include "ESPWEB.h"
 
 extern ESP8266WebServer server; // веб сервер
 extern HTTPClient http; // веб клиент
+
+extern bool web_button_state[];
 
 extern int RelayPin[]; 
 extern int lamp_on[];
@@ -25,6 +28,11 @@ extern bool web_button_state[];
 #define BUTTON_1 0
 #define BUTTON_2 1
 #define BUTTON_3 2
+
+void WebButtonRead(String status, int RelayN);
+
+//Init button state
+void web_button_state_init();
 
 // Инециализируем выходы для реле
 void RelayInit();
