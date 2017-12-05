@@ -63,7 +63,6 @@ void WebParser(){
     {
       Config.ap = "on";
       EnableAP();
-      IPAddressToString(WiFi.softAPIP(),Config.ipap);
     }
     else 
     {

@@ -15,12 +15,12 @@ void EnableAP(){
   if(Config.ap == "on"){
     const char *ssid1 = "Sonoff_T1";
     const char *password1 = "8849884988";
-    WiFi.mode(WIFI_AP);
+    WiFi.mode(WIFI_AP_STA);
     //WiFi.softAPConfig(apIP, apIP, IPAddress(255, 255, 255, 0));
     WiFi.softAP(ssid1, password1);
     IPAddressToString(WiFi.softAPIP(),Config.ipap);
-    //Serial.println("Accss point ON");
-  } WiFi.mode(WIFI_STA);
+    Serial.println("Accss point ON");
+  } else WiFi.mode(WIFI_STA);
 }
 
 void ConectWIFI()
