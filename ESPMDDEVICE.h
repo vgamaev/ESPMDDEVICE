@@ -1,5 +1,6 @@
 //#define IR_RESIVER
 //#define ADC
+#define WIFI_LED
 
 
 //#define Sonoff_Touch

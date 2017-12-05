@@ -128,6 +128,7 @@ void handleOff() {
 }
 
 // Получаем от сервера команды управления реле
+//пример запроса http://192.168.1.119/relay?token=esp8266&relay=3&state=off
 void handleRelay()
 {
   int pinN=100;
@@ -164,7 +165,7 @@ void handleRelay()
     Serial.println(buf);
     
     if (buf == "on")turnOnLamp(pinN);
-    else if(buf == "off")turnOnLamp(pinN);
+    else if(buf == "off")turnOffLamp(pinN);
   }
   String message = "success";
   server.send(200, "text/plain", message);

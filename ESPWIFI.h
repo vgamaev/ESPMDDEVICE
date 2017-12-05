@@ -3,6 +3,7 @@
 
 #include <ESP8266WiFi.h>
 #include "ESPEEPROM.h"
+#include "ESPMDDEVICE.H"
 
 extern long WiFiCheckinterval;  //Интервал проверки WiFi потключения
 extern int WIFI_led;          // Светодиод на выклчателе GPIO13

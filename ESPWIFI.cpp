@@ -56,14 +56,18 @@ void WiFiLedStatus()
    {   
       if(WiFi.status() == WL_CONNECTED && WIWI_Connect == 0) 
       {  
-        digitalWrite(WIFI_led, LOW);
+        #ifdef WIFI_LED
+          digitalWrite(WIFI_led, LOW);
+        #endif
         if(Config.dhcp == "on")    IPAddressToString(WiFi.localIP(),Config.ip);
         Serial.println(Config.ip);
         WIWI_Connect = 1;
       }
       else if(WiFi.status() != WL_CONNECTED)
       {
-        digitalWrite(WIFI_led, HIGH);
+        #ifdef WIFI_LED
+          digitalWrite(WIFI_led, HIGH);
+        #endif
         WIWI_Connect = 0;
       }
       previousMillis = currentMillis; 

@@ -26,9 +26,6 @@
 #endif
 
 //==== WIFI SWITCH =============================
-//int lamp = 14; // Управляем реле через GPIO2
-//int button = 12; // "Ловим" выключатель через GPIO0
-
 int RelayPin[MAX_RELAY];
 int lamp_on[MAX_RELAY];
 
@@ -45,8 +42,12 @@ bool web_button_state[MAX_RELAY];
 
 //=======================Светодиод WIFI=========================================
 long WiFiCheckinterval = 1000; //Интервал проверки WiFi потключения
-int WIFI_led = 13;             // Светодиод на выклчателе GPIO13
 int WIWI_Connect=0;
+
+//#ifdef WIFI_LED
+  int WIFI_led = 13;             // Светодиод на выклчателе GPIO13
+//#endif
+
 //==============================================================================
 
 const char* serverIndex = "<form method='POST' action='/update' enctype='multipart/form-data'><input type='file' name='update'><input type='submit' value='Update'></form>";
@@ -60,8 +61,12 @@ void setup(void) {
 
   RelayInit();
   ButtonInit();
-  pinMode(WIFI_led, OUTPUT);
-  digitalWrite(WIFI_led, HIGH);           //Выключаем пин чтобы не мигала при старте
+
+  #ifdef WIFI_LED
+    pinMode(WIFI_led, OUTPUT);
+    digitalWrite(WIFI_led, HIGH);           //Выключаем пин чтобы не мигала при старте
+  #endif
+  
   web_button_state_init();
   
   Serial.begin(9600);
