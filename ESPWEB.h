@@ -5,6 +5,7 @@
 #include "ESPEEPROM.h"
 #include "LAMP.h"
 #include "ESPWIFI.h"
+#include "ESPMDDEVICE.H"
 
 extern ESP8266WebServer server; // веб сервер
 

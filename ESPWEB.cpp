@@ -79,6 +79,12 @@ void WebParser(){
     
     Config.serverIP = server.arg("MDAdr");
     Config.name = server.arg("MDObj");
+    #if defined (Sonof_T1_2_button) || defined (Sonof_T1_3_button)
+    Config.name2 = server.arg("MDObj2");
+    #endif
+    #ifdef Sonof_T1_3_button
+    Config.name3 = server.arg("MDObj3");
+    #endif
     Config.property = server.arg("MDStatus");
 
     buf = server.arg("DHCP");
@@ -140,9 +146,15 @@ void handleSetup() {
            </br> \
            <table>\
            <tr><td> Mojordomo: </td> </tr>\
-              <tr> <td>Adress      </td><td> <input type= text size=20 maxlength=20 name=MDAdr value="; temp += Config.serverIP; temp += ">  </td> </tr>\
-              <tr> <td>Name object </td><td> <input type= text size=20 maxlength=20 name=MDObj value="; temp += Config.name; temp += ">      </td> </tr>\
-              <tr> <td>Object      </td><td> <input type= text size=20 maxlength=20 name=MDStatus value="; temp += Config.property; temp += ">  </td> </tr>\
+              <tr> <td>Adress      </td><td> <input type= text size=20 maxlength=20 name=MDAdr value="; temp += Config.serverIP; temp += ">  </td> </tr>";
+                temp += "<tr> <td>Name object  </td><td> <input type= text size=20 maxlength=20 name=MDObj value="; temp += Config.name; temp += ">      </td> </tr>";
+              #if defined (Sonof_T1_2_button) || defined (Sonof_T1_3_button)
+                temp += "<tr> <td>Name object 2 </td><td> <input type= text size=20 maxlength=20 name=MDObj2 value="; temp += Config.name2; temp += ">      </td> </tr>";
+              #endif
+              #ifdef Sonof_T1_3_button
+                temp += "<tr> <td>Name object 3 </td><td> <input type= text size=20 maxlength=20 name=MDObj3 value="; temp += Config.name3; temp += ">      </td> </tr>";
+              #endif
+              temp += "<tr> <td>Property  </td><td> <input type= text size=20 maxlength=20 name=MDStatus value="; temp += Config.property; temp += ">  </td> </tr>\
           </table>\
           </br> \
           <table>\

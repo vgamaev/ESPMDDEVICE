@@ -59,7 +59,7 @@ void ButtonSwitch()
   {
     if(button_state[i] == HIGH && can_toggle[i]) {
       toggleLamp(i);
-      sendServer(lamp_on[i], i+1);
+      sendServer(lamp_on[i], i);
       can_toggle[i] = false;
       delay(500);
     }else if (button_state[i] == LOW) {
@@ -283,8 +283,26 @@ void handleRoot() {
 
 
 // Отправляем серверу MojorDomo события вкл./выкл.
-void sendServer(bool state, int relay_n) {
-  String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p="+Config.property+relay_n+"&v=";
+void sendServer(bool state, int relay_n) 
+{
+  String ObjectsName;
+  switch (relay_n)
+  {
+    case RELAY_1:
+      ObjectsName = Config.name;
+    break;
+    #if defined (Sonof_T1_2_button) || defined (Sonof_T1_3_button)
+    case RELAY_2:
+      ObjectsName = Config.name2;
+    break;
+    #endif
+    #ifdef Sonof_T1_3_button
+    case RELAY_3:
+      ObjectsName = Config.name3;
+    break;
+    #endif
+  }
+  String post = "http://"+Config.serverIP+"/objects/?object="+ObjectsName+"&op=set&p="+Config.property+"&v=";
   post += (state ? "1" : "0");
   Serial.println(post);
   http.begin(post);

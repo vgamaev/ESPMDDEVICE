@@ -22,6 +22,8 @@ extern struct ConfigMy{
   String dns;
   String ap;
   String ipap;
+  String name2;
+  String name3;
 }Config;
 
 // сохраняем конфиг в EEPROM

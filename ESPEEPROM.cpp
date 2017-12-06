@@ -59,6 +59,9 @@ void ConfigSave()
   addr= SaveStringEEPROM(addr, Config.dns);
   addr= SaveStringEEPROM(addr, Config.ap);
   addr= SaveStringEEPROM(addr, Config.ipap);
+
+  addr= SaveStringEEPROM(addr, Config.name2);
+  addr= SaveStringEEPROM(addr, Config.name3);
   EEPROM.write(1,8);
   EEPROM.commit();
 }
@@ -92,6 +95,9 @@ void ConfigRead()
     
     addr= GetStringEEPROM(addr, Config.ap);
     addr= GetStringEEPROM(addr, Config.ipap);
+
+    addr= GetStringEEPROM(addr, Config.name2);
+    addr= GetStringEEPROM(addr, Config.name3);
   }
   EEPROM.commit();
 }
@@ -120,6 +126,8 @@ void DeraultConfig()
     Config.dns          = "192.168.1.1";
     Config.ap           = "on";             // Включаем точку доступа для конфигурации устройства
     Config.ipap         = "192.168.4.1";     // Ip адресс ВЭБ интерфейса конфигурации устройства в режиме  точки доступа
+    Config.name2        = "Code2";           // Значение свойства объекта в MojorDomo
+    Config.name3        = "Code3";         // Значение свойства объекта в MojorDomo
   
     ConfigSave();
     }
