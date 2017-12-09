@@ -25,4 +25,5 @@
 /* При компиляции для выключателей Sonoff выбераем Generic ESP8285 Module
  *  При компиляции для выключателя Sonoff s20 с флеш памятью PN25F08B выбераем Generic ESP8266 Module 
  *  flash mode DOUT, flash size 1M(64K SPIFFS)
+ *  https://letscontrolit.com/forum/viewtopic.php?t=3071
  */
