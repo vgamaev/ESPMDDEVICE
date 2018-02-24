@@ -1,5 +1,7 @@
 #include "LAMP.h"
 
+#ifdef RELAYS_ON
+
 // Инециализируем выходы для реле
 void RelayInit()
 {
@@ -24,7 +26,7 @@ void RelayInit()
 // Инециализируем входы для кнопок
 void ButtonInit()
 {
-   ButtonPin[0]=0;
+   ButtonPin[0]=0;  //def 0 15 16 13 6 7 4 3 2 1
    
    #if defined (Sonof_T1_2_button) || defined (Sonof_T1_3_button)
       ButtonPin[1]=9;
@@ -309,3 +311,6 @@ void sendServer(bool state, int relay_n)
   int httpCode = http.GET(); 
   http.end();
 }
+
+#endif
+

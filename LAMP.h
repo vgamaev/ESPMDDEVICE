@@ -8,6 +8,8 @@
 #include "ESPMDDEVICE.H"
 #include "ESPWEB.h"
 
+#ifdef RELAYS_ON
+
 extern ESP8266WebServer server; // веб сервер
 extern HTTPClient http; // веб клиент
 
@@ -67,4 +69,5 @@ void handleRelay();
 // Отправляем серверу MojorDomo события вкл./выкл.
 void sendServer(bool state, int relay_n);
 
+#endif
 #endif

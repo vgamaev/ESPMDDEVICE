@@ -11,7 +11,6 @@
   #include "ESPIR.h"
 #endif
 
-#include "LAMP.h"
 #include "ESPWIFI.h"
 #include "ESPWEB.h"
 
@@ -25,7 +24,9 @@
   int SEND_PIN = 15; //an IR led is connected to GPIO pin 0
 #endif
 
+#ifdef RELAYS_ON
 //==== WIFI SWITCH =============================
+#include "LAMP.h"
 int RelayPin[MAX_RELAY];
 int lamp_on[MAX_RELAY];
 
@@ -33,6 +34,7 @@ int ButtonPin[MAX_BUTTON];
 int can_toggle[MAX_BUTTON];
 int button_state[MAX_BUTTON];
 bool web_button_state[MAX_RELAY];
+#endif
 
 //==============================================
 #ifdef ADC
@@ -58,17 +60,16 @@ HTTPClient http; // веб клиент
 //===========================================================================================
 
 void setup(void) {
-
-  RelayInit();
-  ButtonInit();
-
+  #ifdef RELAYS_ON
+    RelayInit();
+    ButtonInit();
+    web_button_state_init();
+  #endif
   #ifdef WIFI_LED
     pinMode(WIFI_led, OUTPUT);
     digitalWrite(WIFI_led, HIGH);           //Выключаем пин чтобы не мигала при старте
   #endif
-  
-  web_button_state_init();
-  
+    
   Serial.begin(9600);
   delay(10);
 
@@ -86,14 +87,16 @@ void setup(void) {
   Serial.println("Starting");
     
   // Назначем функции на запросы
-  server.on("/", handleRoot);
   server.on("/setup", handleSetup);
-  server.on("/on", handleOn);
-  server.on("/off", handleOff);
-  server.on("/relay", handleRelay);
-#ifdef IR_RESIVER 
-  server.on("/ir",  handleIR);
-#endif
+  #ifdef RELAYS_ON
+    server.on("/", handleRoot);
+    server.on("/on", handleOn);
+    server.on("/off", handleOff);
+    server.on("/relay", handleRelay);
+  #endif
+  #ifdef IR_RESIVER 
+    server.on("/ir",  handleIR);
+  #endif
  // server.on("/firmware", FirmwarePage);
  // serveUupdate();                        //Update firmware
     //server.on("/off", HTTP_POST, handleOff);
@@ -120,6 +123,8 @@ void loop(void) {
   #ifdef IR_RESIVER 
     IRResiver();
   #endif
-  ButtonSwitch();
+  #ifdef RELAYS_ON
+     ButtonSwitch();
+  #endif
 }
 
