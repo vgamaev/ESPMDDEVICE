@@ -2,6 +2,8 @@
 //#define ADC          // Мерим освещеность фоторезистором
 #define WIFI_LED       // Светодиод сети Wi-Fi
 
+//#define 433_RESIVER
+
 #define RELAYS_ON      //Собираем выключатели, не рекомендую вместе с #define IR_RESIVER
 
 #define Sonoff_Touch          //Подходит и для розетки Sonoff S20 примечание ниже
