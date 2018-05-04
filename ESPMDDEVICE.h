@@ -6,9 +6,9 @@
 
 #define RELAYS_ON      //Собираем выключатели, не рекомендую вместе с #define IR_RESIVER
 
-#define Sonoff_Touch          //Подходит и для розетки Sonoff S20 примечание ниже
+//#define Sonoff_Touch          //Подходит и для розетки Sonoff S20 примечание ниже
 //#define Sonof_T1_2_button
-//#define Sonof_T1_3_button
+#define Sonof_T1_3_button
 
 #ifdef Sonoff_Touch
   #define MAX_RELAY  1
