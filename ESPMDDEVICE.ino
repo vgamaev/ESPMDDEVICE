@@ -46,6 +46,16 @@ bool web_button_state[MAX_RELAY];
   int adcValueOld = 0;
 #endif
 
+#ifdef LED_MATRIX
+  int pinCS = 15;                           // Attach CS to this pin, DIN to MOSI and CLK to SCK (cf http://arduino.cc/en/Reference/SPI )
+  int numberOfHorizontalDisplays = 4;       // число матриц 8x8 MAX7219по горизонтали
+  int numberOfVerticalDisplays = 1;         // Число матриц по вертикали
+  String tape = "Gamaev Vlad Гамаев Влад";
+  int wait = 80;                            // In milliseconds
+  int spacer = 1;
+  int width = 5 + spacer;                   // The font width is 5 pixels
+#endif
+
 //=======================Светодиод WIFI=========================================
 long WiFiCheckinterval = 1000; //Интервал проверки WiFi потключения
 int WIWI_Connect=0;
@@ -101,6 +111,9 @@ void setup(void) {
   #ifdef IR_RESIVER 
     server.on("/ir",  handleIR);
   #endif
+  #ifdef LED_MATRIX 
+    server.on("/informer",  handleLedMatrix);
+  #endif
  // server.on("/firmware", FirmwarePage);
  // serveUupdate();                        //Update firmware
     //server.on("/off", HTTP_POST, handleOff);
@@ -113,8 +126,10 @@ void setup(void) {
   //Стартуем ИК приемопередатчик
   StartIR();
 #endif  
-  // посылаем начальный статус устройства
-  //sendServer(false);
+
+#ifdef LED_MATRIX
+  LedMatrixInit();
+#endif
 }
 
 void loop(void) {
@@ -128,7 +143,10 @@ void loop(void) {
     IRResiver();
   #endif
   #ifdef RELAYS_ON
-     ButtonSwitch();
+    ButtonSwitch();
+  #endif
+  #ifdef LED_MATRIX
+    LedMatrix();
   #endif
 }
 

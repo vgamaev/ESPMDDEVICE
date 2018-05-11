@@ -1,7 +1,7 @@
 #ifndef LEDMATRIX_h
 #define LEDMATRIX_h
 
-#include "LEDMATRIX.h"
+#include "ESPMDDEVICE.H"
 
 #ifdef LED_MATRIX
 
@@ -15,17 +15,13 @@
 
 //extern HTTPClient http; // веб клиент
 
-int pinCS = 15; // Attach CS to this pin, DIN to MOSI and CLK to SCK (cf http://arduino.cc/en/Reference/SPI )
-int numberOfHorizontalDisplays = 4;
-int numberOfVerticalDisplays = 1;
-
-Max72xxPanel matrix = Max72xxPanel(pinCS, numberOfHorizontalDisplays, numberOfVerticalDisplays);
-
-String tape = "Gamaev Vlad Гамаев Влад";
-int wait = 80; // In milliseconds
-
-int spacer = 1;
-int width = 5 + spacer; // The font width is 5 pixels
+extern int pinCS; // Attach CS to this pin, DIN to MOSI and CLK to SCK (cf http://arduino.cc/en/Reference/SPI )
+extern int numberOfHorizontalDisplays;
+extern int numberOfVerticalDisplays;
+extern String tape;
+extern int wait; // In milliseconds
+extern int spacer;
+extern int width; // The font width is 5 pixels
 
 //Потдержка русского языка
 String utf8rus(String source);
@@ -35,6 +31,9 @@ void LedMatrixInit();
 
 //Отображение информации на матрице
 void LedMatrix();
+
+//Обрабатываем ВЕБ запросы
+void handleLedMatrix(); 
 
 #endif
 #endif

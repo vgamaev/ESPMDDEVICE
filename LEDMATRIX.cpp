@@ -2,6 +2,8 @@
 
 #ifdef LED_MATRIX
 
+Max72xxPanel matrix = Max72xxPanel(pinCS, numberOfHorizontalDisplays, numberOfVerticalDisplays);
+
 String utf8rus(String source)
 {
   int i,k;
@@ -55,7 +57,7 @@ void LedMatrixInit() {
 
 void LedMatrix() {
   
-  tape=utf8rus("Привет Влад Privet Vlad");
+  tape=utf8rus("Проверка информера: Сегодня наступило лето, температура на улице  +22С и солнышко.");
 
   for ( int i = 0 ; i < width * tape.length() + matrix.width() - 1 - spacer; i++ ) {
 
@@ -78,6 +80,12 @@ void LedMatrix() {
 
     delay(wait);
   }
+}
+
+//Обрабатываем ВЕБ запросы
+void handleLedMatrix()
+{
+  
 }
 
 #endif
