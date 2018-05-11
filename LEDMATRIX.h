@@ -7,13 +7,16 @@
 
 //#include <Arduino.h>
 //#include <ESP8266HTTPClient.h>
-//#include "ESPEEPROM.h"
-
+  
 #include <SPI.h>
 #include <Adafruit_GFX.h>
 #include <Max72xxPanel.h>
+#include <ESP8266WebServer.h>
+#include "ESPEEPROM.h"
 
 //extern HTTPClient http; // веб клиент
+
+extern ESP8266WebServer server; // веб сервер
 
 extern int pinCS; // Attach CS to this pin, DIN to MOSI and CLK to SCK (cf http://arduino.cc/en/Reference/SPI )
 extern int numberOfHorizontalDisplays;

@@ -71,6 +71,18 @@ const char* serverIndex = "<form method='POST' action='/update' enctype='multipa
 ESP8266WebServer server (80) ; // веб сервер
 HTTPClient http; // веб клиент
 
+unsigned long StrToULong(char *str)
+{
+ int len = strlen(str);
+ unsigned long res = 0;
+ unsigned long mul = 1;
+ for(int i = len - 1; i >= 0; i--){
+  res += mul * (unsigned long)(str[i] - '0');
+  mul *= 10;
+ }
+ return res;
+}
+
 //===========================================================================================
 
 void setup(void) {

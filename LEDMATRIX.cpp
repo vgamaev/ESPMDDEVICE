@@ -1,5 +1,7 @@
 #include "LEDMATRIX.h"
 
+//192.168.1.142/informer?token=esp8266&bright=10&string=привет
+
 #ifdef LED_MATRIX
 
 Max72xxPanel matrix = Max72xxPanel(pinCS, numberOfHorizontalDisplays, numberOfVerticalDisplays);
@@ -57,7 +59,7 @@ void LedMatrixInit() {
 
 void LedMatrix() {
   
-  tape=utf8rus("Проверка информера: Сегодня наступило лето, температура на улице  +22С и солнышко.");
+  //tape=utf8rus("Проверка информера: Сегодня наступило лето, температура на улице  +22С и солнышко.");
 
   for ( int i = 0 ; i < width * tape.length() + matrix.width() - 1 - spacer; i++ ) {
 
@@ -71,13 +73,10 @@ void LedMatrix() {
       if ( letter < tape.length() ) {
         matrix.drawChar(x, y, tape[letter], HIGH, LOW, 1);
       }
-
       letter--;
       x -= width;
     }
-
     matrix.write(); // Send bitmap to display
-
     delay(wait);
   }
 }
@@ -85,7 +84,28 @@ void LedMatrix() {
 //Обрабатываем ВЕБ запросы
 void handleLedMatrix()
 {
+    String buf = server.arg("token");
+    Serial.println(buf);
   
+    if (Config.www_password != buf) {
+      String message = "access denied";
+      server.send(401, "text/plain", message);
+      return;
+    }
+    buf = server.arg("bright");
+    char b[3];
+    buf.getBytes((unsigned char *)b, 3);
+    Serial.print("LED MATRIX bright ");
+    Serial.println(StrToULong(b));
+    matrix.setIntensity(StrToULong(b)); 
+    
+    buf = server.arg("string");
+    Serial.print("LED MATRIX sring:  ");
+    Serial.println(buf);
+    tape=utf8rus(buf);
+    
+    String message = "success";
+    server.send(200, "text/plain", message);  
 }
 
 #endif
