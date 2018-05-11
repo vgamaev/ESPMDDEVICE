@@ -18,6 +18,10 @@
   #include "ADC.h"
 #endif
 
+#ifdef LED_MATRIX
+  #include "LEDMATRIX.h"
+#endif
+
 #ifdef IR_RESIVER
 //=== IR Resiver ==============================
   int RECV_PIN = 5; //an IR detector/demodulatord is connected to GPIO pin 2
