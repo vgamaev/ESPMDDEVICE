@@ -13,12 +13,18 @@ void IPAddressToString(IPAddress ip, String &StrIP)
 
 void EnableAP(){
   if(Config.ap == "on"){
-    const char *ssid1 = "Sonoff_T1";
-    //String ssid = "ESPDEV_" + random(1000, 1000000);
-    const char *password1 = "88498849";
+    //const char *ssid2 = "Sonoff_T1";
+    int rand = random(100, 10000);
+    ssid1 = "ESPDEV_" + (String)rand;
+    
+    //конвентируем String в строку символов 
+    char ssid2[ssid1.length()+1];
+    ssid1.toCharArray(ssid2, ssid1.length()+1);
+    
+    const char *password2 = "88498849";
     WiFi.mode(WIFI_AP_STA);
     //WiFi.softAPConfig(apIP, apIP, IPAddress(255, 255, 255, 0));
-    WiFi.softAP(ssid1, password1);
+    WiFi.softAP(ssid2, password2);
     IPAddressToString(WiFi.softAPIP(),Config.ipap);
     Serial.println("Accss point ON");
   } else WiFi.mode(WIFI_STA);

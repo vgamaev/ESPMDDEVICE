@@ -26,6 +26,9 @@ extern int wait; // In milliseconds
 extern int spacer;
 extern int width; // The font width is 5 pixels
 
+extern String ssid1;
+
+
 //Потдержка русского языка
 String utf8rus(String source);
 

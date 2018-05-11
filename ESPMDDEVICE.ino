@@ -50,7 +50,7 @@ bool web_button_state[MAX_RELAY];
   int pinCS = 15;                           // Attach CS to this pin, DIN to MOSI and CLK to SCK (cf http://arduino.cc/en/Reference/SPI )
   int numberOfHorizontalDisplays = 4;       // число матриц 8x8 MAX7219по горизонтали
   int numberOfVerticalDisplays = 1;         // Число матриц по вертикали
-  String tape = "Gamaev Vlad Гамаев Влад";
+  String tape;
   int wait = 80;                            // In milliseconds
   int spacer = 1;
   int width = 5 + spacer;                   // The font width is 5 pixels
@@ -70,6 +70,9 @@ const char* serverIndex = "<form method='POST' action='/update' enctype='multipa
 
 ESP8266WebServer server (80) ; // веб сервер
 HTTPClient http; // веб клиент
+
+String ssid1;
+const char *password1 = "88498849";
 
 unsigned long StrToULong(char *str)
 {

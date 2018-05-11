@@ -42,10 +42,17 @@ return target;
 }
 
 void LedMatrixInit() {
-
+  //Отображакм при имя wifi потключенной сети или точки доступа и ip адрес
+  if(Config.ap == "on"){
+    tape = "AP-SSID:" + ssid1 + "   AP-IP:" + Config.ipap ;
+  }else
+  {
+    tape = "WIFI SSID:" + Config.ssid + " IP:" + Config.ip ;
+  }
+  
   matrix.setIntensity(7); // Use a value between 0 and 15 for brightness
-
-// Adjust to your own needs
+  
+  // Adjust to your own needs
   matrix.setPosition(0, 3, 0); // The first display is at <0, 0>
   matrix.setPosition(1, 2, 0); // The second display is at <1, 0>
   matrix.setPosition(2, 1, 0); // The third display is at <2, 0>
