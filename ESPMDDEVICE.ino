@@ -72,7 +72,7 @@ ESP8266WebServer server (80) ; // веб сервер
 HTTPClient http; // веб клиент
 
 String ssid1;
-const char *password1 = "88498849";
+const char *password1 = "66666666";
 
 unsigned long StrToULong(char *str)
 {
