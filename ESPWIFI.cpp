@@ -13,9 +13,9 @@ void IPAddressToString(IPAddress ip, String &StrIP)
 
 void EnableAP(){
   if(Config.ap == "on"){
-    const char *ssid1 = "Sonoff_T1";
+    const char *ssid1 = "Sonoff_T31";
     //String ssid = "ESPDEV_" + random(1000, 1000000);
-    const char *password1 = "88498849";
+    const char *password1 = "12345678";
     WiFi.mode(WIFI_AP_STA);
     //WiFi.softAPConfig(apIP, apIP, IPAddress(255, 255, 255, 0));
     WiFi.softAP(ssid1, password1);
