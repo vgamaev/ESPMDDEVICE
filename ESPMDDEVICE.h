@@ -1,14 +1,14 @@
 //#define IR_RESIVER   //Собиракм ИК ресивер
 //#define ADC          // Мерим освещеность фоторезистором
 //#define WIFI_LED       // Светодиод сети Wi-Fi
-#define LED_MATRIX       // Информер на светодиодных матрицах MAX7219
-//#define 433_RESIVER
+//#define LED_MATRIX       // Информер на светодиодных матрицах MAX7219
+#define RF433MHZ
 
 //#define RELAYS_ON      //Собираем выключатели, не рекомендую вместе с #define IR_RESIVER
 
 //#define Sonoff_Touch          //Подходит и для розетки Sonoff S20 примечание ниже
 //#define Sonof_T1_2_button
-#define Sonof_T1_3_button
+//#define Sonof_T1_3_button
 
 #ifdef Sonoff_Touch
   #define MAX_RELAY  1
