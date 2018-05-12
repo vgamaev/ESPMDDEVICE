@@ -2,17 +2,23 @@
 //#define ADC          // Мерим освещеность фоторезистором
 //#define WIFI_LED       // Светодиод сети Wi-Fi
 #define LED_MATRIX       // Информер на светодиодных матрицах MAX7219
+<<<<<<< HEAD
 
 <<<<<<< HEAD
+=======
+>>>>>>> origin/RF433
 //#define 433_RESIVER
 
 #define RELAYS_ON      //Собираем выключатели, не рекомендую вместе с #define IR_RESIVER
 
+<<<<<<< HEAD
 =======
 
 //#define RELAYS_ON      //Собираем выключатели, не рекомендую вместе с #define IR_RESIVER
 
 >>>>>>> refs/remotes/origin/master
+=======
+>>>>>>> origin/RF433
 //#define Sonoff_Touch          //Подходит и для розетки Sonoff S20 примечание ниже
 //#define Sonof_T1_2_button
 #define Sonof_T1_3_button
