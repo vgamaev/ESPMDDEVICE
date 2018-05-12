@@ -1,6 +1,6 @@
 #include "LEDMATRIX.h"
 
-//192.168.1.142/informer?token=esp8266&bright=10&string=привет
+//192.168.1.142/informer?token=esp8266&bright=10&power=0&string=привет
 
 #ifdef LED_MATRIX
 
@@ -101,15 +101,32 @@ void handleLedMatrix()
     }
     buf = server.arg("bright");
     char b[3];
-    buf.getBytes((unsigned char *)b, 3);
-    Serial.print("LED MATRIX bright ");
-    Serial.println(StrToULong(b));
-    matrix.setIntensity(StrToULong(b)); 
+    if(buf.length())
+    {
+      buf.getBytes((unsigned char *)b, 3);
+      Serial.print("LED MATRIX bright ");
+      Serial.println(StrToULong(b));
+      Serial.println(buf.length());
+      matrix.setIntensity(StrToULong(b)); 
+    }
+
+    if(buf.length())
+    {
+      buf = server.arg("power");
+      buf.getBytes((unsigned char *)b, 3);
+      Serial.print("LED MATRIX power ");
+      Serial.println(StrToULong(b));
+      matrix.shutdown(StrToULong(b)); 
+    }
     
     buf = server.arg("string");
-    Serial.print("LED MATRIX sring:  ");
-    Serial.println(buf);
-    tape=utf8rus(buf);
+    if(buf.length())
+    {
+      Serial.print("LED MATRIX sring:  ");
+      Serial.println(buf);
+      tape=utf8rus(buf);
+
+    }
     
     String message = "success";
     server.send(200, "text/plain", message);  
