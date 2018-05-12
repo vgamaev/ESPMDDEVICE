@@ -18,6 +18,10 @@
   #include "ADC.h"
 #endif
 
+#ifdef LED_MATRIX
+  #include "LEDMATRIX.h"
+#endif
+
 #ifdef IR_RESIVER
 //=== IR Resiver ==============================
   int RECV_PIN = 5; //an IR detector/demodulatord is connected to GPIO pin 2
@@ -42,6 +46,16 @@ bool web_button_state[MAX_RELAY];
   int adcValueOld = 0;
 #endif
 
+#ifdef LED_MATRIX
+  int pinCS = 15;                           // Attach CS to this pin, DIN to MOSI and CLK to SCK (cf http://arduino.cc/en/Reference/SPI )
+  int numberOfHorizontalDisplays = 4;       // число матриц 8x8 MAX7219по горизонтали
+  int numberOfVerticalDisplays = 1;         // Число матриц по вертикали
+  String tape;
+  int wait = 80;                            // In milliseconds
+  int spacer = 1;
+  int width = 5 + spacer;                   // The font width is 5 pixels
+#endif
+
 //=======================Светодиод WIFI=========================================
 long WiFiCheckinterval = 1000; //Интервал проверки WiFi потключения
 int WIWI_Connect=0;
@@ -56,6 +70,21 @@ const char* serverIndex = "<form method='POST' action='/update' enctype='multipa
 
 ESP8266WebServer server (80) ; // веб сервер
 HTTPClient http; // веб клиент
+
+String ssid1;
+const char *password1 = "66666666";
+
+unsigned long StrToULong(char *str)
+{
+ int len = strlen(str);
+ unsigned long res = 0;
+ unsigned long mul = 1;
+ for(int i = len - 1; i >= 0; i--){
+  res += mul * (unsigned long)(str[i] - '0');
+  mul *= 10;
+ }
+ return res;
+}
 
 //===========================================================================================
 
@@ -97,6 +126,9 @@ void setup(void) {
   #ifdef IR_RESIVER 
     server.on("/ir",  handleIR);
   #endif
+  #ifdef LED_MATRIX 
+    server.on("/informer",  handleLedMatrix);
+  #endif
  // server.on("/firmware", FirmwarePage);
  // serveUupdate();                        //Update firmware
     //server.on("/off", HTTP_POST, handleOff);
@@ -109,8 +141,10 @@ void setup(void) {
   //Стартуем ИК приемопередатчик
   StartIR();
 #endif  
-  // посылаем начальный статус устройства
-  //sendServer(false);
+
+#ifdef LED_MATRIX
+  LedMatrixInit();
+#endif
 }
 
 void loop(void) {
@@ -124,7 +158,10 @@ void loop(void) {
     IRResiver();
   #endif
   #ifdef RELAYS_ON
-     ButtonSwitch();
+    ButtonSwitch();
+  #endif
+  #ifdef LED_MATRIX
+    LedMatrix();
   #endif
 }
 

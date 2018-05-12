@@ -9,7 +9,7 @@ IRsend irsend(SEND_PIN);
 
 decode_results results;
 
-unsigned long StrToULong(char *str)
+/* unsigned long StrToULong(char *str)
 {
  int len = strlen(str);
  unsigned long res = 0;
@@ -19,13 +19,13 @@ unsigned long StrToULong(char *str)
   mul *= 10;
  }
  return res;
-}
+} */
 
 // Получаем от сервера MD команду включить
 void handleIR() {
   String buf = server.arg("token");
   Serial.println(buf);
-  Serial.println("poken");
+//  Serial.println("poken");
 
   if (Config.www_password != buf) {
     String message = "access denied";
