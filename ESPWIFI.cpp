@@ -20,8 +20,6 @@ void EnableAP(){
     //конвентируем String в строку символов 
     char ssid2[ssid1.length()+1];
     ssid1.toCharArray(ssid2, ssid1.length()+1);
-    
-    //const char *password2 = "33333333";
     WiFi.mode(WIFI_AP_STA);
     //WiFi.softAPConfig(apIP, apIP, IPAddress(255, 255, 255, 0));
     WiFi.softAP(ssid2, password1);
