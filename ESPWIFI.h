@@ -10,6 +10,9 @@ extern int WIFI_led;          // Светодиод на выклчателе GP
 
 extern int WIWI_Connect;
 
+extern String ssid1;
+extern const char *password1;
+
 // Функция конвертирует IP адрес в строку
 void IPAddressToString(IPAddress ip, String &StrIP);
 
