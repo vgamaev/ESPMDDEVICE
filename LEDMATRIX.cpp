@@ -110,12 +110,13 @@ void handleLedMatrix()
       matrix.setIntensity(StrToULong(b)); 
     }
 
+    buf = server.arg("power");
     if(buf.length())
     {
-      buf = server.arg("power");
       buf.getBytes((unsigned char *)b, 3);
       Serial.print("LED MATRIX power ");
       Serial.println(StrToULong(b));
+      Serial.println(buf.length());
       matrix.shutdown(StrToULong(b)); 
     }
     
