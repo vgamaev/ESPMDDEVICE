@@ -1,7 +1,7 @@
 //#define IR_RESIVER   //Собиракм ИК ресивер
 //#define ADC          // Мерим освещеность фоторезистором
-#define WIFI_LED       // Светодиод сети Wi-Fi
-
+//#define WIFI_LED       // Светодиод сети Wi-Fi
+#define LED_MATRIX       // Информер на светодиодных матрицах MAX7219
 //#define 433_RESIVER
 
 #define RELAYS_ON      //Собираем выключатели, не рекомендую вместе с #define IR_RESIVER
@@ -30,3 +30,6 @@
  *  flash mode DOUT, flash size 1M(64K SPIFFS)
  *  https://letscontrolit.com/forum/viewtopic.php?t=3071
  */
+
+unsigned long StrToULong(char *str);
+ 
