@@ -4,7 +4,7 @@
 
 RCSwitch mySwitch = RCSwitch();
 
-void 433Resiver()
+void Resiver433()
 { 
   if (mySwitch.available()) {
       unsigned long code=mySwitch.getReceivedValue();

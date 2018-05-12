@@ -11,7 +11,9 @@
 #include <ESP8266HTTPClient.h>
 #include "ESPEEPROM.h"
 
-void 433Resiver();
+extern HTTPClient http; // веб клиент
+
+void Resiver433();
 
 void Start433();
 
