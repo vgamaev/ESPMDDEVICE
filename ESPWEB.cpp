@@ -177,11 +177,102 @@ void handleSetup() {
   server.send ( 200, "text/html", temp );
 }
 
- /*           <tr> <td>MASK   </td><td> <input type= text size=15 maxlength=15 name=MASK value="; temp += Config.mask; if(Config.dhcp == "on") temp +=" disabled"; temp += ">  </td> </tr>\
-            <tr> <td>Gateway </td><td> <input type=text size=15 maxlength=15 name=GW   value="; temp += Config.gw;  if(Config.dhcp == "on") temp +=" disabled"; temp += ">  </td> </tr>\
-            <tr> <td>DNS    </td><td> <input type=text  size=15 maxlength=15 name=DNS  value="; temp += Config.dns;  if(Config.dhcp == "on") temp +=" disabled"; temp += ">  </td> </tr>\
- */
+ //===============================================================================================
+// функция для главной страници
+void handleRoot() {
+  String status;
+  if(WebAuth()== 0) return; // Проверяем логин и пароль
 
+  #ifdef RELAYS_ON
+    status = server.arg("RELAY1");
+    Serial.print("status1 ");
+    Serial.println(status);
+    WebButtonRead(status, RELAY_1);
+  
+    #if defined (Sonof_T1_2_button) || defined (Sonof_T1_3_button)
+        status = server.arg("RELAY2");
+        Serial.print("status2 ");
+        Serial.println(status);
+        WebButtonRead(status, RELAY_2);
+    #endif
+     
+    #ifdef Sonof_T1_3_button
+        status = server.arg("RELAY3");
+        Serial.print("status3 ");
+        Serial.println(status);
+        WebButtonRead(status, RELAY_3);
+    #endif
+  #endif
+  
+  String temp = "<html>\
+  <head>\
+    <meta http-equiv='refresh' content='5'/>\
+    <title>ESPDEVICE</title>\
+    <style>\
+      body { background-color: #cccccc; font-family: Arial, Helvetica, Sans-Serif; Color: #000088; }\
+    </style>\
+  </head>\
+  <body><center>";
+
+// Relay Botton Pages  
+  #ifdef RELAYS_ON  
+    temp += "<h1>WIFI Switch</h1>\
+             <h3><font color=red>LAMP Status: ";
+
+    if (lamp_on[RELAY_1] == true) temp += " LAMP1 ON | "; else temp += " LAMP1 OFF | ";
+    
+    #if defined (Sonof_T1_2_button) || defined (Sonof_T1_3_button)
+        if (lamp_on[RELAY_2] == true) temp += " LAMP2 ON | "; else temp += " LAMP2 OFF | ";
+    #endif
+    #ifdef Sonof_T1_3_button
+        if (lamp_on[RELAY_3] == true) temp += " LAMP3 ON | "; else temp += " LAMP3 OFF | ";
+    #endif
+    
+    temp += "</font></h3>\
+      <form  method=get name=form>";
+    if (web_button_state[RELAY_1] == true)
+    {
+      temp += "<button name=RELAY1 value=0 type=submit style=height:80px;width:150px>LAMP1 On//Off</button>";
+    } else
+    {
+      temp += "<button name=RELAY1 value=1 type=submit style=height:80px;width:150px>LAMP1 On/Off</button>";
+    }
+      
+    #if defined (Sonof_T1_2_button) || defined (Sonof_T1_3_button)
+        if (web_button_state[RELAY_2] == true)
+        {
+          temp += "<button name=RELAY2 value=0 type=submit style=height:80px;width:150px>LAMP2 On/Off</button>";
+        } else
+        {
+          temp += "<button name=RELAY2 value=1 type=submit style=height:80px;width:150px>LAMP2 On/OFF</button>";
+        } 
+    #endif
+     
+    #ifdef Sonof_T1_3_button
+        if (web_button_state[RELAY_3] == true)
+        {
+          temp += "<button name=RELAY3 value=0 type=submit style=height:80px;width:150px>LAMP3 On/Off</button>";
+        } else
+        {
+          temp += "<button name=RELAY3 value=1 type=submit style=height:80px;width:150px>LAMP3 On/off</button>";
+        }  
+    #endif
+    temp += "</form><br />";
+  #endif
+
+//Informer peges
+  #ifdef LED_MATRIX  
+    temp += "<h1>LED MATRIX INFORMER</h1>\
+             <h3><font color=red>Informer string: ";
+    temp += tapeMatrix;
+    temp += "</font></h3>";
+
+  #endif          
+  temp += "</center>\
+</html>" ;
+
+  server.send ( 200, "text/html", temp );
+}
 
 
 // функция для недействительных запросов

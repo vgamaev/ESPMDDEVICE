@@ -44,10 +44,10 @@ return target;
 void LedMatrixInit() {
   //Отображакм при имя wifi потключенной сети или точки доступа и ip адрес
   if(Config.ap == "on"){
-    tape = "AP-SSID:" + ssid1 + "   AP-IP:" + Config.ipap ;
+    tapeMatrix = "AP-SSID:" + ssid1 + "   AP-IP:" + Config.ipap ;
   }else
   {
-    tape = "WIFI SSID:" + Config.ssid + " IP:" + Config.ip ;
+    tapeMatrix = "WIFI SSID:" + Config.ssid + " IP:" + Config.ip ;
   }
   
   matrix.setIntensity(7); // Use a value between 0 and 15 for brightness
@@ -67,7 +67,9 @@ void LedMatrixInit() {
 void LedMatrix() {
   
   //tape=utf8rus("Проверка информера: Сегодня наступило лето, температура на улице  +22С и солнышко.");
-
+  
+  String tape=utf8rus(tapeMatrix);
+  
   for ( int i = 0 ; i < width * tape.length() + matrix.width() - 1 - spacer; i++ ) {
 
     matrix.fillScreen(LOW);
@@ -125,7 +127,8 @@ void handleLedMatrix()
     {
       Serial.print("LED MATRIX sring:  ");
       Serial.println(buf);
-      tape=utf8rus(buf);
+      //tape=utf8rus(buf);
+      tapeMatrix=buf;
 
     }
     
