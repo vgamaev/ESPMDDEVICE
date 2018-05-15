@@ -106,6 +106,15 @@ void WebParser(){
   }
 }
 
+void WebParserinformer()
+{
+  String buf = server.arg("send");
+  if (buf == "send")
+  {
+    tapeMatrix = server.arg("infsrt");
+  }
+}
+
 //=======================================SETUP======================================================
 
 // функция для страници настройки устройства
@@ -203,10 +212,12 @@ void handleRoot() {
         WebButtonRead(status, RELAY_3);
     #endif
   #endif
+
+  WebParserinformer();
   
   String temp = "<html>\
   <head>\
-    <meta http-equiv='refresh' content='5'/>\
+    <meta http-equiv='refresh' content='5' charset='utf-8'/>\
     <title>ESPDEVICE</title>\
     <style>\
       body { background-color: #cccccc; font-family: Arial, Helvetica, Sans-Serif; Color: #000088; }\
@@ -263,12 +274,15 @@ void handleRoot() {
 //Informer peges
   #ifdef LED_MATRIX  
     temp += "<h1>LED MATRIX INFORMER</h1>\
-             <h3><font color=red>Informer string: ";
+             <h3><font color=red>Строка на информере: ";
     temp += tapeMatrix;
-    temp += "</font></h3>";
-
+    temp += "</font></h3> \
+             <form  method=get name=form>";
+    temp += "Ввидите текст для отправки :<input type=text size=30 maxlength=100 name=infsrt value=\"\"> \
+             <input type= submit name=send value=send ><br/> \
+             </form><br />";
   #endif          
-  temp += "</center>\
+  temp += "<body></center>\
 </html>" ;
 
   server.send ( 200, "text/html", temp );
