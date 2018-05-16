@@ -7,6 +7,8 @@
 #include "ESPWIFI.h"
 #include "ESPMDDEVICE.H"
 
+extern String tapeMatrix;
+
 extern ESP8266WebServer server; // веб сервер
 
 bool WebAuth();
@@ -22,6 +24,9 @@ void WebParser();
 
 // функция для страници настройки устройства
 void handleSetup();
+
+// функция для главной страници.
+void handleRoot();
 
 // функция для недействительных запросов
 void handleNotFound();
