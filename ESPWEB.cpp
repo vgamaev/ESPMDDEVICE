@@ -106,6 +106,32 @@ void WebParser(){
   }
 }
 
+//Обработка страници с информера
+void WebParseButton()
+{
+    #ifdef RELAYS_ON
+      String status = server.arg("RELAY1");
+      Serial.print("status1 ");
+      Serial.println(status);
+      WebButtonRead(status, RELAY_1);
+    
+      #if defined (Sonof_T1_2_button) || defined (Sonof_T1_3_button)
+          status = server.arg("RELAY2");
+          Serial.print("status2 ");
+          Serial.println(status);
+          WebButtonRead(status, RELAY_2);
+      #endif
+       
+      #ifdef Sonof_T1_3_button
+          status = server.arg("RELAY3");
+          Serial.print("status3 ");
+          Serial.println(status);
+          WebButtonRead(status, RELAY_3);
+      #endif
+    #endif
+}
+
+//Обработка страници с информера
 void WebParserinformer()
 {
   String buf = server.arg("send");
@@ -193,27 +219,11 @@ void handleRoot() {
   if(WebAuth()== 0) return; // Проверяем логин и пароль
 
   #ifdef RELAYS_ON
-    status = server.arg("RELAY1");
-    Serial.print("status1 ");
-    Serial.println(status);
-    WebButtonRead(status, RELAY_1);
-  
-    #if defined (Sonof_T1_2_button) || defined (Sonof_T1_3_button)
-        status = server.arg("RELAY2");
-        Serial.print("status2 ");
-        Serial.println(status);
-        WebButtonRead(status, RELAY_2);
-    #endif
-     
-    #ifdef Sonof_T1_3_button
-        status = server.arg("RELAY3");
-        Serial.print("status3 ");
-        Serial.println(status);
-        WebButtonRead(status, RELAY_3);
-    #endif
+    WebParseButton();
   #endif
-
-  WebParserinformer();
+  #ifdef LED_MATRIX
+    WebParserinformer();
+  #endif
   
   String temp = "<html>\
   <head>\

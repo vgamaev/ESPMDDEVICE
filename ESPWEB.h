@@ -22,6 +22,12 @@ void WIFIScan(String & temp);
 // Раббираем ответ от ВЭБ страници конфигурвции.
 void WebParser();
 
+// Раббираем ответ от ВЭБ страници кнопок.
+void WebParseButton(); 
+
+// Раббираем ответ от ВЭБ страници информера.
+void WebParserinformer();
+
 // функция для страници настройки устройства
 void handleSetup();
 
