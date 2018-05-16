@@ -50,7 +50,7 @@ bool web_button_state[MAX_RELAY];
   int pinCS = 15;                           // Attach CS to this pin, DIN to MOSI and CLK to SCK (cf http://arduino.cc/en/Reference/SPI )
   int numberOfHorizontalDisplays = 4;       // число матриц 8x8 MAX7219по горизонтали
   int numberOfVerticalDisplays = 1;         // Число матриц по вертикали
-  String tape;
+  String tapeMatrix;
   int wait = 80;                            // In milliseconds
   int spacer = 1;
   int width = 5 + spacer;                   // The font width is 5 pixels
@@ -117,8 +117,8 @@ void setup(void) {
     
   // Назначем функции на запросы
   server.on("/setup", handleSetup);
+  server.on("/", handleRoot);
   #ifdef RELAYS_ON
-    server.on("/", handleRoot);
     server.on("/on", handleOn);
     server.on("/off", handleOff);
     server.on("/relay", handleRelay);
