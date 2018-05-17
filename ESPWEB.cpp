@@ -138,6 +138,7 @@ void WebParserinformer()
   if (buf == "send")
   {
     tapeMatrix = server.arg("infsrt");
+    MatrixCounter = 0;      //Начинаем новую строку сначала
   }
 }
 
@@ -227,7 +228,14 @@ void handleRoot() {
   
   String temp = "<html>\
   <head>\
-    <meta http-equiv='refresh' content='5' charset='utf-8'/>\
+    <meta http-equiv='refresh' content=";
+    #ifdef RELAYS_ON
+      temp += "'5'"; //добавляем автообновление страници
+    #endif
+    #ifdef LED_MATRIX
+      temp += "'180'"; //добавляем автообновление страници
+    #endif
+    temp += " charset='utf-8'/>\
     <title>ESPDEVICE</title>\
     <style>\
       body { background-color: #cccccc; font-family: Arial, Helvetica, Sans-Serif; Color: #000088; }\
