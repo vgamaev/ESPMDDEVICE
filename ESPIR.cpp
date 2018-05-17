@@ -9,24 +9,10 @@ IRsend irsend(SEND_PIN);
 
 decode_results results;
 
-/* unsigned long StrToULong(char *str)
-{
- int len = strlen(str);
- unsigned long res = 0;
- unsigned long mul = 1;
- for(int i = len - 1; i >= 0; i--){
-  res += mul * (unsigned long)(str[i] - '0');
-  mul *= 10;
- }
- return res;
-} */
-
 // Получаем от сервера MD команду включить
 void handleIR() {
   String buf = server.arg("token");
   Serial.println(buf);
-//  Serial.println("poken");
-
   if (Config.www_password != buf) {
     String message = "access denied";
     server.send(401, "text/plain", message);
@@ -35,10 +21,12 @@ void handleIR() {
   buf = server.arg("ircode");
   Serial.println(buf);
   char b[32];
+  //long a = StrToULong(b);  //Проверить
   //buf.getBytes(b, 32);
   buf.getBytes((unsigned char *)b, 32);
   Serial.println(StrToULong(b));
   IRTransmiter(StrToULong(b));
+  TransmiterCode = StrToULong(b);
   String message = "success";
   server.send(200, "text/plain", message);
 }
@@ -47,6 +35,7 @@ void IRResiver()
 { 
   if (irrecv.decode(&results)) {
       Serial.println(results.value); //, HEX);
+      ResiverCode = results.value;
       //String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=m&m=IR_Decode&"+Config.property+"="+results.value;
       String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p="+Config.property+"&v="+results.value;
       Serial.println(post);

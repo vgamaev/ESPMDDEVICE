@@ -20,9 +20,9 @@ extern String tapeMatrix;
 extern int wait; // In milliseconds
 extern int spacer;
 extern int width; // The font width is 5 pixels
+extern int MatrixOFF;
 extern int MatrixCounter;
 extern String ssid1;
-
 
 //Потдержка русского языка
 String utf8rus(String source);
@@ -33,8 +33,8 @@ void LedMatrixInit();
 //Отображение информации на матрице
 void LedMatrix();
 
-//Обрабатываем ВЕБ запросы
-void handleLedMatrix(); 
+// Раббираем ответ от ВЭБ страници информера.
+void WebParserinformer();
 
 #endif
 #endif
