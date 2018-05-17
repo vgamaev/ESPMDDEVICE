@@ -70,23 +70,36 @@ void LedMatrix() {
   
   String tape=utf8rus(tapeMatrix);
   
-  for ( int i = 0 ; i < width * tape.length() + matrix.width() - 1 - spacer; i++ ) {
-
-    matrix.fillScreen(LOW);
-
-    int letter = i / width;
-    int x = (matrix.width() - 1) - i % width;
-    int y = (matrix.height() - 8) / 2; // center the text vertically
-
-    while ( x + width - spacer >= 0 && letter >= 0 ) {
-      if ( letter < tape.length() ) {
-        matrix.drawChar(x, y, tape[letter], HIGH, LOW, 1);
+  static long previousMillis = 0;                             
+  long currentMillis = millis();
+  
+  if(currentMillis - previousMillis > wait) 
+  {  
+  //for ( int i = 0 ; i < width * tape.length() + matrix.width() - 1 - spacer; i++ ) {
+    previousMillis = currentMillis; 
+    
+    if(MatrixCounter < width * tape.length() + matrix.width() - 1 - spacer)
+    {
+      matrix.fillScreen(LOW);
+  
+      int letter = MatrixCounter / width;
+      int x = (matrix.width() - 1) - MatrixCounter % width;
+      int y = (matrix.height() - 8) / 2; // center the text vertically
+  
+      while ( x + width - spacer >= 0 && letter >= 0 ) {
+        if ( letter < tape.length() ) {
+          matrix.drawChar(x, y, tape[letter], HIGH, LOW, 1);
+        }
+        letter--;
+        x -= width;
       }
-      letter--;
-      x -= width;
+      matrix.write(); // Send bitmap to display
+      MatrixCounter++ ;
+      //delay(wait);
+    }else
+    {
+      MatrixCounter = 0 ; 
     }
-    matrix.write(); // Send bitmap to display
-    delay(wait);
   }
 }
 
@@ -129,7 +142,7 @@ void handleLedMatrix()
       Serial.println(buf);
       //tape=utf8rus(buf);
       tapeMatrix=buf;
-
+      MatrixCounter = 0;      //Начинаем новую строку сначала
     }
     
     String message = "success";

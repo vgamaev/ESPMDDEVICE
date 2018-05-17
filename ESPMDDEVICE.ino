@@ -54,6 +54,7 @@ bool web_button_state[MAX_RELAY];
   int wait = 80;                            // In milliseconds
   int spacer = 1;
   int width = 5 + spacer;                   // The font width is 5 pixels
+  int MatrixCounter = 0;                    // Счетчик дляотображения бегущей строки
 #endif
 
 //=======================Светодиод WIFI=========================================
