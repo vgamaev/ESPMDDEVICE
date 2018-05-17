@@ -20,7 +20,7 @@ extern String tapeMatrix;
 extern int wait; // In milliseconds
 extern int spacer;
 extern int width; // The font width is 5 pixels
-
+extern int MatrixCounter;
 extern String ssid1;
 
 

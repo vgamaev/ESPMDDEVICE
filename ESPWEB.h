@@ -8,6 +8,7 @@
 #include "ESPMDDEVICE.H"
 
 extern String tapeMatrix;
+extern int MatrixCounter;
 
 extern ESP8266WebServer server; // веб сервер
 
