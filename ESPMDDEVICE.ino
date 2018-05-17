@@ -26,6 +26,8 @@
 //=== IR Resiver ==============================
   int RECV_PIN = 5; //an IR detector/demodulatord is connected to GPIO pin 2
   int SEND_PIN = 15; //an IR led is connected to GPIO pin 0
+  int long ResiverCode = 0;
+  int long TransmiterCode = 0;
 #endif
 
 #ifdef RELAYS_ON
@@ -54,6 +56,7 @@ bool web_button_state[MAX_RELAY];
   int wait = 80;                            // In milliseconds
   int spacer = 1;
   int width = 5 + spacer;                   // The font width is 5 pixels
+  int MatrixOFF = 0 ;
   int MatrixCounter = 0;                    // Счетчик дляотображения бегущей строки
 #endif
 
