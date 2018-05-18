@@ -14,6 +14,8 @@ extern int MatrixCounter;
 extern int long ResiverCode;
 extern int long TransmiterCode;
 
+extern unsigned long code433;
+
 extern int adcValue;
 
 extern ESP8266WebServer server; // веб сервер

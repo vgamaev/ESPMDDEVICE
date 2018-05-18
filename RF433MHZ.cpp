@@ -7,11 +7,11 @@ RCSwitch mySwitch = RCSwitch();
 void Resiver433()
 { 
   if (mySwitch.available()) {
-      unsigned long code=mySwitch.getReceivedValue();
-      Serial.print("Received ");
-      Serial.println(code); //, HEX);
+      unsigned long code433=mySwitch.getReceivedValue();
+      Serial.print("433 MHZ Received code: ");
+      Serial.println(code433); //, HEX);
       //String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=m&m=IR_Decode&"+Config.property+"="+results.value;
-      String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p="+Config.property+"&v="+code;
+      String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p="+Config.property+"&v="+code433;
       Serial.println(post);
       http.begin(post);
       int httpCode = http.GET(); 
