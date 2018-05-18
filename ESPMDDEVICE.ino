@@ -23,8 +23,8 @@
 #endif
 
 #ifdef RF433MHZ
-  #include "RF433MHZ.h"
-  unsigned long code433 =0;
+    #include "RF433MHZ.h"
+unsigned long code433 =0;
 #endif
 
 #ifdef IR_RESIVER
@@ -35,8 +35,8 @@
   int long TransmiterCode = 0;
 #endif
 
-#ifdef RELAYS_ON
-//==== WIFI SWITCH =============================
+#ifdef RELAYS_ON//==== WIFI SWITCH =============================
+
 #include "LAMP.h"
 int RelayPin[MAX_RELAY];
 int lamp_on[MAX_RELAY];

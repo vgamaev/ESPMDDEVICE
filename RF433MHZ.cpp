@@ -6,8 +6,9 @@ RCSwitch mySwitch = RCSwitch();
 
 void Resiver433()
 { 
+  //Serial.print("433 ");
   if (mySwitch.available()) {
-      unsigned long code433=mySwitch.getReceivedValue();
+      code433=mySwitch.getReceivedValue();
       Serial.print("433 MHZ Received code: ");
       Serial.println(code433); //, HEX);
       //String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=m&m=IR_Decode&"+Config.property+"="+results.value;
@@ -22,7 +23,8 @@ void Resiver433()
 
 void Start433()
 {
-  mySwitch.enableReceive(0);  // Receiver on interrupt 0 => that is pin #2
+  mySwitch.enableReceive(2);  // Receiver on interrupt 0 => that is pin #2
+  //Serial.print("Init 433 ");
 }
 
 #endif
