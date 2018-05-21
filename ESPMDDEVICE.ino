@@ -22,16 +22,21 @@
   #include "LEDMATRIX.h"
 #endif
 
+#ifdef RF433MHZ
+    #include "RF433MHZ.h"
+unsigned long code433 =0;
+#endif
+
 #ifdef IR_RESIVER
 //=== IR Resiver ==============================
   int RECV_PIN = 5; //an IR detector/demodulatord is connected to GPIO pin 2
   int SEND_PIN = 15; //an IR led is connected to GPIO pin 0
-  int long ResiverCode = 0;
-  int long TransmiterCode = 0;
+  unsigned long ResiverCode = 0;
+  unsigned long TransmiterCode = 0;
 #endif
 
-#ifdef RELAYS_ON
-//==== WIFI SWITCH =============================
+#ifdef RELAYS_ON//==== WIFI SWITCH =============================
+
 #include "LAMP.h"
 int RelayPin[MAX_RELAY];
 int lamp_on[MAX_RELAY];
@@ -129,9 +134,15 @@ void setup(void) {
   #endif
   #ifdef IR_RESIVER 
     server.on("/ir",  handleIR);
+    //Стартуем ИК приемопередатчик
+    StartIR();
   #endif
   #ifdef LED_MATRIX 
     server.on("/informer",  handleLedMatrix);
+    LedMatrixInit();
+  #endif
+  #ifdef RF433MHZ
+    Start433();
   #endif
  // server.on("/firmware", FirmwarePage);
  // serveUupdate();                        //Update firmware
@@ -140,15 +151,6 @@ void setup(void) {
   
   // Стартуем WEB сервер
   server.begin();
-
-#ifdef IR_RESIVER 
-  //Стартуем ИК приемопередатчик
-  StartIR();
-#endif  
-
-#ifdef LED_MATRIX
-  LedMatrixInit();
-#endif
 }
 
 void loop(void) {
@@ -166,6 +168,9 @@ void loop(void) {
   #endif
   #ifdef LED_MATRIX
     LedMatrix();
+  #endif
+  #ifdef RF433MHZ
+    Resiver433();
   #endif
 }
 

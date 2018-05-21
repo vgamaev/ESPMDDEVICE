@@ -254,7 +254,7 @@ void handleRoot() {
     #ifdef RELAYS_ON
       temp += "'5'"; //добавляем автообновление страници
     #endif
-    #if defined (LED_MATRIX) || defined (IR_RESIVER) //#ifdef LED_MATRIX
+    #if defined (LED_MATRIX) || defined (IR_RESIVER) || defined (RF433MHZ) //#ifdef LED_MATRIX
       temp += "'180'"; //добавляем автообновление страници
     #endif
     temp += " charset='utf-8'/>\
@@ -345,7 +345,15 @@ void handleRoot() {
     temp += adcValue;
     temp += "</font></h3>";
   #endif 
-  
+
+  //433MHZ peges
+  #ifdef RF433MHZ  
+    temp += "<h1>433МГц приемник</h1>\
+             <h3><font color=red>Принятый код по 433МГЦ: ";
+    temp += code433;
+    temp += "</font></h3>";
+  #endif 
+
   temp += "<body></center></html>" ;
   server.send ( 200, "text/html", temp );
 }

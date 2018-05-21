@@ -11,8 +11,10 @@
 extern String tapeMatrix;
 extern int MatrixCounter;
 
-extern int long ResiverCode;
-extern int long TransmiterCode;
+extern unsigned long ResiverCode;
+extern unsigned long TransmiterCode;
+
+extern unsigned long code433;
 
 extern int adcValue;
 

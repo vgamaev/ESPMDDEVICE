@@ -17,8 +17,8 @@ extern int SEND_PIN; //an IR led is connected to GPIO pin 0
 extern ESP8266WebServer server; // веб сервер
 extern HTTPClient http; // веб клиент
 
-extern int long ResiverCode;
-extern int long TransmiterCode;
+extern unsigned long ResiverCode;
+extern unsigned long TransmiterCode;
 
 unsigned long StrToULong(char *str);
 void StartIR();
