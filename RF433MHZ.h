@@ -12,6 +12,7 @@
 #include "ESPEEPROM.h"
 
 extern HTTPClient http; // веб клиент
+extern unsigned long code433;
 
 void Resiver433();
 

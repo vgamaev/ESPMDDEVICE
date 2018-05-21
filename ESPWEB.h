@@ -4,11 +4,19 @@
 #include <ESP8266WebServer.h>
 #include "ESPEEPROM.h"
 #include "LAMP.h"
+#include "ESPIR.h"
 #include "ESPWIFI.h"
 #include "ESPMDDEVICE.H"
 
 extern String tapeMatrix;
 extern int MatrixCounter;
+
+extern unsigned long ResiverCode;
+extern unsigned long TransmiterCode;
+
+extern unsigned long code433;
+
+extern int adcValue;
 
 extern ESP8266WebServer server; // веб сервер
 
@@ -26,8 +34,8 @@ void WebParser();
 // Раббираем ответ от ВЭБ страници кнопок.
 void WebParseButton(); 
 
-// Раббираем ответ от ВЭБ страници информера.
-void WebParserinformer();
+//Обрабатываем ВЕБ запросы
+void handleLedMatrix(); 
 
 // функция для страници настройки устройства
 void handleSetup();

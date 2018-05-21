@@ -142,6 +142,25 @@ void WebParserinformer()
   }
 }
 
+//Обработка страници с ИК
+void WebParserIR()
+{ 
+  #ifdef IR_RESIVER
+    String buf = server.arg("send");
+    if (buf == "send")
+    {
+      buf = server.arg("ircode");
+      Serial.println(buf);
+      char b[32];
+      //long a = StrToULong(b);  //Проверить
+      buf.getBytes((unsigned char *)b, 32);
+      Serial.println(StrToULong(b));
+      IRTransmiter(StrToULong(b));
+      TransmiterCode = StrToULong(b);
+    }
+  #endif
+}
+
 //=======================================SETUP======================================================
 
 // функция для страници настройки устройства
@@ -225,6 +244,9 @@ void handleRoot() {
   #ifdef LED_MATRIX
     WebParserinformer();
   #endif
+  #ifdef IR_RESIVER
+    WebParserIR();
+  #endif
   
   String temp = "<html>\
   <head>\
@@ -232,7 +254,7 @@ void handleRoot() {
     #ifdef RELAYS_ON
       temp += "'5'"; //добавляем автообновление страници
     #endif
-    #ifdef LED_MATRIX
+    #if defined (LED_MATRIX) || defined (IR_RESIVER) || defined (RF433MHZ) //#ifdef LED_MATRIX
       temp += "'180'"; //добавляем автообновление страници
     #endif
     temp += " charset='utf-8'/>\
@@ -299,10 +321,40 @@ void handleRoot() {
     temp += "Ввидите текст для отправки :<input type=text size=30 maxlength=100 name=infsrt value=\"\"> \
              <input type= submit name=send value=send ><br/> \
              </form><br />";
-  #endif          
-  temp += "<body></center>\
-</html>" ;
+  #endif 
 
+  //IR peges
+  #ifdef IR_RESIVER  
+    temp += "<h1>IR RESIVER-TRANSMITER</h1>\
+             <h3><font color=red>Принятый код по ИК: ";
+    temp += ResiverCode;
+    temp += "</font></h3>";
+    
+    temp += "<h3><font color=red>Отправленный код по ИК: ";
+    temp += TransmiterCode;
+    temp += "</font></h3> \
+             <form  method=get name=form>";
+    temp += "Ввидите код для отправки :<input type=text size=10 maxlength=10 name=ircode value=\"\"> \
+             <input type= submit name=send value=send ><br/> \
+             </form><br />";
+  #endif 
+
+  //ADC peges
+  #ifdef ADC  
+    temp += "<h3><font color=red>Освещеность: ";
+    temp += adcValue;
+    temp += "</font></h3>";
+  #endif 
+
+  //433MHZ peges
+  #ifdef RF433MHZ  
+    temp += "<h1>433МГц приемник</h1>\
+             <h3><font color=red>Принятый код по 433МГЦ: ";
+    temp += code433;
+    temp += "</font></h3>";
+  #endif 
+
+  temp += "<body></center></html>" ;
   server.send ( 200, "text/html", temp );
 }
 
