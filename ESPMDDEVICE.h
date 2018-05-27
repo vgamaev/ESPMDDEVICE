@@ -31,5 +31,5 @@
  *  https://letscontrolit.com/forum/viewtopic.php?t=3071
  */
 
-unsigned long StrToULong(char *str);
- 
+
+
