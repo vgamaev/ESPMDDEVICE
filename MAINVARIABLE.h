@@ -46,7 +46,7 @@ unsigned long code433 =0;
 #ifdef LED_MATRIX
   #include "LEDMATRIX.h"
   int pinCS = 15;                           // Attach CS to this pin, DIN to MOSI and CLK to SCK (cf http://arduino.cc/en/Reference/SPI )
-  int numberOfHorizontalDisplays = 4;       // число матриц 8x8 MAX7219по горизонтали
+  int numberOfHorizontalDisplays = 5;       // число матриц 8x8 MAX7219по горизонтали
   int numberOfVerticalDisplays = 1;         // Число матриц по вертикали
   String tapeMatrix;
   int wait = 80;                            // In milliseconds

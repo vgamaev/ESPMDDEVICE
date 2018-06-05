@@ -51,17 +51,31 @@ void LedMatrixInit() {
   }
   
   matrix.setIntensity(7); // Use a value between 0 and 15 for brightness
-  
+  /*
   // Adjust to your own needs
   matrix.setPosition(0, 3, 0); // The first display is at <0, 0>
   matrix.setPosition(1, 2, 0); // The second display is at <1, 0>
   matrix.setPosition(2, 1, 0); // The third display is at <2, 0>
   matrix.setPosition(3, 0, 0); // And the last display is at <3, 0>
+  //  ...
+  matrix.setRotation(0, 3);    // The first display is position upside down
+  matrix.setRotation(1, 3);    // The first display is position upside down
+  matrix.setRotation(2, 3);    // The first display is position upside down
+  matrix.setRotation(3, 3);    // The same hold for the last display
+  */
+  // Adjust to your own needs
+  matrix.setPosition(0, 4, 0); // The first display is at <0, 0>
+  matrix.setPosition(1, 3, 0); // The second display is at <1, 0>
+  matrix.setPosition(2, 2, 0); // The third display is at <2, 0>
+  matrix.setPosition(3, 1, 0); // And the last display is at <3, 0>
+  matrix.setPosition(4, 0, 0); // And the last display is at <3, 0>
 //  ...
   matrix.setRotation(0, 3);    // The first display is position upside down
   matrix.setRotation(1, 3);    // The first display is position upside down
   matrix.setRotation(2, 3);    // The first display is position upside down
   matrix.setRotation(3, 3);    // The same hold for the last display
+  matrix.setRotation(4, 3);    // The same hold for the last display
+  
 }
 
 void LedMatrix() {
