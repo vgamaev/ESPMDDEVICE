@@ -48,7 +48,8 @@ unsigned long code433 =0;
   int pinCS = 15;                           // Attach CS to this pin, DIN to MOSI and CLK to SCK (cf http://arduino.cc/en/Reference/SPI )
   int numberOfHorizontalDisplays = 5;       // число матриц 8x8 MAX7219по горизонтали
   int numberOfVerticalDisplays = 1;         // Число матриц по вертикали
-  String tapeMatrix;
+  String tapeMatrix;                        // Буфер для принятия строки
+  String tape;                              // Буфер для отображения строки
   int wait = 80;                            // In milliseconds
   int spacer = 1;
   int width = 5 + spacer;                   // The font width is 5 pixels

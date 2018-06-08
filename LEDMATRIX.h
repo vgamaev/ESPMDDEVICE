@@ -18,6 +18,7 @@ extern int pinCS; // Attach CS to this pin, DIN to MOSI and CLK to SCK (cf http:
 extern int numberOfHorizontalDisplays;
 extern int numberOfVerticalDisplays;
 extern String tapeMatrix;
+extern String tape;
 extern int wait; // In milliseconds
 extern int spacer;
 extern int width; // The font width is 5 pixels
