@@ -1,6 +1,6 @@
 #include "LEDMATRIX.h"
 
-//192.168.1.142/informer?token=esp8266&bright=10&power=0&string=привет
+//192.168.1.142/informer?token=esp8266&bright=10&power=0&priority=high&string=привет
 
 #ifdef LED_MATRIX
 
@@ -83,15 +83,14 @@ void LedMatrix() {
   //tape=utf8rus("Проверка информера: Сегодня наступило лето, температура на улице  +22С и солнышко.");
   if(MatrixOFF == 0)
   {
-    String tape=utf8rus(tapeMatrix);
-    
     static long previousMillis = 0;                             
     long currentMillis = millis();
     
     if(currentMillis - previousMillis > wait) 
     {  
-    //for ( int i = 0 ; i < width * tape.length() + matrix.width() - 1 - spacer; i++ ) {
       previousMillis = currentMillis; 
+      
+      if(MatrixCounter == 0) tape=utf8rus(tapeMatrix);    //Загружаем новую строку если закончилось отображение предедущей
       
       if(MatrixCounter < width * tape.length() + matrix.width() - 1 - spacer)
       {
@@ -132,39 +131,58 @@ void handleLedMatrix()
     }
     buf = server.arg("bright");
     char b[3];
+    int z = 100;
     if(buf.length())
     {
       buf.getBytes((unsigned char *)b, 3);
-      Serial.print("LED MATRIX bright ");
-      Serial.println(StrToULong(b));
-      Serial.println(buf.length());
-      matrix.setIntensity(StrToULong(b)); 
+      z = StrToULong(b);
+      if(z != MatrixOFF)
+      {
+        MatrixOFF = z;
+        Serial.print("LED MATRIX bright ");
+        Serial.println(StrToULong(b));
+        Serial.println(buf.length());
+        matrix.setIntensity(StrToULong(b)); 
+      }
     }
 
     buf = server.arg("power");
     if(buf.length())
     {
       buf.getBytes((unsigned char *)b, 3);
-      Serial.print("LED MATRIX power ");
-      MatrixOFF = StrToULong(b);
-      Serial.println(MatrixOFF);
-      Serial.println(buf.length());
-      //matrix.fillScreen(1);
-      matrix.shutdown(MatrixOFF); 
-      MatrixCounter = 0;      //Начинаем новую строку сначала
+      z = StrToULong(b);
+      if(z != MatrixOFF)
+      {
+        MatrixOFF = z;
+        Serial.print("LED MATRIX power ");
+        Serial.println(MatrixOFF);
+        Serial.println(buf.length());
+        //matrix.fillScreen(1);
+        matrix.shutdown(MatrixOFF); 
+        MatrixCounter = 0;      //Начинаем новую строку сначала
+      }
+    }
+    
+    buf = server.arg("priority");
+    if(buf.length())  // проверяем задан ли параметр
+    {
+      if (buf == "high")
+      {
+        Serial.print("Priority high");
+        MatrixCounter = 0;      //Начинаем новую строку сначала
+      }
     }
     
     buf = server.arg("string");
-    if(buf.length())
+    if(buf.length())  // проверяем задан ли параметр
     {
       Serial.print("LED MATRIX sring:  ");
       Serial.println(buf);
-      //tape=utf8rus(buf);
       tapeMatrix=buf;
-      MatrixCounter = 0;      //Начинаем новую строку сначала
+      //MatrixCounter = 0;      //Начинаем новую строку сначала
     }
-    
-    String message = "success";
+
+        String message = "success";
     server.send(200, "text/plain", message);  
 }
 
