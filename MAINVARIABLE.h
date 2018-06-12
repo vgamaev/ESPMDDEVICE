@@ -3,7 +3,7 @@
 #include "ESPMDDEVICE.H"
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
-//#include <WiFiClient.h>
+#include <WiFiClient.h>
 #include <ESP8266HTTPClient.h>
 #include <ESP8266mDNS.h>
 #include "ESPEEPROM.h"
