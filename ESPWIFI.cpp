@@ -54,6 +54,9 @@ void WiFiLedStatus()
         #ifdef WIFI_LED
           digitalWrite(WIFI_led, LOW);
         #endif
+        #ifdef LED_MATRIX
+          tapeMatrix = "WIFI SSID:" + Config.ssid + " IP:" + Config.ip ;
+        #endif
         if(Config.dhcp == "on")    IPAddressToString(WiFi.localIP(),Config.ip);
         Serial.println(Config.ip);
         WIWI_Connect = 1;
