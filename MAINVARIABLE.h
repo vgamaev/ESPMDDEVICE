@@ -9,6 +9,7 @@
 #include "ESPEEPROM.h"
 #include "ESPWIFI.h"
 #include "ESPWEB.h"
+#include "WEBUPDATE.h"
 
 #ifdef RF433MHZ
     #include "RF433MHZ.h"
@@ -57,6 +58,13 @@ unsigned long code433 =0;
   int MatrixCounter = 0;                    // Счетчик дляотображения бегущей строки
 #endif
 
+#ifdef WEBUPDATE
+  const char* serverIndex = "<form method='POST' action='/update' enctype='multipart/form-data'> \
+                                <input type='file' name='update'> \
+                                <input type='submit' value='Update'> \ 
+                                </form>";
+#endif
+
 //=======================Светодиод WIFI=========================================
 long WiFiCheckinterval = 1000; //Интервал проверки WiFi потключения
 int WIWI_Connect=0;
@@ -64,8 +72,6 @@ int WIWI_Connect=0;
 //#ifdef WIFI_LED
   int WIFI_led = 13;             // Светодиод на выклчателе GPIO13
 //#endif
-
-//const char* serverIndex = "<form method='POST' action='/update' enctype='multipart/form-data'><input type='file' name='update'><input type='submit' value='Update'></form>";
 
 String ssid1;
 const char *password1 = "66666666";
