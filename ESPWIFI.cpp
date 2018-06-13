@@ -54,6 +54,12 @@ void WiFiLedStatus()
         #ifdef WIFI_LED
           digitalWrite(WIFI_led, LOW);
         #endif
+        #ifdef LED_MATRIX
+        if(Config.ap != "on"){    // Если не включена точкадоступа
+          tapeMatrix = "WIFI SSID:" + Config.ssid + " IP:" + Config.ip ;
+          MatrixCounter = 0;
+        }
+        #endif
         if(Config.dhcp == "on")    IPAddressToString(WiFi.localIP(),Config.ip);
         Serial.println(Config.ip);
         WIWI_Connect = 1;
@@ -65,7 +71,7 @@ void WiFiLedStatus()
         #endif
         #ifdef LED_MATRIX
           tapeMatrix = "Нет подключения по WIFI";
-          MatrixCounter = 0;
+          //MatrixCounter = 0;
         #endif
         WIWI_Connect = 0;
       }

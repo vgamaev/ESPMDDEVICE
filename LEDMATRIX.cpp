@@ -45,10 +45,11 @@ void LedMatrixInit() {
   //Отображакм при имя wifi потключенной сети или точки доступа и ip адрес
   if(Config.ap == "on"){
     tapeMatrix = "AP-SSID:" + ssid1 + "   AP-IP:" + Config.ipap ;
-  }else
+  }
+  /*else
   {
     tapeMatrix = "WIFI SSID:" + Config.ssid + " IP:" + Config.ip ;
-  }
+  } */
   
   matrix.setIntensity(7); // Use a value between 0 and 15 for brightness
   /*
