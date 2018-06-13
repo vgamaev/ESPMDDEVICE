@@ -58,13 +58,6 @@ unsigned long code433 =0;
   int MatrixCounter = 0;                    // Счетчик дляотображения бегущей строки
 #endif
 
-#ifdef WEBUPDATE
-  const char* serverIndex = "<form method='POST' action='/update' enctype='multipart/form-data'> \
-                                <input type='file' name='update'> \
-                                <input type='submit' value='Update'> \ 
-                                </form>";
-#endif
-
 //=======================Светодиод WIFI=========================================
 long WiFiCheckinterval = 1000; //Интервал проверки WiFi потключения
 int WIWI_Connect=0;

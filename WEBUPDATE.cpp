@@ -2,9 +2,27 @@
 
 #ifdef WEBUPDATE
 
+//Страница выбора файла прошивки
 void handleWebUpdate()
 {
-      if(WebAuth()== 0) return; // Проверяем логин и пароль
+  if(WebAuth()== 0) return; // Проверяем логин и пароль
+  String serverIndex = "<html>\
+                          <head>\
+                            <style>\
+                               body { background-color: #cccccc; font-family: Arial, Helvetica, Sans-Serif; Color: #000088; }\
+                            </style>\
+                          </head>\
+                          <form method='POST' action='/update' enctype='multipart/form-data'> \
+                            <body>\
+                              <center> \
+                                <h1>Firmware update </h1>\
+                                <input type='file' name='update'> \
+                                <input type='submit' value='Update'> \ 
+                              </center> \
+                            </body>\
+                          </form> \
+                       </html>" ;
+      
       server.sendHeader("Connection", "close");
       server.send(200, "text/html", serverIndex);
 }
