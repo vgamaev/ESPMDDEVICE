@@ -8,6 +8,9 @@
 extern long WiFiCheckinterval;  //Интервал проверки WiFi потключения
 extern int WIFI_led;          // Светодиод на выклчателе GPIO13
 
+extern String tapeMatrix;
+extern int MatrixCounter;
+
 extern int WIWI_Connect;
 
 extern String ssid1;

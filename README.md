@@ -14,6 +14,11 @@ ESPMDDEVICE
 - Измерение уровня освещености.
 - Добавил поддержку выключателей Sonoff T1 двух, трехкнопочный, Sonoff Touch,  розетка Sonoff S20, 
 - Поддержка информера на светодиодных матрицах 8x8 на микросхеме MAX7219 с поддержкой русского языка.
+- Обновление прошивки через WEB интерфейс на esp8266 c flash памятью больше 1 мб.
+
+Библиотеки для сборки кода https://github.com/vgamaev/lib
+Скрипты интеграции с MajorDomo
+https://connect.smartliving.ru/profile/907/objects.html
 
 Управления реле 
 http://192.168.1.11/relay?token=12345678&relay=3&state=off  
@@ -24,7 +29,8 @@ http://192.168.43.218/objects/?object=LAMP1&op=set&p=status&v=0   где v=1 лампа 
 ИК передатчик https://majordomo.smartliving.ru/forum/viewtopic.php?f=6&t=4670
 
 Информер
-Отправка строки на информер 192.168.17.14/informer?token=esptoken&bright=10&power=0&string=привет
+Отправка строки на информер 192.168.1.42/informer?token=123456&bright=10&power=0&priority=high&string=привет
 	bright - ярость от 0-15
 	power  - отключить дисплей 1, включить дисплей 1.
+	priority=high  сообщение выводится сразу, не дожидаясь пока закончится отображение предедущегою
 Опции можно отправлять отдельно.

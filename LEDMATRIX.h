@@ -11,12 +11,14 @@
 #include <ESP8266WebServer.h>
 #include "ESPEEPROM.h"
 
+extern unsigned long StrToULong(char *str);
 extern ESP8266WebServer server; // веб сервер
 
 extern int pinCS; // Attach CS to this pin, DIN to MOSI and CLK to SCK (cf http://arduino.cc/en/Reference/SPI )
 extern int numberOfHorizontalDisplays;
 extern int numberOfVerticalDisplays;
 extern String tapeMatrix;
+extern String tape;
 extern int wait; // In milliseconds
 extern int spacer;
 extern int width; // The font width is 5 pixels

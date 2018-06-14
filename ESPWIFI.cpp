@@ -39,16 +39,6 @@ void ConectWIFI()
  
  // Потключаемся к  WIFI
   WiFi.begin(ssid, password);
-
- /* // Ждем пока подключимся к WiFi
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-  }  
-  // Записываем текущий IP адресс
-  if(Config.dhcp == "on")
-    IPAddressToString(WiFi.localIP(),Config.ip);
-
-  Serial.println(Config.ip);    */
 }
 
 //Индикация потключения по wifi
@@ -64,6 +54,12 @@ void WiFiLedStatus()
         #ifdef WIFI_LED
           digitalWrite(WIFI_led, LOW);
         #endif
+        #ifdef LED_MATRIX
+        if(Config.ap != "on"){    // Если не включена точкадоступа
+          tapeMatrix = "WIFI SSID:" + Config.ssid + " IP:" + Config.ip ;
+          MatrixCounter = 0;
+        }
+        #endif
         if(Config.dhcp == "on")    IPAddressToString(WiFi.localIP(),Config.ip);
         Serial.println(Config.ip);
         WIWI_Connect = 1;
@@ -72,6 +68,12 @@ void WiFiLedStatus()
       {
         #ifdef WIFI_LED
           digitalWrite(WIFI_led, HIGH);
+        #endif
+        #ifdef LED_MATRIX
+          if(Config.ap != "on"){    // Если не включена точкадоступа
+            tapeMatrix = "Нет подключения по WIFI";
+          //MatrixCounter = 0;
+          }
         #endif
         WIWI_Connect = 0;
       }

@@ -3,12 +3,13 @@
 #include "ESPMDDEVICE.H"
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
-//#include <WiFiClient.h>
+#include <WiFiClient.h>
 #include <ESP8266HTTPClient.h>
 #include <ESP8266mDNS.h>
 #include "ESPEEPROM.h"
 #include "ESPWIFI.h"
 #include "ESPWEB.h"
+#include "WEBUPDATE.h"
 
 #ifdef RF433MHZ
     #include "RF433MHZ.h"
@@ -46,9 +47,10 @@ unsigned long code433 =0;
 #ifdef LED_MATRIX
   #include "LEDMATRIX.h"
   int pinCS = 15;                           // Attach CS to this pin, DIN to MOSI and CLK to SCK (cf http://arduino.cc/en/Reference/SPI )
-  int numberOfHorizontalDisplays = 4;       // число матриц 8x8 MAX7219по горизонтали
+  int numberOfHorizontalDisplays = 5;       // число матриц 8x8 MAX7219по горизонтали
   int numberOfVerticalDisplays = 1;         // Число матриц по вертикали
-  String tapeMatrix;
+  String tapeMatrix;                        // Буфер для принятия строки
+  String tape;                              // Буфер для отображения строки
   int wait = 80;                            // In milliseconds
   int spacer = 1;
   int width = 5 + spacer;                   // The font width is 5 pixels
@@ -63,8 +65,6 @@ int WIWI_Connect=0;
 //#ifdef WIFI_LED
   int WIFI_led = 13;             // Светодиод на выклчателе GPIO13
 //#endif
-
-//const char* serverIndex = "<form method='POST' action='/update' enctype='multipart/form-data'><input type='file' name='update'><input type='submit' value='Update'></form>";
 
 String ssid1;
 const char *password1 = "66666666";
