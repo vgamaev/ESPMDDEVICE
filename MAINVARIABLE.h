@@ -3,12 +3,13 @@
 #include "ESPMDDEVICE.H"
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
-//#include <WiFiClient.h>
+#include <WiFiClient.h>
 #include <ESP8266HTTPClient.h>
 #include <ESP8266mDNS.h>
 #include "ESPEEPROM.h"
 #include "ESPWIFI.h"
 #include "ESPWEB.h"
+#include "WEBUPDATE.h"
 
 #ifdef RF433MHZ
     #include "RF433MHZ.h"
@@ -64,8 +65,6 @@ int WIWI_Connect=0;
 //#ifdef WIFI_LED
   int WIFI_led = 13;             // Светодиод на выклчателе GPIO13
 //#endif
-
-//const char* serverIndex = "<form method='POST' action='/update' enctype='multipart/form-data'><input type='file' name='update'><input type='submit' value='Update'></form>";
 
 String ssid1;
 const char *password1 = "66666666";

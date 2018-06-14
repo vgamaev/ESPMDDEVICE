@@ -70,8 +70,10 @@ void WiFiLedStatus()
           digitalWrite(WIFI_led, HIGH);
         #endif
         #ifdef LED_MATRIX
-          tapeMatrix = "Нет подключения по WIFI";
+          if(Config.ap != "on"){    // Если не включена точкадоступа
+            tapeMatrix = "Нет подключения по WIFI";
           //MatrixCounter = 0;
+          }
         #endif
         WIWI_Connect = 0;
       }

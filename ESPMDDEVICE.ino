@@ -62,14 +62,16 @@ void setup(void) {
   #ifdef RF433MHZ
     Start433();
   #endif
- // server.on("/firmware", FirmwarePage);
- // serveUupdate();                        //Update firmware
-    //server.on("/off", HTTP_POST, handleOff);
+  #ifdef WEBUPDATE
+    server.on("/webupdate", HTTP_GET, handleWebUpdate);
+    server.on("/update", HTTP_POST, handleUpdate1, handleUpdate2);
+  #endif
   server.onNotFound(handleNotFound);
   
   // Стартуем WEB сервер
   server.begin();
 }
+
 
 void loop(void) {
   server.handleClient();
