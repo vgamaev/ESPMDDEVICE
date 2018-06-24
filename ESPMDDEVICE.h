@@ -1,3 +1,4 @@
+#define IR_RESIVER   //Собиракм ИК ресивер
 #define ADC          // Мерим освещеность фоторезистором
 //#define WIFI_LED       // Светодиод сети Wi-Fi
 //#define LED_MATRIX       // Информер на светодиодных матрицах MAX7219
