@@ -354,6 +354,20 @@ void handleRoot() {
     temp += "</font></h3>";
   #endif 
 
+  //DHT22 peges
+  #ifdef DHT22  
+    temp += "<h1>Метеостанция</h1>\
+             <h3><font color=red>Температура: ";
+    temp += tempDHT;
+    temp += " С</font></h3>\
+             <h3><font color=red>Влажность: ";
+    temp += humDHT;
+    temp += "% </font></h3>\
+             <h3><font color=red>Ощущаеиая температура: ";
+    temp += hicDHT;
+    temp += "С </font></h3>";
+  #endif 
+
   temp += "<body></center></html>" ;
   server.send ( 200, "text/html", temp );
 }
