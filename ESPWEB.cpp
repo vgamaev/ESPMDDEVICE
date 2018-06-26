@@ -178,6 +178,7 @@ void handleSetup() {
     <form method=get>\
       <body>\
         <center> \
+          <a href=.>Main </a> <a href=setup>| Setup </a> <a href=webupdate>| Firmware </a> \
         <h1>Setup devise </h1>\
            <table border=\"1\">\
            <tr>\
@@ -224,7 +225,10 @@ void handleSetup() {
                \
           <input type= submit name=save value= save ><br/>\
      </form>\
-     </center> \
+     </br> \
+     Gamaev Vlad Version:";
+     temp += VersionCode;
+     temp +="</center> \
   </body>\
   </html>\
   </html>" ;
@@ -263,7 +267,12 @@ void handleRoot() {
       body { background-color: #cccccc; font-family: Arial, Helvetica, Sans-Serif; Color: #000088; }\
     </style>\
   </head>\
+<<<<<<< HEAD
   <body><center> ";
+=======
+  <body><center> \
+    <a href=.>Main </a> <a href=setup>| Setup </a> <a href=webupdate>| Firmware </a> ";
+>>>>>>> master
 
 // Relay Botton Pages  
   #ifdef RELAYS_ON  

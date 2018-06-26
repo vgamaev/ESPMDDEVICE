@@ -11,6 +11,8 @@
 #include <ESP8266mDNS.h>
 #include "ESPWEB.h"
 
+extern String VersionCode;
+
 extern const char* serverIndex;
 
 void handleWebUpdate();
