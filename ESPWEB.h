@@ -8,6 +8,8 @@
 #include "ESPWIFI.h"
 #include "ESPMDDEVICE.H"
 
+extern String VersionCode;
+
 extern String tapeMatrix;
 extern int MatrixCounter;
 
