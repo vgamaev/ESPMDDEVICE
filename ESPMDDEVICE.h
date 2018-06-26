@@ -1,6 +1,6 @@
 #define IR_RESIVER   //Собиракм ИК ресивер
 #define ADC          // Мерим освещеность фоторезистором
-//#define WIFI_LED       // Светодиод сети Wi-Fi
+#define WIFI_LED       // Светодиод сети Wi-Fi
 //#define LED_MATRIX       // Информер на светодиодных матрицах MAX7219
 //#define RF433MHZ
 #define WEBUPDATE        // Будет работать только с ESP8266 с большим чем 1Мб встроеной флеш памяти
