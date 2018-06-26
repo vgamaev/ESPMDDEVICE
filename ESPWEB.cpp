@@ -178,7 +178,6 @@ void handleSetup() {
     <form method=get>\
       <body>\
         <center> \
-        <a href=.>Главная</a> <a href=setup>Настройка</a> <a href=webupdate>Обновления</a>\
         <h1>Setup devise </h1>\
            <table border=\"1\">\
            <tr>\
@@ -264,8 +263,7 @@ void handleRoot() {
       body { background-color: #cccccc; font-family: Arial, Helvetica, Sans-Serif; Color: #000088; }\
     </style>\
   </head>\
-  <body><center>\
-  <a href=.>Главная</a> <a href=setup>Настройка</a> <a href=webupdate>Обновления</a>";
+  <body><center> ";
 
 // Relay Botton Pages  
   #ifdef RELAYS_ON  
