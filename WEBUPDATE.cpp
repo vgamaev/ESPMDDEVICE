@@ -15,6 +15,7 @@ void handleWebUpdate()
                           <form method='POST' action='/update' enctype='multipart/form-data'> \
                             <body>\
                               <center> \
+                                  <a href=.>Main </a> <a href=setup>| Setup </a> <a href=webupdate>| Firmware </a> \
                                 <h1>Firmware update </h1>\
                                 <input type='file' name='update'> \
                                 <input type='submit' value='Update'> \ 
