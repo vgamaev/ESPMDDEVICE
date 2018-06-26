@@ -171,13 +171,14 @@ void handleSetup() {
   
   String temp = "<html>\
     <head>\
-      <style>\
+       <style>\
         body { background-color: #cccccc; font-family: Arial, Helvetica, Sans-Serif; Color: #000088; }\
       </style>\
     </head>\
     <form method=get>\
       <body>\
         <center> \
+        <a href=.>Главная</a> <a href=setup>Настройка</a> <a href=webupdate>Обновления</a>\
         <h1>Setup devise </h1>\
            <table border=\"1\">\
            <tr>\
@@ -263,7 +264,8 @@ void handleRoot() {
       body { background-color: #cccccc; font-family: Arial, Helvetica, Sans-Serif; Color: #000088; }\
     </style>\
   </head>\
-  <body><center>";
+  <body><center>\
+  <a href=.>Главная</a> <a href=setup>Настройка</a> <a href=webupdate>Обновления</a>";
 
 // Relay Botton Pages  
   #ifdef RELAYS_ON  
