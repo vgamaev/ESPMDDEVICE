@@ -62,6 +62,9 @@ void setup(void) {
   #ifdef RF433MHZ
     Start433();
   #endif
+  #ifdef DHT22
+    dhtInit();
+  #endif
   #ifdef WEBUPDATE
     server.on("/webupdate", HTTP_GET, handleWebUpdate);
     server.on("/update", HTTP_POST, handleUpdate1, handleUpdate2);
@@ -91,6 +94,9 @@ void loop(void) {
   #endif
   #ifdef RF433MHZ
     Resiver433();
+  #endif
+  #ifdef DHT22
+    dhtRead();
   #endif
 }
 

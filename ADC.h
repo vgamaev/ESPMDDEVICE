@@ -14,7 +14,6 @@ extern HTTPClient http; // веб клиент
 extern int adcValue;
 extern int adcValueOld;
 
-
 void adcRead();
 
 #endif
