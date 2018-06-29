@@ -44,10 +44,12 @@ void dhtRead()
 
       if(tempDHT != tempDHTOld || humDHT != humDHTOld)
       { 
-        String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p=temp&v="+tempDHT+"&p=hump&v="+humDHT+"&p=hic&v="+hicDHT;  
+        //String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p=temp&v="+tempDHT;  
+        String post = "http://"+Config.serverIP+"/objects/?op=m&object="+Config.name+"&m=ChangeParams&temp="+tempDHT+"&hum="+humDHT+"&hic="+hicDHT;  
         Serial.println(post);
         http.begin(post);
         int httpCode = http.GET(); 
+
         http.end();
         tempDHTOld = tempDHT;
         humDHTOld = humDHTOld;
