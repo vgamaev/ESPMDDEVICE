@@ -45,7 +45,6 @@ unsigned long code433 =0;
   bool web_button_state[MAX_RELAY];
 #endif
 
-
 #ifdef LED_MATRIX
   #include "LEDMATRIX.h"
   int pinCS = 15;                           // Attach CS to this pin, DIN to MOSI and CLK to SCK (cf http://arduino.cc/en/Reference/SPI )
@@ -58,6 +57,16 @@ unsigned long code433 =0;
   int width = 5 + spacer;                   // The font width is 5 pixels
   int MatrixOFF = 0 ;
   int MatrixCounter = 0;                    // Счетчик дляотображения бегущей строки
+#endif
+
+//==============================================
+#ifdef DHT22
+  #include "DHT22.h"
+  float tempDHT = 0;
+  float humDHT = 0;
+  float tempDHTOld = 0;
+  float humDHTOld = 0;
+  float hicDHT = 0;
 #endif
 
 //=======================Светодиод WIFI=========================================

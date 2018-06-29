@@ -20,6 +20,10 @@ extern unsigned long code433;
 
 extern int adcValue;
 
+extern  float tempDHT;
+extern  float humDHT;
+extern  float hicDHT;
+
 extern ESP8266WebServer server; // веб сервер
 
 bool WebAuth();
