@@ -7,6 +7,9 @@
 
 #include <Arduino.h>
 #include <IRremoteESP8266.h>
+#include <IRrecv.h>
+#include <IRsend.h>
+#include <IRutils.h>
 #include <ESP8266WebServer.h>
 #include <ESP8266HTTPClient.h>
 #include "ESPEEPROM.h"
@@ -17,8 +20,8 @@ extern int SEND_PIN; //an IR led is connected to GPIO pin 0
 extern ESP8266WebServer server; // веб сервер
 extern HTTPClient http; // веб клиент
 
-extern unsigned long ResiverCode;
-extern unsigned long TransmiterCode;
+extern String ResiverCode;
+extern String TransmiterCode;
 
 unsigned long StrToULong(char *str);
 void StartIR();

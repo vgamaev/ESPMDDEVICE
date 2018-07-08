@@ -13,8 +13,8 @@ extern String VersionCode;
 extern String tapeMatrix;
 extern int MatrixCounter;
 
-extern unsigned long ResiverCode;
-extern unsigned long TransmiterCode;
+extern String ResiverCode;
+extern String TransmiterCode;
 
 extern unsigned long code433;
 

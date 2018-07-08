@@ -40,7 +40,7 @@ void dhtRead()
       Serial.print(" *C ");
       Serial.print("Heat index: ");
       Serial.print(hicDHT);
-      Serial.print(" *C ");
+      Serial.println(" *C ");
 
       if(tempDHT != tempDHTOld || humDHT != humDHTOld)
       { 
@@ -49,7 +49,6 @@ void dhtRead()
         Serial.println(post);
         http.begin(post);
         int httpCode = http.GET(); 
-
         http.end();
         tempDHTOld = tempDHT;
         humDHTOld = humDHTOld;

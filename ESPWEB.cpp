@@ -156,7 +156,7 @@ void WebParserIR()
       buf.getBytes((unsigned char *)b, 32);
       Serial.println(StrToULong(b));
       IRTransmiter(StrToULong(b));
-      TransmiterCode = StrToULong(b);
+      TransmiterCode = b;
     }
   #endif
 }
