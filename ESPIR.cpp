@@ -26,7 +26,7 @@ void handleIR() {
   buf.getBytes((unsigned char *)b, 32);
   Serial.println(StrToULong(b));
   IRTransmiter(StrToULong(b));
-  TransmiterCode = StrToULong(b);
+  TransmiterCode = b;
   String message = "success";
   server.send(200, "text/plain", message);
 }
@@ -34,10 +34,12 @@ void handleIR() {
 void IRResiver()
 { 
   if (irrecv.decode(&results)) {
-      Serial.println(results.value); //, HEX);
-      ResiverCode = results.value;
+      // print() & println() can't handle printing long longs. (uint64_t)
+//      serialPrintUint64(results.value, DEC);
+      ResiverCode = uint64ToString(results.value, DEC);
+      Serial.println(ResiverCode); //, HEX);
       //String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=m&m=IR_Decode&"+Config.property+"="+results.value;
-      String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p="+Config.property+"&v="+results.value;
+      String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p="+Config.property+"&v="+ResiverCode;
       Serial.println(post);
       http.begin(post);
       int httpCode = http.GET(); 

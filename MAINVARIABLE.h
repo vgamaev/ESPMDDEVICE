@@ -30,8 +30,8 @@ unsigned long code433 =0;
   #include "ESPIR.h"
   int RECV_PIN = 5; //an IR detector/demodulatord is connected to GPIO pin 2
   int SEND_PIN = 15; //an IR led is connected to GPIO pin 0
-  unsigned long ResiverCode = 0;
-  unsigned long TransmiterCode = 0;
+  String ResiverCode = "0";
+  String TransmiterCode = "0";
 #endif
 
 
