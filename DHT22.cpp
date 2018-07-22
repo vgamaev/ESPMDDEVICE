@@ -14,7 +14,7 @@ void dhtRead()
     static long previousMillisDHT = 0;                             
     long currentMillis = millis();
      
-    if(currentMillis - previousMillisDHT > 2000) 
+    if(currentMillis - previousMillisDHT > 5000) 
     {
       previousMillisDHT = currentMillis;  
       // Reading temperature or humidity takes about 250 milliseconds!
@@ -26,21 +26,22 @@ void dhtRead()
        // Check if any reads failed and exit early (to try again).
       if (isnan(humDHT) || isnan(tempDHT)) {
         Serial.println("Failed to read from DHT sensor!");
-        return;
+        //return;
+      }else
+      {    
+        Serial.print("Humidity: ");
+        Serial.print(humDHT);
+        Serial.print(" %\t");
+        Serial.print("Temperature: ");
+        Serial.print(tempDHT);
+        Serial.print(" *C ");
+        Serial.print("Heat index: ");
+        Serial.print(hicDHT);
+        Serial.println(" *C ");
       }
-    
+
       // Compute heat index in Celsius (isFahreheit = false)
       hicDHT = dht.computeHeatIndex(tempDHT, humDHT, false);
-    
-      Serial.print("Humidity: ");
-      Serial.print(humDHT);
-      Serial.print(" %\t");
-      Serial.print("Temperature: ");
-      Serial.print(tempDHT);
-      Serial.print(" *C ");
-      Serial.print("Heat index: ");
-      Serial.print(hicDHT);
-      Serial.println(" *C ");
 
       if(tempDHT != tempDHTOld || humDHT != humDHTOld)
       { 
