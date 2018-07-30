@@ -11,7 +11,8 @@ void dhtInit()
 
 void dhtRead()
 {
-    static long previousMillisDHT = 0;                             
+    
+    static long previousMillisDHT = 0;
     long currentMillis = millis();
      
     if(currentMillis - previousMillisDHT > 5000) 
