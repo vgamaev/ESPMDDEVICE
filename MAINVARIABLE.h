@@ -11,7 +11,7 @@
 #include "ESPWEB.h"
 #include "WEBUPDATE.h"
 
-String VersionCode = "1.04";
+String VersionCode = "1.05";
 
 #ifdef RF433MHZ
     #include "RF433MHZ.h"

@@ -1,4 +1,4 @@
-#include "DHT22.h"
+ #include "DHT22.h"
 
 #ifdef DHT22
 
@@ -44,7 +44,13 @@ void dhtRead()
       // Compute heat index in Celsius (isFahreheit = false)
       hicDHT = dht.computeHeatIndex(tempDHT, humDHT, false);
 
-      if(tempDHT != tempDHTOld || humDHT != humDHTOld)
+      float DeltaPlusT = tempDHTOld + 0.3;
+      float DeltaMinusT = tempDHTOld - 0.3;
+      float DeltaPlusH = humDHTOld + 0.3;
+      float DeltaMinusH = humDHTOld - 0.3;
+
+      //if(tempDHT != tempDHTOld || humDHT != humDHTOld)
+      if(tempDHT > DeltaPlusT || tempDHT < DeltaMinusT || humDHT > DeltaPlusH || humDHT < DeltaMinusH)
       { 
         //String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p=temp&v="+tempDHT;  
         String post = "http://"+Config.serverIP+"/objects/?op=m&object="+Config.name+"&m=ChangeParams&temp="+tempDHT+"&hum="+humDHT+"&hic="+hicDHT;  
