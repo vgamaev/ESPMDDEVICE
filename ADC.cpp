@@ -11,8 +11,10 @@ void adcRead()
     {
       previousMillis = currentMillis;    
       adcValue = map(analogRead(A0), 1022, 0, 0,100);
-      //if(adcValue < adcValueOld - 5 ||  adcValue > adcValueOld + 5)
-      if(adcValue != adcValueOld)
+      float DeltaPlus = adcValueOld + 2;
+      float DeltaMinus = adcValueOld - 2;
+      if(adcValue < DeltaMinus ||  adcValue > DeltaPlus)
+      //if(adcValue != adcValueOld)
       { 
         String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p=ADC&v="+adcValue;
         Serial.println(post);
