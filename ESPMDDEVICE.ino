@@ -65,6 +65,10 @@ void setup(void) {
   #ifdef DHT22
     dhtInit();
   #endif
+  #ifdef KARNIZ
+    InitKarniz();
+  #endif
+  
   #ifdef WEBUPDATE
     server.on("/webupdate", HTTP_GET, handleWebUpdate);
     server.on("/update", HTTP_POST, handleUpdate1, handleUpdate2);

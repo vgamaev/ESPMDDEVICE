@@ -69,6 +69,14 @@ unsigned long code433 =0;
   float hicDHT = 0;
 #endif
 
+//======================= KARNIZ =================================================
+#ifdef KARNIZ
+  #include "KARNIZ.h"
+  int ENA = 4;
+  int IN1 = 0;
+  int IN2 = 2;
+  
+#endif
 //=======================Светодиод WIFI=========================================
 long WiFiCheckinterval = 1000; //Интервал проверки WiFi потключения
 int WIWI_Connect=0;
