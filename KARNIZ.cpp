@@ -3,7 +3,7 @@
 #ifdef KARNIZ
 
 //Обрабатываем ВЕБ запросы
-void handleLedKarniz()
+void handleKarniz()
 {
     String buf = server.arg("token");
     Serial.println(buf);

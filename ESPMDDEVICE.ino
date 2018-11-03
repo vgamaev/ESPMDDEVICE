@@ -66,6 +66,7 @@ void setup(void) {
     dhtInit();
   #endif
   #ifdef KARNIZ
+    server.on("/karniz",  handleKarniz);
     InitKarniz();
   #endif
   
@@ -101,6 +102,9 @@ void loop(void) {
   #endif
   #ifdef DHT22
     dhtRead();
+  #endif
+  #ifdef KARNIZ
+    KarnizWork();
   #endif
 }
 

@@ -22,6 +22,7 @@
   extern int KarnizMotorCommand;
   extern int KarnizMotorDelay;
 
+  void handleKarniz();
   void InitKarniz();
   void MotorForward();
   void MotorBackward(); 
