@@ -77,7 +77,7 @@ unsigned long code433 =0;
   int IN2 = 2;
   int KarnizMotorState = 0;
   int KarnizMotorCommand = 0;
-
+  int KarnizMotorDelay =0;
   
 #endif
 //=======================Светодиод WIFI=========================================
