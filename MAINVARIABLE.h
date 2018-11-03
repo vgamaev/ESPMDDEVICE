@@ -11,7 +11,7 @@
 #include "ESPWEB.h"
 #include "WEBUPDATE.h"
 
-String VersionCode = "1.05";
+String VersionCode = "2.00";
 
 #ifdef RF433MHZ
     #include "RF433MHZ.h"
@@ -75,6 +75,9 @@ unsigned long code433 =0;
   int ENA = 4;
   int IN1 = 0;
   int IN2 = 2;
+  int KarnizMotorState = 0;
+  int KarnizMotorCommand = 0;
+
   
 #endif
 //=======================Светодиод WIFI=========================================
