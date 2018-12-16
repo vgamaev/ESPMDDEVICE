@@ -34,6 +34,10 @@ void setup(void) {
   
   // Читаем конфигурацию с EEPROM
   ConfigRead();
+
+  #ifdef KARNIZ
+    InitKarniz();
+  #endif
    
   // Включаем точку доступа инециализируем WIFI
   WiFi.hostname(Config.name);
@@ -67,7 +71,6 @@ void setup(void) {
   #endif
   #ifdef KARNIZ
     server.on("/karniz",  handleKarniz);
-    InitKarniz();
   #endif
   
   #ifdef WEBUPDATE

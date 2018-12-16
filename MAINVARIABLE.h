@@ -72,12 +72,13 @@ unsigned long code433 =0;
 //======================= KARNIZ =================================================
 #ifdef KARNIZ
   #include "KARNIZ.h"
-  int ENA = 4;
-  int IN1 = 0;
-  int IN2 = 2;
+  int ENA = 14;
+  int IN1 = 12;
+  int IN2 = 13;
   int KarnizMotorState = 0;
   int KarnizMotorCommand = 0;
   int KarnizMotorDelay =0;
+  long KarnizMotorStartMillis =0;
   
 #endif
 //=======================Светодиод WIFI=========================================
