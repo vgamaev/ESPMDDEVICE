@@ -72,9 +72,9 @@ unsigned long code433 =0;
 //======================= KARNIZ =================================================
 #ifdef KARNIZ
   #include "KARNIZ.h"
-  int ENA = 14;
-  int IN1 = 12;
-  int IN2 = 13;
+  //int ENA = 14;
+  int IN1 = 16;
+  int IN2 = 14;
   int KarnizMotorState = 0;
   int KarnizMotorCommand = 0;
   int KarnizMotorDelay =0;

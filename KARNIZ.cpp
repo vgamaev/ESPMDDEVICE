@@ -15,7 +15,6 @@ void handleKarniz()
     }
     buf = server.arg("command");
     char b[3];
-    //int z = 100;
     if(buf.length())
     {
       buf.getBytes((unsigned char *)b, 3);
@@ -85,16 +84,39 @@ void MotorStop()
   }
 }
 
+/*
 void KarnizWork()
 {
   if(KarnizMotorCommand > 0)
   {
-    /*Serial.println("Karnix work ");
+    int mtdelay = KarnizMotorDelay * 1000;
+    static long previousMillis = 0;
+    long currentMillis = millis();
+
+    if(currentMillis - previousMillis > 1000) 
+    {
+      previousMillis = currentMillis; 
+    }
+      if(KarnizMotorCommand == 1) MotorForward();
+      else if(KarnizMotorCommand == 2) MotorBackward();
+      
+      long KarnizCurrentMillis = millis();
+      if(KarnizCurrentMillis - KarnizMotorStartMillis > mtdelay) MotorStop(); //останавливаем мотор если прошло больше заданого времени
+    
+  } else MotorStop();
+}
+*/
+
+void KarnizWork()
+{
+  if(KarnizMotorCommand > 0)
+  {
+    Serial.println("Karnix work ");
     Serial.print("KarnizMotorCommand ");
     Serial.println(KarnizMotorCommand);
     Serial.print("KarnizMotorDelay ");
     Serial.println(KarnizMotorDelay);
-    Serial.println(); */
+    Serial.println(); 
     int mtdelay = KarnizMotorDelay * 1000;
     Serial.print("mtdelay ");
     Serial.println(mtdelay);
@@ -103,16 +125,16 @@ void KarnizWork()
     else if(KarnizMotorCommand == 2) MotorBackward();
 
     long currentMillis = millis();
-    /*
+    
     Serial.print("currentMillis ");
     Serial.println(currentMillis);
     Serial.print("KarnizMotorStartMillis ");
     Serial.println(KarnizMotorStartMillis);
-    Serial.println(); */
+    Serial.println(); 
     
     if(currentMillis - KarnizMotorStartMillis > mtdelay) MotorStop(); //останавливаем мотор если прошло больше заданого времени
   } else MotorStop();
-}
+}  
 
 void KarnizCommand(int Command, int MotorDelay)
 {
