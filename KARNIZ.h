@@ -19,9 +19,12 @@
   extern int IN2;
 
   extern int KarnizMotorState;
-  extern int KarnizMotorCommand;
-  extern int KarnizMotorDelay;
-  extern long KarnizMotorStartMillis;
+  //extern int KarnizMotorCommand;
+  extern int  KarnizLength;
+  extern int  CurKarnizPosition;
+  extern int KarnizPosition;
+  //extern int KarnizMotorDelay;
+  //extern long KarnizMotorStartMillis;
 
   void handleKarniz();
   void InitKarniz();

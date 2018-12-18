@@ -76,10 +76,10 @@ unsigned long code433 =0;
   int IN1 = 16;
   int IN2 = 14;
   int KarnizMotorState = 0;
-  int KarnizMotorCommand = 0;
-  int KarnizMotorDelay =0;
-  long KarnizMotorStartMillis =0;
-  
+  int KarnizLength = 16;
+  int CurKarnizPosition = 0;
+  int KarnizPosition = 0;
+    
 #endif
 //=======================Светодиод WIFI=========================================
 long WiFiCheckinterval = 1000; //Интервал проверки WiFi потключения
