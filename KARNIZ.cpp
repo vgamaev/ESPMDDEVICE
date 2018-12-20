@@ -45,6 +45,8 @@ void InitKarniz() {
   pinMode(IN2, OUTPUT);
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, LOW);
+  //SendCurKarnizPosition();
+  Serial.println();
   Serial.println("Init karniz...");
 }
 
@@ -78,6 +80,7 @@ void MotorStop()
   {
     digitalWrite(IN1, LOW);
     digitalWrite(IN2, LOW);
+    SendCurKarnizPosition();
     Serial.println("Motor stop...");
     KarnizMotorState = 0;
   }
@@ -90,7 +93,12 @@ void KarnizWork()
 
     if(KarnizCurrentMillis - previousMillis > 1000) 
     {
-      previousMillis = KarnizCurrentMillis; 
+      previousMillis = KarnizCurrentMillis;
+
+      Serial.print("KarnizPosition ");
+      Serial.println(KarnizPosition);
+      Serial.print("CurKarnizPosition ");
+      Serial.println(CurKarnizPosition);
       
       if(KarnizPosition == CurKarnizPosition || KarnizPosition > KarnizLength) MotorStop(); //останавливаем мотор если прошло больше заданого времени
       else if(KarnizPosition > CurKarnizPosition)
@@ -103,9 +111,17 @@ void KarnizWork()
              CurKarnizPosition -- ;
              MotorBackward();
           }
-  }       
+    }       
 }
 
+void SendCurKarnizPosition()
+{
+  String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p=slider2&v="+CurKarnizPosition;
+        Serial.println(post);
+        http.begin(post);
+        int httpCode = http.GET(); 
+        http.end();
+}
 /*
 void KarnizCommand(int Command, int MotorDelay)
 {
