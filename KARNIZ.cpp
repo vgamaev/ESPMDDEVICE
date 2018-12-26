@@ -90,27 +90,43 @@ void KarnizWork()
 {
     static long previousMillis = 0;
     long KarnizCurrentMillis = millis();
+    static long motorDelay = 1;
 
     if(KarnizCurrentMillis - previousMillis > 1000) 
     {
       previousMillis = KarnizCurrentMillis;
-
       Serial.print("KarnizPosition ");
       Serial.println(KarnizPosition);
       Serial.print("CurKarnizPosition ");
       Serial.println(CurKarnizPosition);
       
-      if(KarnizPosition == CurKarnizPosition || KarnizPosition > KarnizLength) MotorStop(); //останавливаем мотор если прошло больше заданого времени
+      if(KarnizPosition == CurKarnizPosition || KarnizPosition > KarnizLength) 
+      {
+        MotorStop(); //останавливаем мотор
+        motorDelay = 1;
+      }
       else if(KarnizPosition > CurKarnizPosition)
            {
-              CurKarnizPosition ++ ;
-              MotorForward();
+              if(motorDelay < 2) {    // нужно подождать пока мотор остановится при резкой смене напрвления
+                MotorStop()
+                motorDelay ++ ;
+              }
+              else {
+                MotorForward();
+                CurKarnizPosition ++ ;
+              }
            }
           else if(KarnizPosition < CurKarnizPosition)
           {
-             CurKarnizPosition -- ;
-             MotorBackward();
-          }
+             if(motorDelay > 0) {     // нужно подождать пока мотор остановится при резкой смене напрвления
+                MotorStop()
+                motorDelay -- ;
+              }
+             else {
+                MotorBackward();
+                CurKarnizPosition -- ;
+             }
+         }
     }       
 }
 
