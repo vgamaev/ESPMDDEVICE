@@ -48,6 +48,7 @@ void InitKarniz() {
   //SendCurKarnizPosition();
   Serial.println();
   Serial.println("Init karniz...");
+  ReadCurPosMD();
 }
 
 void MotorForward()
@@ -133,6 +134,15 @@ void KarnizWork()
 void SendCurKarnizPosition()
 {
   String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p=slider2&v="+CurKarnizPosition;
+        Serial.println(post);
+        http.begin(post);
+        int httpCode = http.GET(); 
+        http.end();
+}
+
+void ReadCurPosMD()
+{
+  String post = "http://"+Config.serverIP+"/objects/?op=m&object="+Config.name+"&m=StartPos";  
         Serial.println(post);
         http.begin(post);
         int httpCode = http.GET(); 

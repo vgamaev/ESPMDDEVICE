@@ -35,10 +35,6 @@ void setup(void) {
   // Читаем конфигурацию с EEPROM
   ConfigRead();
 
-  #ifdef KARNIZ
-    InitKarniz();
-  #endif
-   
   // Включаем точку доступа инециализируем WIFI
   WiFi.hostname(Config.name);
   EnableAP();  
@@ -69,10 +65,12 @@ void setup(void) {
   #ifdef DHT22
     dhtInit();
   #endif
+  
   #ifdef KARNIZ
     server.on("/karniz",  handleKarniz);
+    InitKarniz();
   #endif
-  
+
   #ifdef WEBUPDATE
     server.on("/webupdate", HTTP_GET, handleWebUpdate);
     server.on("/update", HTTP_POST, handleUpdate1, handleUpdate2);
@@ -82,7 +80,6 @@ void setup(void) {
   // Стартуем WEB сервер
   server.begin();
 }
-
 
 void loop(void) {
   server.handleClient();
@@ -110,4 +107,3 @@ void loop(void) {
     KarnizWork();
   #endif
 }
-

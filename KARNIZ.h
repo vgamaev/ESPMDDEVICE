@@ -31,6 +31,7 @@
   void KarnizWork();
   void KarnizCommand(int Command, int MotorDelay);
   void SendCurKarnizPosition();
+  void ReadCurPosMD();
 
 #endif
 #endif
