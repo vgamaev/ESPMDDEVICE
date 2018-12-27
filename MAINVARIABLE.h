@@ -45,6 +45,13 @@ unsigned long code433 =0;
   bool web_button_state[MAX_RELAY];
 #endif
 
+#ifdef BUTTON =============================
+  #include "BUTTON.h"
+  int ButtonPin2[MAX_BUTTON2];
+  int can_toggle2[MAX_BUTTON2];
+  int button_state2[MAX_BUTTON2];
+#endif
+
 #ifdef LED_MATRIX
   #include "LEDMATRIX.h"
   int pinCS = 15;                           // Attach CS to this pin, DIN to MOSI and CLK to SCK (cf http://arduino.cc/en/Reference/SPI )
@@ -96,4 +103,3 @@ ESP8266WebServer server (80) ; // веб сервер
 HTTPClient http; // веб клиент
 
 unsigned long StrToULong(char *str);
-

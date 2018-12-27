@@ -109,7 +109,7 @@ void KarnizWork()
       else if(KarnizPosition > CurKarnizPosition)
            {
               if(motorDelay < 2) {    // нужно подождать пока мотор остановится при резкой смене напрвления
-                MotorStop()
+                MotorStop();
                 motorDelay ++ ;
               }
               else {
@@ -120,7 +120,7 @@ void KarnizWork()
           else if(KarnizPosition < CurKarnizPosition)
           {
              if(motorDelay > 0) {     // нужно подождать пока мотор остановится при резкой смене напрвления
-                MotorStop()
+                MotorStop();
                 motorDelay -- ;
               }
              else {
