@@ -48,7 +48,7 @@ void InitKarniz() {
   //SendCurKarnizPosition();
   Serial.println();
   Serial.println("Init karniz...");
-  ReadCurPosMD();
+//  ReadCurPosMD();
 }
 
 void MotorForward()
@@ -92,6 +92,8 @@ void KarnizWork()
     static long previousMillis = 0;
     long KarnizCurrentMillis = millis();
     static long motorDelay = 1;
+    static int f = 0;
+    static int g = 1000;
 
     if(KarnizCurrentMillis - previousMillis > 1000) 
     {
@@ -100,34 +102,42 @@ void KarnizWork()
       Serial.println(KarnizPosition);
       Serial.print("CurKarnizPosition ");
       Serial.println(CurKarnizPosition);
-      
-      if(KarnizPosition == CurKarnizPosition || KarnizPosition > KarnizLength) 
+
+      if(f < 10) // Пробуем почитать текущию позицию карниза с сервера в течении 10 секунд после старта
       {
-        MotorStop(); //останавливаем мотор
-        motorDelay = 1;
-      }
-      else if(KarnizPosition > CurKarnizPosition)
-           {
-              if(motorDelay < 2) {    // нужно подождать пока мотор остановится при резкой смене напрвления
-                MotorStop();
-                motorDelay ++ ;
-              }
-              else {
-                MotorForward();
-                CurKarnizPosition ++ ;
-              }
-           }
-          else if(KarnizPosition < CurKarnizPosition)
-          {
-             if(motorDelay > 0) {     // нужно подождать пока мотор остановится при резкой смене напрвления
-                MotorStop();
-                motorDelay -- ;
-              }
-             else {
-                MotorBackward();
-                CurKarnizPosition -- ;
-             }
-         }
+        if(CurKarnizPosition == 0)
+        {
+           ReadCurPosMD();
+           f++;
+        }else f = 10;
+      } 
+      else if(KarnizPosition == CurKarnizPosition || KarnizPosition > KarnizLength) 
+            {
+              MotorStop(); //останавливаем мотор
+              motorDelay = 1;
+            }
+            else if(KarnizPosition > CurKarnizPosition)
+                 {
+                    if(motorDelay < 2) {    // нужно подождать пока мотор остановится при резкой смене напрвления
+                      MotorStop();
+                      motorDelay ++ ;
+                    }
+                    else {
+                      MotorForward();
+                      CurKarnizPosition ++ ;
+                    }
+                 }
+                else if(KarnizPosition < CurKarnizPosition)
+                {
+                   if(motorDelay > 0) {     // нужно подождать пока мотор остановится при резкой смене напрвления
+                      MotorStop();
+                      motorDelay -- ;
+                    }
+                   else {
+                      MotorBackward();
+                      CurKarnizPosition -- ;
+                   }
+               }
     }       
 }
 
