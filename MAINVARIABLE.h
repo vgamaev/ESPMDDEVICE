@@ -11,7 +11,7 @@
 #include "ESPWEB.h"
 #include "WEBUPDATE.h"
 
-String VersionCode = "1.05";
+String VersionCode = "2.01";
 
 #ifdef RF433MHZ
     #include "RF433MHZ.h"
@@ -45,6 +45,13 @@ unsigned long code433 =0;
   bool web_button_state[MAX_RELAY];
 #endif
 
+#ifdef BUTTON =============================
+  #include "BUTTON.h"
+  int ButtonPin2[MAX_BUTTON2];
+  int can_toggle2[MAX_BUTTON2];
+  int button_state2[MAX_BUTTON2];
+#endif
+
 #ifdef LED_MATRIX
   #include "LEDMATRIX.h"
   int pinCS = 15;                           // Attach CS to this pin, DIN to MOSI and CLK to SCK (cf http://arduino.cc/en/Reference/SPI )
@@ -69,6 +76,18 @@ unsigned long code433 =0;
   float hicDHT = 0;
 #endif
 
+//======================= KARNIZ =================================================
+#ifdef KARNIZ
+  #include "KARNIZ.h"
+  //int ENA = 14;
+  int IN1 = 16;
+  int IN2 = 14;
+  int KarnizMotorState = 0;
+  int KarnizLength = 16;
+  int CurKarnizPosition = 0;
+  int KarnizPosition = 0;
+    
+#endif
 //=======================Светодиод WIFI=========================================
 long WiFiCheckinterval = 1000; //Интервал проверки WiFi потключения
 int WIWI_Connect=0;
@@ -84,4 +103,3 @@ ESP8266WebServer server (80) ; // веб сервер
 HTTPClient http; // веб клиент
 
 unsigned long StrToULong(char *str);
-
