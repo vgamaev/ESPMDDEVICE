@@ -21,6 +21,7 @@ void handleKarniz()
       KarnizPosition = (int)StrToULong(b);
       Serial.print("WEB KarnizPosition ");
       Serial.println(KarnizPosition);
+      KarnizPosition = map(KarnizPosition,0,100,0,KarnizLength);
     }
 
     buf = server.arg("calibrate");
@@ -28,11 +29,22 @@ void handleKarniz()
     {
       buf.getBytes((unsigned char *)b, 3);
       CurKarnizPosition = (int)StrToULong(b);
-      KarnizPosition = CurKarnizPosition;
       Serial.print("Calibrate CurKarnizPosition ");
       Serial.println(CurKarnizPosition);
+      CurKarnizPosition = map(CurKarnizPosition,0,100,0,KarnizLength);
+      KarnizPosition = CurKarnizPosition;
       
     }
+
+    buf = server.arg("opentime");
+    if(buf.length())
+    {
+      buf.getBytes((unsigned char *)b, 3);
+      KarnizLength = (int)StrToULong(b);
+      Serial.print("WEB open time second ");
+      Serial.println(KarnizLength);
+    }
+
     
      String message = "success";
     server.send(200, "text/plain", message);  
@@ -143,11 +155,12 @@ void KarnizWork()
 
 void SendCurKarnizPosition()
 {
-  String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p=slider2&v="+CurKarnizPosition;
-        Serial.println(post);
-        http.begin(post);
-        int httpCode = http.GET(); 
-        http.end();
+     int a = map(CurKarnizPosition,0,KarnizLength,0,100);
+     String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p=slider2&v="+a;
+     Serial.println(post);
+     http.begin(post);
+     int httpCode = http.GET(); 
+     http.end();
 }
 
 void ReadCurPosMD()
