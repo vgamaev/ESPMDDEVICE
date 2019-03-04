@@ -17,22 +17,31 @@ void handleKarniz()
     char b[3];
     if(buf.length())
     {
-      buf.getBytes((unsigned char *)b, 3);
-      KarnizPosition = (int)StrToULong(b);
-      Serial.print("WEB KarnizPosition ");
-      Serial.println(KarnizPosition);
-      KarnizPosition = map(KarnizPosition,0,100,0,KarnizLength);
+      buf.getBytes((unsigned char *)b, 4);
+      //KarnizPosition
+      int a = (int)StrToULong(b);
+      if(a >= 0 && a <=100)
+      {
+          Serial.print("WEB KarnizPosition ");
+          Serial.println(a);
+          KarnizPosition = map(a,0,100,0,KarnizLength);
+          Serial.println(KarnizPosition);
+      } else Serial.print("ERROR position");
     }
 
     buf = server.arg("calibrate");
     if(buf.length())
     {
-      buf.getBytes((unsigned char *)b, 3);
-      CurKarnizPosition = (int)StrToULong(b);
-      Serial.print("Calibrate CurKarnizPosition ");
-      Serial.println(CurKarnizPosition);
-      CurKarnizPosition = map(CurKarnizPosition,0,100,0,KarnizLength);
-      KarnizPosition = CurKarnizPosition;
+      buf.getBytes((unsigned char *)b, 4);
+      int Q = (int)StrToULong(b);
+      if(Q >= 0 && Q <=100)
+      {
+          Serial.print("Calibrate CurKarnizPosition ");
+          Serial.println(Q);
+          CurKarnizPosition = map(Q,0,100,0,KarnizLength);
+          Serial.println(CurKarnizPosition);
+          KarnizPosition = CurKarnizPosition;
+      } else Serial.print("ERROR calibrate");
       
     }
 
@@ -40,9 +49,13 @@ void handleKarniz()
     if(buf.length())
     {
       buf.getBytes((unsigned char *)b, 3);
-      KarnizLength = (int)StrToULong(b);
-      Serial.print("WEB open time second ");
-      Serial.println(KarnizLength);
+      int z = (int)StrToULong(b);
+      if(z >= 0 && z <=30)
+      {
+        KarnizLength = z;
+        Serial.print("WEB open time second ");
+        Serial.println(KarnizLength);
+      }else Serial.print("ERROR opentime");
     }
 
     
