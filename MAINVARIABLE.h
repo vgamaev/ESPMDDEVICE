@@ -54,7 +54,7 @@ unsigned long code433 =0;
 
 #ifdef LED_MATRIX
   #include "LEDMATRIX.h"
-  int pinCS = 15;                           // Attach CS to this pin, DIN to MOSI and CLK to SCK (cf http://arduino.cc/en/Reference/SPI )
+  int pinCS = 15;                           //   DIN -> GPIO13 (MOSI) SCK -> GPIO14 (SCK) CS -> GPIO15(или любой свободный) Пины задаются в недрах библиотек Max72xxPanel. Я
   int numberOfHorizontalDisplays = 5;       // число матриц 8x8 MAX7219по горизонтали
   int numberOfVerticalDisplays = 1;         // Число матриц по вертикали
   String tapeMatrix;                        // Буфер для принятия строки
