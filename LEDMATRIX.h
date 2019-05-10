@@ -14,7 +14,7 @@
 extern unsigned long StrToULong(char *str);
 extern ESP8266WebServer server; // веб сервер
 
-extern int pinCS; // Attach CS to this pin, DIN to MOSI and CLK to SCK (cf http://arduino.cc/en/Reference/SPI )
+extern int pinCS; // Попробуйте пины. DIN -> GPIO13 (MOSI) SCK -> GPIO14 (SCK) CS -> GPIO15 
 extern int numberOfHorizontalDisplays;
 extern int numberOfVerticalDisplays;
 extern String tapeMatrix;
