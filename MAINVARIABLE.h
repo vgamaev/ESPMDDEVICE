@@ -11,7 +11,7 @@
 #include "ESPWEB.h"
 #include "WEBUPDATE.h"
 
-String VersionCode = "2.01";
+String VersionCode = "2.02";
 
 #ifdef RF433MHZ
     #include "RF433MHZ.h"
@@ -83,7 +83,7 @@ unsigned long code433 =0;
   int IN1 = 16;
   int IN2 = 14;
   int KarnizMotorState = 0;
-  int KarnizLength = 16;
+  int KarnizLength = 2; //16;
   int CurKarnizPosition = 0;
   int KarnizPosition = 0;
     

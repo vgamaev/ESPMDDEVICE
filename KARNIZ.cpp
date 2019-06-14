@@ -17,22 +17,47 @@ void handleKarniz()
     char b[3];
     if(buf.length())
     {
-      buf.getBytes((unsigned char *)b, 3);
-      KarnizPosition = (int)StrToULong(b);
-      Serial.print("WEB KarnizPosition ");
-      Serial.println(KarnizPosition);
+      buf.getBytes((unsigned char *)b, 4);
+      //KarnizPosition
+      int a = (int)StrToULong(b);
+      if(a >= 0 && a <=100)
+      {
+          Serial.print("WEB KarnizPosition ");
+          Serial.println(a);
+          KarnizPosition = map(a,0,100,0,KarnizLength);
+          Serial.println(KarnizPosition);
+      } else Serial.print("ERROR position");
     }
 
     buf = server.arg("calibrate");
     if(buf.length())
     {
-      buf.getBytes((unsigned char *)b, 3);
-      CurKarnizPosition = (int)StrToULong(b);
-      KarnizPosition = CurKarnizPosition;
-      Serial.print("Calibrate CurKarnizPosition ");
-      Serial.println(CurKarnizPosition);
+      buf.getBytes((unsigned char *)b, 4);
+      int Q = (int)StrToULong(b);
+      if(Q >= 0 && Q <=100)
+      {
+          Serial.print("Calibrate CurKarnizPosition ");
+          Serial.println(Q);
+          CurKarnizPosition = map(Q,0,100,0,KarnizLength);
+          Serial.println(CurKarnizPosition);
+          KarnizPosition = CurKarnizPosition;
+      } else Serial.print("ERROR calibrate");
       
     }
+
+    buf = server.arg("opentime");
+    if(buf.length())
+    {
+      buf.getBytes((unsigned char *)b, 3);
+      int z = (int)StrToULong(b);
+      if(z >= 0 && z <=30)
+      {
+        KarnizLength = z;
+        Serial.print("WEB open time second ");
+        Serial.println(KarnizLength);
+      }else Serial.print("ERROR opentime");
+    }
+
     
      String message = "success";
     server.send(200, "text/plain", message);  
@@ -143,11 +168,12 @@ void KarnizWork()
 
 void SendCurKarnizPosition()
 {
-  String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p=slider2&v="+CurKarnizPosition;
-        Serial.println(post);
-        http.begin(post);
-        int httpCode = http.GET(); 
-        http.end();
+     int a = map(CurKarnizPosition,0,KarnizLength,0,100);
+     String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p=slider2&v="+a;
+     Serial.println(post);
+     http.begin(post);
+     int httpCode = http.GET(); 
+     http.end();
 }
 
 void ReadCurPosMD()
