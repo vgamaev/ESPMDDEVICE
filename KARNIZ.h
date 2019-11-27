@@ -32,6 +32,8 @@
   void KarnizCommand(int Command, int MotorDelay);
   void SendCurKarnizPosition();
   void ReadCurPosMD();
+  //обрабатываем нажатые кнопки
+  void KarnizButtonSwitch(int nomer);
 
 #endif
 #endif

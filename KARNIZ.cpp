@@ -76,6 +76,23 @@ void InitKarniz() {
 //  ReadCurPosMD();
 }
 
+//обрабатываем нажатые кнопки
+void KarnizButtonSwitch(int nomer)
+{
+    switch(nomer)
+    {
+      case 0:
+          if(CurKarnizPosition >= 50) KarnizPosition = 100;
+          else if(CurKarnizPosition < 50) KarnizPosition = 0;
+      break;
+
+      case 1:
+
+      break;
+    }
+
+}
+
 void MotorForward()
 {
   if(KarnizMotorState != 1)
