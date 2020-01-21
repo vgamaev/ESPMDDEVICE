@@ -166,6 +166,25 @@ void WebParserIR()
   #endif
 }
 
+void WebParserKarniz()
+{
+    String buf = server.arg("KARSLID");
+    char b[3];
+    if(buf.length())
+    {
+      buf.getBytes((unsigned char *)b, 4);
+      //KarnizPosition
+      int a = (int)StrToULong(b);
+      if(a >= 0 && a <=100)
+      {
+          Serial.print("WEB slider KarnizPosition ");
+          Serial.println(a);
+          //KarnizPosition = map(a,0,100,0,KarnizLength);
+          KarnizLength = a ;
+          Serial.println(KarnizPosition);
+      } else Serial.print("ERROR position");
+    }
+}
 //=======================================SETUP======================================================
 
 // функция для страници настройки устройства
@@ -176,6 +195,7 @@ void handleSetup() {
   
   String temp = "<html>\
     <head>\
+    <meta charset=utf-8> \
       <style>\
         body { background-color: #cccccc; font-family: Arial, Helvetica, Sans-Serif; Color: #000088; }\
       </style>\
@@ -264,11 +284,16 @@ void handleRoot() {
   #ifdef IR_RESIVER
     WebParserIR();
   #endif
+  #ifdef KARNIZ
+    WebParserKarniz();
+  #endif
+  
   
   String temp = "<html>\
   <head>\
     <meta http-equiv='refresh' content=";
-    #ifdef RELAYS_ON
+    //#ifdef RELAYS_ON
+    #if defined (RELAYS_ON) || defined (KARNIZ)
       temp += "'5'"; //добавляем автообновление страници
     #endif
     #if defined (LED_MATRIX) || defined (IR_RESIVER) || defined (RF433MHZ) //#ifdef LED_MATRIX
@@ -386,6 +411,12 @@ void handleRoot() {
     temp += "С </font></h3>";
   #endif 
 
+  //KARNIZ peges
+  #ifdef KARNIZ  
+      int a = map(CurKarnizPosition,0,KarnizLength,0,100);
+      temp += "<p>Upravlenie karnix: <input type=range min=1 max=100 step=1 name=KARSLID  value="; temp += a ; temp +=" ></p>";
+  #endif 
+  
   temp += "<body></center></html>" ;
   server.send ( 200, "text/html", temp );
 }
