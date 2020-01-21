@@ -50,7 +50,7 @@ void handleKarniz()
     {
       buf.getBytes((unsigned char *)b, 3);
       int z = (int)StrToULong(b);
-      if(z >= 0 && z <=30)
+      if(z >= 0 && z <=100)   //Время открытия карниза
       {
         KarnizLength = z;
         Serial.print("WEB open time second ");
