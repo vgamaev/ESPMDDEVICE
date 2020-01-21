@@ -29,7 +29,7 @@ void ButtonRead2()
 //Отрабатываем однократно нажатую клавишу
 void ButtonIsPressedOnce(int nomer)
 {
-  #ifdef BUTTON2
+  #ifdef KARNIZ
       KarnizButtonSwitch(nomer);
   #endif
 }

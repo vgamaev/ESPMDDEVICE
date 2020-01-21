@@ -7,6 +7,10 @@
 
 #include <Arduino.h>
 
+#ifdef KARNIZ
+  #include "KARNIZ.h"
+#endif  
+
 extern int ButtonPin2[]; // "Ловим" выключатель через GPIO0
 extern int can_toggle2[];
 extern int button_state2[];

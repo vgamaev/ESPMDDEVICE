@@ -45,7 +45,8 @@ unsigned long code433 =0;
   bool web_button_state[MAX_RELAY];
 #endif
 
-#ifdef BUTTON =============================
+#ifdef BUTTON2
+//==================Кнопки версии 2=============================
   #include "BUTTON.h"
   int ButtonPin2[MAX_BUTTON2];
   int can_toggle2[MAX_BUTTON2];

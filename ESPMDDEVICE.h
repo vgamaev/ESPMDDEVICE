@@ -6,7 +6,7 @@
 //#define DHT22            // Датчик температуры и влажности DHT22
 #define KARNIZ           // Управление эдектрокарнизом
 //#define BUTTON           // Включаем кнопки
-#define BUTTON           // Включаем кнопки версии 2
+#define BUTTON2           // Включаем кнопки версии 2
 #define WEBUPDATE        // Будет работать только с ESP8266 с большим чем 1Мб встроеной флеш памяти
 
 //#define RELAYS_ON      //Собираем выключатели, не рекомендую вместе с #define IR_RESIVER
@@ -30,8 +30,8 @@
   #define MAX_BUTTON 3
 #endif
 
-#ifdef BUTTON
-  #define MAX_BUTTON2 2
+#ifdef BUTTON2
+  #define MAX_BUTTON2 1
 #endif
 
 /* При компиляции для выключателей Sonoff выбераем Generic ESP8285 Module
