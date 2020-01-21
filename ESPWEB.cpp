@@ -171,7 +171,7 @@ void handleSetup() {
   
   String temp = "<html>\
     <head>\
-       <style>\
+      <style>\
         body { background-color: #cccccc; font-family: Arial, Helvetica, Sans-Serif; Color: #000088; }\
       </style>\
     </head>\
@@ -199,8 +199,15 @@ void handleSetup() {
                <tr> <td>Login:    </td><td> <input type=text size=12 maxlength=12 name=WWWUSER value="; temp += Config.www_username; temp += ">   </td> </tr>\
                <tr> <td>Password: </td><td> <input type=text size=12 maxlength=12 name=WWWPASS value="; temp += Config.www_password; temp += ">   </td> </tr>\
            </table> \
-           </br> \
-           <table>\
+           </br>";
+           #ifdef KARNIZ
+           temp += "<table>\
+               <tr> <td>Karniz setting:</td> </tr>\
+               <tr> <td>Open time sec: </td><td> <input type=text size=12 maxlength=12 name=KARLEN value="; temp += Config.KarnizLength; temp += ">   </td> </tr>\
+           </table> \
+           </br>";
+           #endif
+           temp += "<table>\
            <tr><td> Mojordomo: </td> </tr>\
               <tr> <td>Adress      </td><td> <input type= text size=20 maxlength=20 name=MDAdr value="; temp += Config.serverIP; temp += ">  </td> </tr>";
                 temp += "<tr> <td>Name object  </td><td> <input type= text size=20 maxlength=20 name=MDObj value="; temp += Config.name; temp += ">      </td> </tr>";
@@ -226,7 +233,7 @@ void handleSetup() {
           <input type= submit name=save value= save ><br/>\
      </form>\
      </br> \
-     Gamaev Vlad Version:";
+     Gamaev Vlad Version: ";
      temp += VersionCode;
      temp +="</center> \
   </body>\
@@ -392,5 +399,3 @@ void initVariant() {
   uint8_t mac[6] = {0x00, 0xA3, 0xA0, 0x1C, 0x8C, 0x45};
   // wifi_set_macaddr(STATION_IF, &mac[0]);
 }*/
-
-

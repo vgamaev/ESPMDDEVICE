@@ -32,6 +32,7 @@
   void KarnizCommand(int Command, int MotorDelay);
   void SendCurKarnizPosition();
   void ReadCurPosMD();
+  void ReadEPROMKarnizLength();
 
 #endif
 #endif
