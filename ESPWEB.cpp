@@ -76,7 +76,12 @@ void WebParser(){
   
     Config.www_username = server.arg("WWWUSER");
     Config.www_password = server.arg("WWWPASS");
-    
+
+    #ifdef KARNIZ
+      Config.KarnizLength = server.arg("KARLEN");
+      ReadEPROMKarnizLength();  //Обновляем текущию переменую размера карниза
+    #endif
+        
     Config.serverIP = server.arg("MDAdr");
     Config.name = server.arg("MDObj");
     #if defined (Sonof_T1_2_button) || defined (Sonof_T1_3_button)
@@ -202,9 +207,10 @@ void handleSetup() {
            </br>";
            #ifdef KARNIZ
            temp += "<table>\
-               <tr> <td>Karniz setting:</td> </tr>\
+               <tr> <td>Karniz setting.</td> </tr>\
                <tr> <td>Open time sec: </td><td> <input type=text size=12 maxlength=12 name=KARLEN value="; temp += Config.KarnizLength; temp += ">   </td> </tr>\
            </table> \
+           Curent open time: "; temp += KarnizLength; temp += " sec </br> \
            </br>";
            #endif
            temp += "<table>\
@@ -221,7 +227,7 @@ void handleSetup() {
           </table>\
           </br> \
           <table>\
-            <tr> <td> Conect sitting:  </td> </tr>\
+            <tr> <td> Conect setting:  </td> </tr>\
             <tr> <td>DHCP:  </td><td> <input type= checkbox name= DHCP id="; temp += Config.dhcp; if(Config.dhcp == "on") temp +=" checked=checked" ;  temp += ">  </td> </tr>\
             <tr> <td>IP     </td><td> <input type= text size=15 maxlength=15 name=IP   value="; temp += Config.ip;   if(Config.dhcp == "on") temp +=" disabled"; temp += ">  </td> </tr>\
             </table>\
