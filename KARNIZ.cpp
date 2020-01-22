@@ -91,6 +91,7 @@ void KarnizButtonSwitch(int nomer)
 
       break;
     }
+}
 
 void ReadEPROMKarnizLength()
 {
