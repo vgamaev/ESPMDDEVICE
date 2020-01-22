@@ -11,7 +11,9 @@
 #include "ESPWEB.h"
 #include "WEBUPDATE.h"
 
-String VersionCode = "2.03 Добавил в карниз кнопку";
+#ifdef KARNIZ
+    String VersionCode = "2.05 KARNIZ";
+#endif
 
 #ifdef RF433MHZ
     #include "RF433MHZ.h"

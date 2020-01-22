@@ -24,6 +24,7 @@ extern struct ConfigMy{
   String ipap;
   String name2;
   String name3;
+  String KarnizLength;
 }Config;
 
 // сохраняем конфиг в EEPROM

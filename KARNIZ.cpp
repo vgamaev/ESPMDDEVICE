@@ -70,11 +70,12 @@ void InitKarniz() {
   pinMode(IN2, OUTPUT);
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, LOW);
-  //SendCurKarnizPosition();
+  ReadEPROMKarnizLength();
   Serial.println();
   Serial.println("Init karniz...");
 //  ReadCurPosMD();
 }
+
 
 //обрабатываем нажатые кнопки
 void KarnizButtonSwitch(int nomer)
@@ -90,6 +91,17 @@ void KarnizButtonSwitch(int nomer)
 
       break;
     }
+
+void ReadEPROMKarnizLength()
+{
+  //Читаем длину карниза еи eeprom
+  char KarnizLengthChar[Config.KarnizLength.length()+1];
+  Config.KarnizLength.toCharArray(KarnizLengthChar,Config.KarnizLength.length()+1);
+  int z = (int)StrToULong(KarnizLengthChar);
+  KarnizLength = z;
+  Serial.println(z);
+  Serial.print("Dlina karniza iz eeprom ");
+  Serial.println();
 
 }
 
