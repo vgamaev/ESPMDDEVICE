@@ -45,6 +45,11 @@ void setup(void) {
   // Назначем функции на запросы
   server.on("/setup", handleSetup);
   server.on("/", handleRoot);
+
+  #ifdef BUTTON2
+    ButtonInit2();
+  #endif 
+  
   #ifdef RELAYS_ON
     server.on("/on", handleOn);
     server.on("/off", handleOff);
@@ -88,6 +93,10 @@ void loop(void) {
   #ifdef ADC
     adcRead();  // читаем вход ацп
   #endif
+
+  #ifdef BUTTON2
+    ButtonSwitch2();
+  #endif  
   
   #ifdef IR_RESIVER 
     IRResiver();

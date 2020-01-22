@@ -76,6 +76,22 @@ void InitKarniz() {
 //  ReadCurPosMD();
 }
 
+
+//обрабатываем нажатые кнопки
+void KarnizButtonSwitch(int nomer)
+{
+    switch(nomer)
+    {
+      case 0:
+          if(CurKarnizPosition >= 50) KarnizPosition = 100;
+          else if(CurKarnizPosition < 50) KarnizPosition = 0;
+      break;
+
+      case 1:
+
+      break;
+    }
+
 void ReadEPROMKarnizLength()
 {
   //Читаем длину карниза еи eeprom
@@ -86,6 +102,7 @@ void ReadEPROMKarnizLength()
   Serial.println(z);
   Serial.print("Dlina karniza iz eeprom ");
   Serial.println();
+
 }
 
 void MotorForward()
