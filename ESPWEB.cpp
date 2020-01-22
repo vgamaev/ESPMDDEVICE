@@ -168,21 +168,25 @@ void WebParserIR()
 
 void WebParserKarniz()
 {
-    String buf = server.arg("KARSLID");
-    char b[3];
-    if(buf.length())
+    String buf = server.arg("send");
+    if (buf == "send")
     {
-      buf.getBytes((unsigned char *)b, 4);
-      //KarnizPosition
-      int a = (int)StrToULong(b);
-      if(a >= 0 && a <=100)
-      {
-          Serial.print("WEB slider KarnizPosition ");
-          Serial.println(a);
-          //KarnizPosition = map(a,0,100,0,KarnizLength);
-          KarnizLength = a ;
-          Serial.println(KarnizPosition);
-      } else Serial.print("ERROR position");
+      buf = server.arg("KARSLID");
+        char b[3];
+        if(buf.length())
+        {
+          buf.getBytes((unsigned char *)b, 4);
+          //KarnizPosition
+          int a = (int)StrToULong(b);
+          if(a >= 0 && a <=100)
+          {
+              Serial.print("WEB slider KarnizPosition ");
+              Serial.println(a);
+              KarnizPosition = map(a,0,100,0,KarnizLength);
+              //KarnizLength = a ;
+              Serial.println(KarnizPosition);
+          } else Serial.print("ERROR position");
+        }
     }
 }
 //=======================================SETUP======================================================
@@ -296,7 +300,7 @@ void handleRoot() {
     #if defined (RELAYS_ON) || defined (KARNIZ)
       temp += "'5'"; //добавляем автообновление страници
     #endif
-    #if defined (LED_MATRIX) || defined (IR_RESIVER) || defined (RF433MHZ) //#ifdef LED_MATRIX
+    #if defined (LED_MATRIX) || defined (IR_RESIVER) || defined (RF433MHZ) // || defined (KARNIZ) //#ifdef LED_MATRIX
       temp += "'180'"; //добавляем автообновление страници
     #endif
     temp += " charset='utf-8'/>\
@@ -413,8 +417,22 @@ void handleRoot() {
 
   //KARNIZ peges
   #ifdef KARNIZ  
-      int a = map(CurKarnizPosition,0,KarnizLength,0,100);
-      temp += "<p>Upravlenie karnix: <input type=range min=1 max=100 step=1 name=KARSLID  value="; temp += a ; temp +=" ></p>";
+      temp += "<h1>Управление карнизом</h1>\
+              <form  method=get name=form>";
+              int b = map(CurKarnizPosition,0,KarnizLength,0,100);
+              temp += "<p>Текущее положение: <input type=range min=1 max=100 step=1 name=KARSLID  value="; temp += b ;
+              temp +=" disabled > ";
+              temp += b ;
+              temp +=" </p> ";
+              
+              int a = map(KarnizPosition,0,KarnizLength,0,100);
+              temp += "<p>Положение карниза: <input type=range min=1 max=100 step=1 name=KARSLID  value="; temp += a ;
+              temp +="  > ";
+              temp += a ;
+              temp +=" </p> ";
+                            
+              temp += "<input type= submit name=send value=send ><br/> \  
+              </form><br />";
   #endif 
   
   temp += "<body></center></html>" ;
