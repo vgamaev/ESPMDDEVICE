@@ -76,7 +76,12 @@ void WebParser(){
   
     Config.www_username = server.arg("WWWUSER");
     Config.www_password = server.arg("WWWPASS");
-    
+
+    #ifdef KARNIZ
+      Config.KarnizLength = server.arg("KARLEN");
+      ReadEPROMKarnizLength();  //Обновляем текущию переменую размера карниза
+    #endif
+        
     Config.serverIP = server.arg("MDAdr");
     Config.name = server.arg("MDObj");
     #if defined (Sonof_T1_2_button) || defined (Sonof_T1_3_button)
@@ -161,6 +166,25 @@ void WebParserIR()
   #endif
 }
 
+void WebParserKarniz()
+{
+    String buf = server.arg("KARSLID");
+    char b[3];
+    if(buf.length())
+    {
+      buf.getBytes((unsigned char *)b, 4);
+      //KarnizPosition
+      int a = (int)StrToULong(b);
+      if(a >= 0 && a <=100)
+      {
+          Serial.print("WEB slider KarnizPosition ");
+          Serial.println(a);
+          //KarnizPosition = map(a,0,100,0,KarnizLength);
+          KarnizLength = a ;
+          Serial.println(KarnizPosition);
+      } else Serial.print("ERROR position");
+    }
+}
 //=======================================SETUP======================================================
 
 // функция для страници настройки устройства
@@ -171,7 +195,8 @@ void handleSetup() {
   
   String temp = "<html>\
     <head>\
-       <style>\
+    <meta charset=utf-8> \
+      <style>\
         body { background-color: #cccccc; font-family: Arial, Helvetica, Sans-Serif; Color: #000088; }\
       </style>\
     </head>\
@@ -199,8 +224,16 @@ void handleSetup() {
                <tr> <td>Login:    </td><td> <input type=text size=12 maxlength=12 name=WWWUSER value="; temp += Config.www_username; temp += ">   </td> </tr>\
                <tr> <td>Password: </td><td> <input type=text size=12 maxlength=12 name=WWWPASS value="; temp += Config.www_password; temp += ">   </td> </tr>\
            </table> \
-           </br> \
-           <table>\
+           </br>";
+           #ifdef KARNIZ
+           temp += "<table>\
+               <tr> <td>Karniz setting.</td> </tr>\
+               <tr> <td>Open time sec: </td><td> <input type=text size=12 maxlength=12 name=KARLEN value="; temp += Config.KarnizLength; temp += ">   </td> </tr>\
+           </table> \
+           Curent open time: "; temp += KarnizLength; temp += " sec </br> \
+           </br>";
+           #endif
+           temp += "<table>\
            <tr><td> Mojordomo: </td> </tr>\
               <tr> <td>Adress      </td><td> <input type= text size=20 maxlength=20 name=MDAdr value="; temp += Config.serverIP; temp += ">  </td> </tr>";
                 temp += "<tr> <td>Name object  </td><td> <input type= text size=20 maxlength=20 name=MDObj value="; temp += Config.name; temp += ">      </td> </tr>";
@@ -214,7 +247,7 @@ void handleSetup() {
           </table>\
           </br> \
           <table>\
-            <tr> <td> Conect sitting:  </td> </tr>\
+            <tr> <td> Conect setting:  </td> </tr>\
             <tr> <td>DHCP:  </td><td> <input type= checkbox name= DHCP id="; temp += Config.dhcp; if(Config.dhcp == "on") temp +=" checked=checked" ;  temp += ">  </td> </tr>\
             <tr> <td>IP     </td><td> <input type= text size=15 maxlength=15 name=IP   value="; temp += Config.ip;   if(Config.dhcp == "on") temp +=" disabled"; temp += ">  </td> </tr>\
             </table>\
@@ -226,7 +259,7 @@ void handleSetup() {
           <input type= submit name=save value= save ><br/>\
      </form>\
      </br> \
-     Gamaev Vlad Version:";
+     Gamaev Vlad Version: ";
      temp += VersionCode;
      temp +="</center> \
   </body>\
@@ -251,11 +284,16 @@ void handleRoot() {
   #ifdef IR_RESIVER
     WebParserIR();
   #endif
+  #ifdef KARNIZ
+    WebParserKarniz();
+  #endif
+  
   
   String temp = "<html>\
   <head>\
     <meta http-equiv='refresh' content=";
-    #ifdef RELAYS_ON
+    //#ifdef RELAYS_ON
+    #if defined (RELAYS_ON) || defined (KARNIZ)
       temp += "'5'"; //добавляем автообновление страници
     #endif
     #if defined (LED_MATRIX) || defined (IR_RESIVER) || defined (RF433MHZ) //#ifdef LED_MATRIX
@@ -373,6 +411,12 @@ void handleRoot() {
     temp += "С </font></h3>";
   #endif 
 
+  //KARNIZ peges
+  #ifdef KARNIZ  
+      int a = map(CurKarnizPosition,0,KarnizLength,0,100);
+      temp += "<p>Upravlenie karnix: <input type=range min=1 max=100 step=1 name=KARSLID  value="; temp += a ; temp +=" ></p>";
+  #endif 
+  
   temp += "<body></center></html>" ;
   server.send ( 200, "text/html", temp );
 }
@@ -392,5 +436,3 @@ void initVariant() {
   uint8_t mac[6] = {0x00, 0xA3, 0xA0, 0x1C, 0x8C, 0x45};
   // wifi_set_macaddr(STATION_IF, &mac[0]);
 }*/
-
-

@@ -7,6 +7,7 @@
 #include "ESPIR.h"
 #include "ESPWIFI.h"
 #include "ESPMDDEVICE.H"
+#include "KARNIZ.h"
 
 extern String VersionCode;
 
