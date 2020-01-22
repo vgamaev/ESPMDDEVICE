@@ -26,6 +26,14 @@ void ButtonRead2()
   for(int i=0; i<MAX_BUTTON2; i++) button_state2[i] = digitalRead(ButtonPin2[i]);
 }
 
+//Отрабатываем однократно нажатую клавишу
+void ButtonIsPressedOnce(int nomer)
+{
+  #ifdef KARNIZ
+      KarnizButtonSwitch(nomer);
+  #endif
+}
+
 // Обрабатываем нажатие кнопок
 void ButtonSwitch2()
 {
@@ -34,7 +42,7 @@ void ButtonSwitch2()
   for(int i=0; i<MAX_BUTTON2; i++)
   {
     if(button_state2[i] == HIGH && can_toggle2[i]) {
-      
+      ButtonIsPressedOnce(i);
       can_toggle2[i] = false;
       delay(500);
     }else if (button_state2[i] == LOW) {
