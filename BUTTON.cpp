@@ -15,6 +15,8 @@ void ButtonInit2()
       pinMode(ButtonPin2[i], INPUT_PULLUP);
       can_toggle2[i]=0;
       button_state2[i]=0;
+      Serial.println("Init button v2 ");
+      Serial.println(ButtonPin2[i]);
    }
 }
 
@@ -23,7 +25,12 @@ void ButtonInit2()
 // Проверяем нажатие кнопок выключателя
 void ButtonRead2()
 {
-  for(int i=0; i<MAX_BUTTON2; i++) button_state2[i] = digitalRead(ButtonPin2[i]);
+  for(int i=0; i<MAX_BUTTON2; i++)
+  { 
+    button_state2[i] = digitalRead(ButtonPin2[i]);
+    Serial.println("Button_state v2 ");
+    Serial.println(button_state2[i]);
+  }
 }
 
 //Отрабатываем однократно нажатую клавишу
@@ -31,6 +38,8 @@ void ButtonIsPressedOnce(int nomer)
 {
   #ifdef KARNIZ
       KarnizButtonSwitch(nomer);
+      Serial.println("ButtonIs Pressed Once v2 ");
+      Serial.println(nomer);
   #endif
 }
 

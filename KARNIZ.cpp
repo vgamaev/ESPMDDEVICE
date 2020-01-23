@@ -98,8 +98,10 @@ void OpenCloseKarniz()
     int a = map(CurKarnizPosition,0,KarnizLength,0,100);
      //if(CurKarnizPosition >= 50) KarnizPosition = 100;
      //else if(CurKarnizPosition < 50) KarnizPosition = 0;
-     if(a >= 50) KarnizPosition = KarnizPosition = 0;
-     else if(a < 50) map(100,0,100,0,KarnizLength); // Выстовляем саксимальное открытие карниза
+     if(a >= 50)  KarnizPosition = 0;
+     else if(a < 50) KarnizPosition = map(100,0,100,0,KarnizLength); // Выстовляем саксимальное открытие карниза
+     Serial.println("Func Open Close Karniz ");
+     Serial.println(KarnizPosition);
 }
 
 
@@ -209,7 +211,9 @@ void KarnizWork()
 void SendCurKarnizPosition()
 {
      int a = map(CurKarnizPosition,0,KarnizLength,0,100);
-     String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p=slider2&v="+a;
+     //String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p=slider2&v="+a;
+     String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p="+Config.property+"&v="+a;
+     Serial.println(post);
      Serial.println(post);
      http.begin(post);
      int httpCode = http.GET(); 
