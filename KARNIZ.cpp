@@ -98,8 +98,10 @@ void OpenCloseKarniz()
     int a = map(CurKarnizPosition,0,KarnizLength,0,100);
      //if(CurKarnizPosition >= 50) KarnizPosition = 100;
      //else if(CurKarnizPosition < 50) KarnizPosition = 0;
-     if(a >= 50) KarnizPosition = KarnizPosition = 0;
-     else if(a < 50) map(100,0,100,0,KarnizLength); // Выстовляем саксимальное открытие карниза
+     if(a >= 50)  KarnizPosition = 0;
+     else if(a < 50) KarnizPosition = map(100,0,100,0,KarnizLength); // Выстовляем саксимальное открытие карниза
+     Serial.println("Func Open Close Karniz ");
+     Serial.println(KarnizPosition);
 }
 
 
