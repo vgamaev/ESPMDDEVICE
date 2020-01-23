@@ -211,7 +211,9 @@ void KarnizWork()
 void SendCurKarnizPosition()
 {
      int a = map(CurKarnizPosition,0,KarnizLength,0,100);
-     String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p=slider2&v="+a;
+     //String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p=slider2&v="+a;
+     String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p="+Config.property+"&v="+a;
+     Serial.println(post);
      Serial.println(post);
      http.begin(post);
      int httpCode = http.GET(); 
