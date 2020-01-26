@@ -15,6 +15,10 @@
     String VersionCode = "2.05 KARNIZ";
 #endif
 
+#ifdef RELAYS_ON
+    String VersionCode = "2.05 RELAY TESTER";
+#endif    
+
 #ifdef RF433MHZ
     #include "RF433MHZ.h"
 unsigned long code433 =0;
