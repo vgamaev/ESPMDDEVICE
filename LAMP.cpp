@@ -227,4 +227,3 @@ void sendServer(bool state, int relay_n)
 }
 
 #endif
-

@@ -166,6 +166,7 @@ void WebParserIR()
   #endif
 }
 
+#ifdef KARNIZ
 void WebParserKarniz()
 {
     String buf = server.arg("send");
@@ -189,6 +190,8 @@ void WebParserKarniz()
         }
     }
 }
+#endif
+
 //=======================================SETUP======================================================
 
 // функция для страници настройки устройства
