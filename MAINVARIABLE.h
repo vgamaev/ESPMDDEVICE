@@ -11,17 +11,11 @@
 #include "ESPWEB.h"
 #include "WEBUPDATE.h"
 
-#ifdef KARNIZ
-    String VersionCode = "2.05 KARNIZ";
-#endif
-
-#ifdef RELAYS_ON
-    String VersionCode = "2.05 RELAY TESTER";
-#endif    
 
 #ifdef RF433MHZ
     #include "RF433MHZ.h"
-unsigned long code433 =0;
+    unsigned long code433 =0;
+    String VersionCode = "2.05 RF 433MHZ";
 #endif
 
 //==============================================
@@ -38,6 +32,7 @@ unsigned long code433 =0;
   int SEND_PIN = 15; //an IR led is connected to GPIO pin 0
   String ResiverCode = "0";
   String TransmiterCode = "0";
+  String VersionCode = "2.05 IR RESIVER";
 #endif
 
 
@@ -49,6 +44,7 @@ unsigned long code433 =0;
   int can_toggle[MAX_BUTTON];
   int button_state[MAX_BUTTON];
   bool web_button_state[MAX_RELAY];
+  String VersionCode = "2.05 RELAY TESTER";
 #endif
 
 #ifdef BUTTON2
@@ -71,6 +67,7 @@ unsigned long code433 =0;
   int width = 5 + spacer;                   // The font width is 5 pixels
   int MatrixOFF = 0 ;
   int MatrixCounter = 0;                    // Счетчик дляотображения бегущей строки
+  String VersionCode = "2.05 LED MATRIX";
 #endif
 
 //==============================================
@@ -93,7 +90,13 @@ unsigned long code433 =0;
   int KarnizLength = 2; //16;
   int CurKarnizPosition = 0;
   int KarnizPosition = 0;
+  String VersionCode = "2.05 KARNIZ";
     
+#endif
+//======================= ENERGOMERA ===============================================
+#ifdef ENERGOMERA
+  #include "ENERGOMERA.h"
+  String VersionCode = "2.05 ENERGOMERA";
 #endif
 //=======================Светодиод WIFI=========================================
 long WiFiCheckinterval = 1000; //Интервал проверки WiFi потключения
