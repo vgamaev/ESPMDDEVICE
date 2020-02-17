@@ -11,15 +11,15 @@ void EnergomeraInit()
     digitalWrite(DIR, HIGH);
 }
 
-extern Energomera ValueParser(String inString, String Param)
+void ValueParser(String inString, String Param, Energomera* Buffer)
 {
   char x [50];
   String inString2;
-  Energomera Buffer;
+  //struct Energomera Buffer;
 
-  Buffer.NameParam = Param;
-  Buffer.StrValue = "0";
-  Buffer.FloatValue = 0;
+  Buffer->NameParam = Param;
+  Buffer->StrValue = "0";
+  Buffer->FloatValue = 0;
 
   if (inString.lastIndexOf(Param)>0) 
       {
@@ -33,21 +33,21 @@ extern Energomera ValueParser(String inString, String Param)
           inString2.toCharArray(x, sizeof(x));
           float f = atof(x);
           
-          Buffer.StrValue = inString2;
-          Buffer.FloatValue = f;
+          Buffer->StrValue = inString2;
+          Buffer->FloatValue = f;
           
           inString = "";
       }
-      return Buffer;
+      //return Buffer;
 }
 
-void PrintVolume(Energomera Buffer)
+void PrintVolume(Energomera* Buffer)
 {
-   Serial.print(Buffer.NameParam); 
+   Serial.print(Buffer->NameParam); 
    Serial.print("   ");
-   Serial.print(Buffer.StrValue);   //формат string
+   Serial.print(Buffer->StrValue);   //формат string
    Serial.print("------>");
-   Serial.println(Buffer.FloatValue);           //формат float
+   Serial.println(Buffer->FloatValue);           //формат float
 }
 
 void EnergomeraRead()
@@ -60,28 +60,28 @@ void EnergomeraRead()
               
         break;
         case 3:
-              Etope = ValueParser(ReadStr, "ET0PE");
-              PrintVolume(Etope);
+              ValueParser(ReadStr, "ET0PE", &Etope);
+              PrintVolume(&Etope);
         break;
         case 4:
-              Volta = ValueParser(ReadStr, "VOLTA");
-              PrintVolume(Volta);
+              //Volta = ValueParser(ReadStr, "VOLTA");
+              //PrintVolume(Volta);
         break;
         case 5:
-              Power = ValueParser(ReadStr, "POWEP");
-              PrintVolume(Power);
+              //ValueParser(ReadStr, "POWEP", Power);
+              //PrintVolume(Power);
         break;
         case 6:
-              Frequ = ValueParser(ReadStr, "FREQU");
-              PrintVolume(Frequ);
+              //ValueParser(ReadStr, "FREQU", Frequ);
+              //PrintVolume(Frequ);
         break;
         case 7:
-              Curre = ValueParser(ReadStr, "CURRE");
-              PrintVolume(Curre);
+              //ValueParser(ReadStr, "CURRE", Curre);
+              //PrintVolume(Curre);
         break;
         case 8:
-              Cos_f = ValueParser(ReadStr, "COS_f");
-              PrintVolume(Cos_f);
+              //ValueParser(ReadStr, "COS_f", Cos_f);
+              //PrintVolume(Cos_f);
               Serial.println();
         break;
         default:

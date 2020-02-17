@@ -103,12 +103,7 @@
 
   String ReadStr;
 
-  struct Energomera{
-    String NameParam;
-    String StrValue;
-    float  FloatValue;
-  }Etope,Volta,Power,Curre,Frequ,Cos_f; 
-   
+ 
   // открываем сессию
    byte CmdOpenSesion[] = {0xaF,0x3F,0x21,0x8D,0x0A};
   // читаем тип счетчика

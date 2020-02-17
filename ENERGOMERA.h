@@ -12,8 +12,8 @@
 
   extern ESP8266WebServer server; // веб сервер
   extern HTTPClient http; // веб клиент
-
 */
+
 
 #include <SoftwareSerial.h>
 
@@ -42,21 +42,25 @@ extern byte CmdCos_f[];
 #define CYCLE_TIME 15
 #define DIR 15 
 
-
-extern struct Energomera Etope,Volta,Power,Curre,Frequ,Cos_f; 
-
 extern String ReadStr;
 
-//extern Energomera Etope;
-//extern Energomera Volta;
-//extern Energomera Power;
-//extern Energomera Curre;
-//extern Energomera Frequ;
-//extern Energomera Cos_f;
+extern struct Energomera{
+    String NameParam;
+    String StrValue;
+    float  FloatValue;
+  }Etope, Volta, Power, Curre, Frequ, Cos_f; 
+   
+/*extern struct Energomera Etope;
+Energomera Volta;
+Energomera Power;
+Energomera Curre;
+Energomera Frequ;
+Energomera Cos_f1;
+*/
 
-extern Energomera ValueParser(String inString, String Param);
+void ValueParser(String inString, String Param, struct Energomera* Buffer);
 void EnergomeraInit(); 
-void PrintVolume(Energomera Buffer);
+void PrintVolume(Energomera* Buffer);
 void EnergomeraRead();
 void SendCommand(byte* cmd, int size);
 void EmergomeraWrite();
