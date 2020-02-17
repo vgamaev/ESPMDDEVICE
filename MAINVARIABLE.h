@@ -93,16 +93,21 @@
   String VersionCode = "2.05 KARNIZ";
     
 #endif
+
 //======================= ENERGOMERA ===============================================
 #ifdef ENERGOMERA
   #include "ENERGOMERA.h"
 
+  /*#define RX_EM 14
+  #define TX_EM 12
+  #define CYCLE_TIME 15
+  #define DIR 15 */
+  
   long Previous = 0; 
   int Step = 0;
   //char x [50];
 
   String ReadStr;
-
  
   // открываем сессию
    byte CmdOpenSesion[] = {0xaF,0x3F,0x21,0x8D,0x0A};
@@ -123,6 +128,7 @@
   
    String VersionCode = "2.05 ENERGOMERA";
 #endif
+
 //=======================Светодиод WIFI=========================================
 long WiFiCheckinterval = 1000; //Интервал проверки WiFi потключения
 int WIWI_Connect=0;

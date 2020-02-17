@@ -2,7 +2,9 @@
 
 #ifdef ENERGOMERA
 
-SoftwareSerial UART(10, 11); // RX, TX
+EnergomeraStruct Etope, Volta, Power, Frequ, Curre, Cos_f;
+
+SoftwareSerial UART(14, 12);  //(RX_EM, TX_EM); //(14, 12)  RX, TX
 
 void EnergomeraInit()
 { 
@@ -10,8 +12,16 @@ void EnergomeraInit()
     pinMode(DIR, OUTPUT);
     digitalWrite(DIR, HIGH);
 }
+/*
+struct EnergomeraStruct{
+    String NameParam;
+    String StrValue;
+    float  FloatValue;
+  }Etope, Volta, Power, Curre, Frequ, Cos_f; 
+   */
 
-void ValueParser(String inString, String Param, Energomera* Buffer)
+
+void ValueParser(String inString, String Param, EnergomeraStruct* Buffer)
 {
   char x [50];
   String inString2;
@@ -41,7 +51,7 @@ void ValueParser(String inString, String Param, Energomera* Buffer)
       //return Buffer;
 }
 
-void PrintVolume(Energomera* Buffer)
+void PrintVolume(EnergomeraStruct *Buffer)
 {
    Serial.print(Buffer->NameParam); 
    Serial.print("   ");
@@ -64,24 +74,24 @@ void EnergomeraRead()
               PrintVolume(&Etope);
         break;
         case 4:
-              //Volta = ValueParser(ReadStr, "VOLTA");
-              //PrintVolume(Volta);
+              ValueParser(ReadStr, "VOLTA", &Volta);
+              PrintVolume(&Volta);
         break;
         case 5:
-              //ValueParser(ReadStr, "POWEP", Power);
-              //PrintVolume(Power);
+              ValueParser(ReadStr, "POWEP", &Power);
+              PrintVolume(&Power);
         break;
         case 6:
-              //ValueParser(ReadStr, "FREQU", Frequ);
-              //PrintVolume(Frequ);
+              ValueParser(ReadStr, "FREQU", &Frequ);
+              PrintVolume(&Frequ);
         break;
         case 7:
-              //ValueParser(ReadStr, "CURRE", Curre);
-              //PrintVolume(Curre);
+              ValueParser(ReadStr, "CURRE", &Curre);
+              PrintVolume(&Curre);
         break;
         case 8:
-              //ValueParser(ReadStr, "COS_f", Cos_f);
-              //PrintVolume(Cos_f);
+              ValueParser(ReadStr, "COS_f", &Cos_f);
+              PrintVolume(&Cos_f);
               Serial.println();
         break;
         default:

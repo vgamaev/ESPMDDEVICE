@@ -18,7 +18,7 @@
 #include <SoftwareSerial.h>
 
 extern long Previous ; 
-extern int Step;
+extern int Step ;
 //extern char x [50];
 
 // открываем сессию
@@ -38,29 +38,21 @@ extern byte CmdCurre[];
 // cos f  
 extern byte CmdCos_f[];
 
-
 #define CYCLE_TIME 15
 #define DIR 15 
 
 extern String ReadStr;
 
-extern struct Energomera{
+extern struct EnergomeraStruct{
     String NameParam;
     String StrValue;
     float  FloatValue;
   }Etope, Volta, Power, Curre, Frequ, Cos_f; 
-   
-/*extern struct Energomera Etope;
-Energomera Volta;
-Energomera Power;
-Energomera Curre;
-Energomera Frequ;
-Energomera Cos_f1;
-*/
 
-void ValueParser(String inString, String Param, struct Energomera* Buffer);
+
+void ValueParser(String inString, String Param, struct EnergomeraStruct* Buffer);
 void EnergomeraInit(); 
-void PrintVolume(Energomera* Buffer);
+void PrintVolume(EnergomeraStruct* );
 void EnergomeraRead();
 void SendCommand(byte* cmd, int size);
 void EmergomeraWrite();
