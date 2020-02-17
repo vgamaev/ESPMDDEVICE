@@ -2,8 +2,18 @@
 
 #ifdef ENERGOMERA
 
-Energomera ValueParser(String inString, String Param)
+SoftwareSerial UART(10, 11); // RX, TX
+
+void EnergomeraInit()
+{ 
+    UART.begin(9600);
+    pinMode(DIR, OUTPUT);
+    digitalWrite(DIR, HIGH);
+}
+
+extern Energomera ValueParser(String inString, String Param)
 {
+  char x [50];
   String inString2;
   Energomera Buffer;
 

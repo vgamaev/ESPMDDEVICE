@@ -17,49 +17,45 @@
 
 #include <SoftwareSerial.h>
 
-long Previous = 0; 
-int Step = 0;
-char x [50];
+extern long Previous ; 
+extern int Step;
+//extern char x [50];
 
 // открываем сессию
-byte CmdOpenSesion[] = {0xaF,0x3F,0x21,0x8D,0x0A};
+extern byte CmdOpenSesion[];
 // читаем тип счетчика
-byte CmdReadType[] = {0x06,0x30,0x35,0xb1,0x8d,0x0a};
+extern byte CmdReadType[];
 // снимаем показания
-byte CmdEtope[] = {0x81,0xd2,0xb1,0x82,0xc5,0xd4,0x30,0x50,0xc5,0x28,0xa9,0x03,0xb7};
+extern byte CmdEtope[];
 //напряжение на фазах
-byte CmdVolta[] = {0x81,0xd2,0xb1,0x82,0x56,0xcf,0xcc,0xd4,0x41,0x28,0xa9,0x03,0x5f};
+extern byte CmdVolta[];
 // мощность
-byte CmdPower[] = {0x81,0xd2,0xb1,0x82,0x50,0xcf,0xd7,0xc5,0x50,0x28,0xa9,0x03,0xe4};
+extern byte CmdPower[];
 // частота  
-byte CmdFrequ[] = {0x81,0xd2,0xb1,0x82,0xc6,0xd2,0xc5,0xd1,0x55,0x28,0xa9,0x03,0x5c};
+extern byte CmdFrequ[];
 // ток  
-byte CmdCurre[] = {0x81,0xd2,0xb1,0x82,0xc3,0x55,0xd2,0xd2,0xc5,0x28,0xa9,0x03,0x5a};
+extern byte CmdCurre[];
 // cos f  
-byte CmdCos_f[] = {0x81,0xd2,0xb1,0x82,0xc3,0x55,0xd2,0xd2,0xc5,0x28,0xa9,0x03,0x5a};
+extern byte CmdCos_f[];
 
 
 #define CYCLE_TIME 15
-#define DIR 8 
- 
-SoftwareSerial UART (10, 11); // RX, TX
-
-struct Energomera{
-  String NameParam;
-  String StrValue;
-  float  FloatValue;
-};
+#define DIR 15 
 
 
-String ReadStr;
-Energomera Etope;
-Energomera Volta;
-Energomera Power;
-Energomera Curre;
-Energomera Frequ;
-Energomera Cos_f;
+extern struct Energomera Etope,Volta,Power,Curre,Frequ,Cos_f; 
 
-Energomera ValueParser(String inString, String Param);
+extern String ReadStr;
+
+//extern Energomera Etope;
+//extern Energomera Volta;
+//extern Energomera Power;
+//extern Energomera Curre;
+//extern Energomera Frequ;
+//extern Energomera Cos_f;
+
+extern Energomera ValueParser(String inString, String Param);
+void EnergomeraInit(); 
 void PrintVolume(Energomera Buffer);
 void EnergomeraRead();
 void SendCommand(byte* cmd, int size);

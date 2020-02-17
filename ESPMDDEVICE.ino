@@ -77,9 +77,7 @@ void setup(void) {
   #endif
 
   #ifdef ENERGOMERA
-    UART.begin(9600);
-    pinMode(DIR, OUTPUT);
-    digitalWrite(DIR, HIGH);
+    EnergomeraInit(); 
   #endif
   
   #ifdef WEBUPDATE
