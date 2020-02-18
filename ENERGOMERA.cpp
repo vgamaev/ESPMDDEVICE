@@ -60,6 +60,15 @@ void PrintVolume(EnergomeraStruct *Buffer)
    Serial.println(Buffer->FloatValue);           //формат float
 }
 
+void SendMDEnergomera(EnergomeraStruct *Buffer)
+{
+    String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p="+Buffer->NameParam+"&v="+Buffer->StrValue;
+    Serial.println(post);
+    http.begin(post);
+    int httpCode = http.GET(); 
+    http.end();
+}
+
 void EnergomeraRead()
 {
   switch (Step) {
@@ -72,26 +81,32 @@ void EnergomeraRead()
         case 3:
               ValueParser(ReadStr, "ET0PE", &Etope);
               PrintVolume(&Etope);
+              SendMDEnergomera(&Etope);
         break;
         case 4:
               ValueParser(ReadStr, "VOLTA", &Volta);
               PrintVolume(&Volta);
+              SendMDEnergomera(&Volta);
         break;
         case 5:
               ValueParser(ReadStr, "POWEP", &Power);
               PrintVolume(&Power);
+              SendMDEnergomera(&Power);
         break;
         case 6:
               ValueParser(ReadStr, "FREQU", &Frequ);
               PrintVolume(&Frequ);
+              SendMDEnergomera(&Frequ);
         break;
         case 7:
               ValueParser(ReadStr, "CURRE", &Curre);
               PrintVolume(&Curre);
+              SendMDEnergomera(&Curre);
         break;
         case 8:
               ValueParser(ReadStr, "COS_f", &Cos_f);
               PrintVolume(&Cos_f);
+              SendMDEnergomera(&Cos_f);
               Serial.println();
         break;
         default:
@@ -154,13 +169,13 @@ void EnergomeraCycle()
       char response = UART.read();
       response &= 0x7F;// convert 8N1 to 7E1
       
-      //Serial.print(response);
+      Serial.print(response);
       char inChar = response;
 
       ReadStr += inChar;
     }
     
-    //ReadStr = "FREQU(50.00)";
+    ReadStr = "FREQU(50.00)";
       
     if (millis() - Previous > 1000)
     {

@@ -7,15 +7,15 @@
 /*  #include <Arduino.h>
   #include <IRremoteESP8266.h>
   #include <ESP8266WebServer.h>
-  #include <ESP8266HTTPClient.h>
-  #include "ESPEEPROM.h"
-
+  
   extern ESP8266WebServer server; // веб сервер
-  extern HTTPClient http; // веб клиент
 */
-
-
+  
 #include <SoftwareSerial.h>
+#include <ESP8266HTTPClient.h>
+#include "ESPEEPROM.h"
+
+extern HTTPClient http; // веб клиент
 
 extern long Previous ; 
 extern int Step ;
@@ -50,9 +50,10 @@ extern struct EnergomeraStruct{
   }Etope, Volta, Power, Curre, Frequ, Cos_f; 
 
 
-void ValueParser(String inString, String Param, struct EnergomeraStruct* Buffer);
 void EnergomeraInit(); 
+void ValueParser(String inString, String Param, struct EnergomeraStruct* Buffer);
 void PrintVolume(EnergomeraStruct* );
+void SendMDEnergomera(EnergomeraStruct *Buffer);
 void EnergomeraRead();
 void SendCommand(byte* cmd, int size);
 void EmergomeraWrite();
