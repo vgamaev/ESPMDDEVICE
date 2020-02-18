@@ -418,6 +418,29 @@ void handleRoot() {
     temp += "С </font></h3>";
   #endif 
 
+   //Энергомера peges
+  #ifdef ENERGOMERA  
+    temp += "<h1>Электросчетчик ЭНЕРГОМЕРА СЕ102М</h1>\
+             <h3><font color=red>Показания: ";
+    temp += Etope.StrValue;
+    temp += " Кв час</font></h3>\
+             <h3><font color=red>Напряжение: ";
+    temp += Volta.StrValue;
+    temp += " Вольт </font></h3>\
+             <h3><font color=red>Мощьность : ";
+    temp += Power.StrValue;
+    temp += " КВт </font></h3>\
+              <h3><font color=red>Сила тока: ";
+    temp += Curre.StrValue;
+    temp += " Ампер </font></h3>\
+              <h3><font color=red>Частота  : ";
+    temp += Frequ.StrValue;
+    temp += " Герц </font></h3>\
+             <h3><font color=red>Косинус F : ";
+    temp += Cos_f.StrValue;
+    temp += " гр </font></h3>";
+  #endif 
+  
   //KARNIZ peges
   #ifdef KARNIZ  
       temp += "<h1>Управление карнизом</h1>\

@@ -8,6 +8,7 @@
 #include "ESPWIFI.h"
 #include "ESPMDDEVICE.H"
 #include "KARNIZ.h"
+#include "ENERGOMERA.h"
 
 extern String VersionCode;
 
