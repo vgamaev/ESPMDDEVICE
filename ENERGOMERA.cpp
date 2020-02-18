@@ -42,7 +42,7 @@ void ValueParser(String inString, String Param, EnergomeraStruct* Buffer)
           inString2 = inString.substring(first,first_2);
           inString2.toCharArray(x, sizeof(x));
           float f = atof(x);
-          
+                  
           Buffer->StrValue = inString2;
           Buffer->FloatValue = f;
           
@@ -62,7 +62,7 @@ void PrintVolume(EnergomeraStruct *Buffer)
 
 void SendMDEnergomera(EnergomeraStruct *Buffer)
 {
-    String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p="+Buffer->NameParam+"&v="+Buffer->StrValue;
+    String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p="+Buffer->NameParam+"&v="+Buffer->FloatValue;
     Serial.println(post);
     http.begin(post);
     int httpCode = http.GET(); 
@@ -175,7 +175,7 @@ void EnergomeraCycle()
       ReadStr += inChar;
     }
     
-    ReadStr = "FREQU(50.00)";
+    //ReadStr = "FREQU(50.00)";
       
     if (millis() - Previous > 1000)
     {

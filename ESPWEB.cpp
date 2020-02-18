@@ -300,10 +300,10 @@ void handleRoot() {
   <head>\
     <meta http-equiv='refresh' content=";
     //#ifdef RELAYS_ON
-    #if defined (RELAYS_ON) || defined (KARNIZ)
+    #if defined (RELAYS_ON) || defined (KARNIZ) || defined (ENERGOMERA)
       temp += "'5'"; //добавляем автообновление страници
     #endif
-    #if defined (LED_MATRIX) || defined (IR_RESIVER) || defined (RF433MHZ) // || defined (KARNIZ) //#ifdef LED_MATRIX
+    #if defined (LED_MATRIX) || defined (IR_RESIVER) || defined (RF433MHZ) //|| defined (ENERGOMERA) // || defined (KARNIZ) //#ifdef LED_MATRIX
       temp += "'180'"; //добавляем автообновление страници
     #endif
     temp += " charset='utf-8'/>\
