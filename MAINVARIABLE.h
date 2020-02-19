@@ -11,17 +11,11 @@
 #include "ESPWEB.h"
 #include "WEBUPDATE.h"
 
-#ifdef KARNIZ
-    String VersionCode = "2.05 KARNIZ";
-#endif
-
-#ifdef RELAYS_ON
-    String VersionCode = "2.05 RELAY TESTER";
-#endif    
 
 #ifdef RF433MHZ
     #include "RF433MHZ.h"
-unsigned long code433 =0;
+    unsigned long code433 =0;
+    String VersionCode = "2.05 RF 433MHZ";
 #endif
 
 //==============================================
@@ -38,6 +32,7 @@ unsigned long code433 =0;
   int SEND_PIN = 15; //an IR led is connected to GPIO pin 0
   String ResiverCode = "0";
   String TransmiterCode = "0";
+  String VersionCode = "2.05 IR RESIVER";
 #endif
 
 
@@ -49,6 +44,7 @@ unsigned long code433 =0;
   int can_toggle[MAX_BUTTON];
   int button_state[MAX_BUTTON];
   bool web_button_state[MAX_RELAY];
+  String VersionCode = "2.05 RELAY TESTER";
 #endif
 
 #ifdef BUTTON2
@@ -71,6 +67,7 @@ unsigned long code433 =0;
   int width = 5 + spacer;                   // The font width is 5 pixels
   int MatrixOFF = 0 ;
   int MatrixCounter = 0;                    // Счетчик дляотображения бегущей строки
+  String VersionCode = "2.05 LED MATRIX";
 #endif
 
 //==============================================
@@ -93,8 +90,45 @@ unsigned long code433 =0;
   int KarnizLength = 2; //16;
   int CurKarnizPosition = 0;
   int KarnizPosition = 0;
+  String VersionCode = "2.05 KARNIZ";
     
 #endif
+
+//======================= ENERGOMERA ===============================================
+#ifdef ENERGOMERA
+  #include "ENERGOMERA.h"
+
+  /*#define RX_EM 14
+  #define TX_EM 12
+  #define CYCLE_TIME 15
+  #define DIR 15 */
+  
+  long Previous = 0; 
+  int Step = 0;
+  //char x [50];
+
+  String ReadStr;
+ 
+  // открываем сессию
+   byte CmdOpenSesion[] = {0xaF,0x3F,0x21,0x8D,0x0A};
+  // читаем тип счетчика
+   byte CmdReadType[] = {0x06,0x30,0x35,0xb1,0x8d,0x0a};
+  // снимаем показания
+   byte CmdEtope[] = {0x81,0xd2,0xb1,0x82,0xc5,0xd4,0x30,0x50,0xc5,0x28,0xa9,0x03,0xb7};
+  //напряжение на фазах
+   byte CmdVolta[] = {0x81,0xd2,0xb1,0x82,0x56,0xcf,0xcc,0xd4,0x41,0x28,0xa9,0x03,0x5f};
+  // мощность
+   byte CmdPower[] = {0x81,0xd2,0xb1,0x82,0x50,0xcf,0xd7,0xc5,0x50,0x28,0xa9,0x03,0xe4};
+  // частота  
+   byte CmdFrequ[] = {0x81,0xd2,0xb1,0x82,0xc6,0xd2,0xc5,0xd1,0x55,0x28,0xa9,0x03,0x5c};
+  // ток  
+   byte CmdCurre[] = {0x81,0xd2,0xb1,0x82,0xc3,0x55,0xd2,0xd2,0xc5,0x28,0xa9,0x03,0x5a};
+  // cos f  
+   byte CmdCos_f[] = {0x81,0xd2,0xb1,0x82,0xc3,0x55,0xd2,0xd2,0xc5,0x28,0xa9,0x03,0x5a};
+  
+   String VersionCode = "2.05 ENERGOMERA";
+#endif
+
 //=======================Светодиод WIFI=========================================
 long WiFiCheckinterval = 1000; //Интервал проверки WiFi потключения
 int WIWI_Connect=0;

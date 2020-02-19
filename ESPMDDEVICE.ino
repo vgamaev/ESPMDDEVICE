@@ -76,6 +76,10 @@ void setup(void) {
     InitKarniz();
   #endif
 
+  #ifdef ENERGOMERA
+    EnergomeraInit(); 
+  #endif
+  
   #ifdef WEBUPDATE
     server.on("/webupdate", HTTP_GET, handleWebUpdate);
     server.on("/update", HTTP_POST, handleUpdate1, handleUpdate2);
@@ -115,5 +119,8 @@ void loop(void) {
   #endif
   #ifdef KARNIZ
     KarnizWork();
+  #endif
+  #ifdef ENERGOMERA
+    EnergomeraCycle();
   #endif
 }
