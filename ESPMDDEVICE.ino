@@ -22,7 +22,7 @@ void setup(void) {
     web_button_state_init();
   #endif
   #ifdef WIFI_LED
-    pinMode(WIFI_led, OUTPUT);
+    pinMode(WIFI_led,OUTPUT);
     digitalWrite(WIFI_led, HIGH);           //Выключаем пин чтобы не мигала при старте
   #endif
     
