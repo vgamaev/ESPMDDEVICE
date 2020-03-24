@@ -44,7 +44,7 @@
   int can_toggle[MAX_BUTTON];
   int button_state[MAX_BUTTON];
   bool web_button_state[MAX_RELAY];
-  String VersionCode = "2.05 RELAY TESTER";
+  String VersionCode = "2.06 @ Button";
 #endif
 
 #ifdef BUTTON2

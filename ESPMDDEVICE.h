@@ -4,18 +4,18 @@
 //#define LED_MATRIX       // Информер на светодиодных матрицах MAX7219
 //#define RF433MHZ
 //#define DHT22            // Датчик температуры и влажности DHT22
-#define KARNIZ           // Управление эдектрокарнизом
-//#define BUTTON           // Включаем кнопки
+//#define KARNIZ           // Управление эдектрокарнизом
+#define BUTTON           // Включаем кнопки
 //#define BUTTON2           // Включаем кнопки версии 2
-#define  ENERGOMERA         // Считывае показания электросчетчика Энергомера СЕ102М через jgnjgjhn bkb КЫ485
+//#define  ENERGOMERA         // Считывае показания электросчетчика Энергомера СЕ102М через jgnjgjhn bkb КЫ485
 
 #define WEBUPDATE        // Будет работать только с ESP8266 с большим чем 1Мб встроеной флеш памяти
 
-//#define RELAYS_ON      //Собираем выключатели, не рекомендую вместе с #define IR_RESIVER
+#define RELAYS_ON      //Собираем выключатели, не рекомендую вместе с #define IR_RESIVER
 
 //#define Sonoff_Touch          //Подходит и для розетки Sonoff S20 примечание ниже
 //#define Sonof_T1_2_button
-//#define Sonof_T1_3_button
+#define Sonof_T1_3_button
 
 #ifdef Sonoff_Touch
   #define MAX_RELAY  1
