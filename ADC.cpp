@@ -9,8 +9,16 @@ void adcRead()
      
     if(currentMillis - previousMillis > 1000) 
     {
-      previousMillis = currentMillis;    
+      previousMillis = currentMillis;  
+        
+      #ifdef FOTOREZ
       adcValue = map(analogRead(A0), 1022, 0, 0,100);
+      #endif
+
+      #ifdef MQ135
+        adcValue = analogRead(A0);
+      #endif
+      
       float DeltaPlus = adcValueOld + 2;
       float DeltaMinus = adcValueOld - 2;
       if(adcValue < DeltaMinus ||  adcValue > DeltaPlus)
@@ -25,5 +33,16 @@ void adcRead()
       }
     }
 }
-#endif
 
+void ADCInit()
+{
+  #ifdef FOTOREZ
+      VersionCode += VersionFOTOREZ ;
+  #endif
+
+  #ifdef MQ135
+        VersionCode += VersionMQ135 ;
+  #endif
+}
+
+#endif

@@ -11,6 +11,9 @@
 
 extern HTTPClient http; // веб клиент
 
+extern String VersionCode;
+extern String VersionDHT ;
+
 #define DHTPIN 12     // what digital pin we're connected to
 
 // Uncomment whatever type you're using!

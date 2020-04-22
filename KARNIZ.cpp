@@ -73,6 +73,7 @@ void InitKarniz() {
   ReadEPROMKarnizLength();
   Serial.println();
   Serial.println("Init karniz...");
+  VersionCode += VersionKARNIZ ;
 //  ReadCurPosMD();
 }
 

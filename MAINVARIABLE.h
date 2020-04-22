@@ -12,6 +12,8 @@
 #include "WEBUPDATE.h"
 
 
+String VersionCode = "Version: ";
+
 #ifdef RF433MHZ
     #include "RF433MHZ.h"
     unsigned long code433 =0;
@@ -23,6 +25,8 @@
   #include "ADC.h"
   int adcValue = 0;
   int adcValueOld = 0;
+  String VersionFOTOREZ = " 1.0 FOTOREZ ";
+  String VersionMQ135 = " 1.0 MQ135 ";
 #endif
 
 #ifdef IR_RESIVER
@@ -78,6 +82,7 @@
   float tempDHTOld = 0;
   float humDHTOld = 0;
   float hicDHT = 0;
+  String VersionDHT = "1.0 DHT22 ";
 #endif
 
 //======================= KARNIZ =================================================
@@ -90,7 +95,7 @@
   int KarnizLength = 2; //16;
   int CurKarnizPosition = 0;
   int KarnizPosition = 0;
-  String VersionCode = "2.05 KARNIZ";
+  String VersionKARNIZ = "2.05 KARNIZ";
     
 #endif
 

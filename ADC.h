@@ -11,10 +11,15 @@
 
 extern HTTPClient http; // веб клиент
 
+extern String VersionCode;
+extern String VersionFOTOREZ ;
+extern String VersionMQ135 ;
+
 extern int adcValue;
 extern int adcValueOld;
 
 void adcRead();
+void ADCInit();
 
 #endif
 #endif

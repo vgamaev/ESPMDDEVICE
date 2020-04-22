@@ -13,6 +13,9 @@
   extern ESP8266WebServer server; // веб сервер
   extern HTTPClient http; // веб клиент
 
+  extern String VersionCode;
+  extern String VersionKARNIZ ;
+
   unsigned long StrToULong(char *str);
   extern int ENA;
   extern int IN1;

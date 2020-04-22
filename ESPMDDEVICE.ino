@@ -79,6 +79,10 @@ void setup(void) {
   #ifdef ENERGOMERA
     EnergomeraInit(); 
   #endif
+
+  #ifdef ADC
+    ADCInit();
+  #endif
   
   #ifdef WEBUPDATE
     server.on("/webupdate", HTTP_GET, handleWebUpdate);
