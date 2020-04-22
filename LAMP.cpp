@@ -21,6 +21,8 @@ void RelayInit()
       pinMode(RelayPin[i], OUTPUT);
       turnOffLamp(i);
    }
+   
+   VersionCode += VersionRelay ;
 }
 
 // Инециализируем входы для кнопок
