@@ -26,7 +26,7 @@ String VersionCode = "Version: ";
   int adcValue = 0;
   int adcValueOld = 0;
   String VersionFOTOREZ = " 1.0 FOTOREZ ";
-  String VersionMQ135 = " 1.0 MQ135 ";
+  String VersionMQ135 = " 1.1 MQ135 ";
 #endif
 
 #ifdef IR_RESIVER

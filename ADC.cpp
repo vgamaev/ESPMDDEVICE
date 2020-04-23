@@ -16,7 +16,7 @@ void adcRead()
       #endif
 
       #ifdef MQ135
-        adcValue = analogRead(A0);
+        adcValue = map(analogRead(A0), 330, 430, 0,100);   //adcValue = analogRead(A0);
       #endif
       
       float DeltaPlus = adcValueOld + 2;
