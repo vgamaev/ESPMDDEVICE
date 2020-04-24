@@ -25,6 +25,7 @@ void Start433()
 {
   mySwitch.enableReceive(2);  // Receiver on interrupt 0 => that is pin #2
   //Serial.print("Init 433 ");
+  VersionCode += Version433MHz ;
 }
 
 #endif

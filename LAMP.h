@@ -13,6 +13,9 @@
 extern ESP8266WebServer server; // веб сервер
 extern HTTPClient http; // веб клиент
 
+extern String VersionCode;
+extern String VersionRelay ;
+
 extern bool web_button_state[];
 
 extern int RelayPin[]; 

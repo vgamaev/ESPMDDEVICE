@@ -14,6 +14,9 @@
 extern HTTPClient http; // веб клиент
 extern unsigned long code433;
 
+extern String VersionCode;
+extern String Version433MHz ;
+
 void Resiver433();
 
 void Start433();

@@ -11,10 +11,15 @@
 
 extern HTTPClient http; // веб клиент
 
+extern String VersionCode;
+extern long   ADCInterval ;
+extern String VersionADC ;
+
 extern int adcValue;
 extern int adcValueOld;
 
 void adcRead();
+void ADCInit();
 
 #endif
 #endif

@@ -12,10 +12,12 @@
 #include "WEBUPDATE.h"
 
 
+String VersionCode = "Version: ";
+
 #ifdef RF433MHZ
     #include "RF433MHZ.h"
     unsigned long code433 =0;
-    String VersionCode = "2.05 RF 433MHZ";
+    Version433MHz = "1.00 RF 433MHZ";
 #endif
 
 //==============================================
@@ -23,6 +25,16 @@
   #include "ADC.h"
   int adcValue = 0;
   int adcValueOld = 0;
+       
+  #ifdef FOTOREZ
+      long ADCInterval= 1000;
+      String VersionADC = " 1.0 FOTOREZ ";
+  #endif
+
+  #ifdef MQ135
+      long ADCInterval= 60000;
+      String VersionADC = " 1.2 MQ135 ";
+  #endif
 #endif
 
 #ifdef IR_RESIVER
@@ -32,7 +44,7 @@
   int SEND_PIN = 15; //an IR led is connected to GPIO pin 0
   String ResiverCode = "0";
   String TransmiterCode = "0";
-  String VersionCode = "2.05 IR RESIVER";
+  String VersionIrResiver = "2.05 IR RESIVER";
 #endif
 
 
@@ -44,7 +56,7 @@
   int can_toggle[MAX_BUTTON];
   int button_state[MAX_BUTTON];
   bool web_button_state[MAX_RELAY];
-  String VersionCode = "2.05 RELAY TESTER";
+  String VersionRelay = "2.05 RELAY TESTER";
 #endif
 
 #ifdef BUTTON2
@@ -67,7 +79,7 @@
   int width = 5 + spacer;                   // The font width is 5 pixels
   int MatrixOFF = 0 ;
   int MatrixCounter = 0;                    // Счетчик дляотображения бегущей строки
-  String VersionCode = "2.05 LED MATRIX";
+  String VersionLedMatrix = "2.05 LED MATRIX";
 #endif
 
 //==============================================
@@ -78,6 +90,7 @@
   float tempDHTOld = 0;
   float humDHTOld = 0;
   float hicDHT = 0;
+  String VersionDHT = "1.0 DHT22 ";
 #endif
 
 //======================= KARNIZ =================================================
@@ -90,7 +103,7 @@
   int KarnizLength = 2; //16;
   int CurKarnizPosition = 0;
   int KarnizPosition = 0;
-  String VersionCode = "2.05 KARNIZ";
+  String VersionKARNIZ = "2.05 KARNIZ";
     
 #endif
 
@@ -125,7 +138,7 @@
   // cos f  
    byte CmdCos_f[] = {0x81,0xd2,0xb1,0x82,0xc3,0xCF,0x53,0x5F,0x66,0x28,0xa9,0x03,0x03};
   
-   String VersionCode = "2.06 ENERGOMERA";
+   String VersionEnergomera = "2.06 ENERGOMERA";
 #endif
 
 //=======================Светодиод WIFI=========================================

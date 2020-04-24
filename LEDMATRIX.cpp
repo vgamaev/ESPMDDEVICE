@@ -76,7 +76,8 @@ void LedMatrixInit() {
   matrix.setRotation(2, 3);    // The first display is position upside down
   matrix.setRotation(3, 3);    // The same hold for the last display
   matrix.setRotation(4, 3);    // The same hold for the last display
-  
+
+  VersionCode += VersionLedMatrix ;
 }
 
 void LedMatrix() {
@@ -188,4 +189,3 @@ void handleLedMatrix()
 }
 
 #endif
-

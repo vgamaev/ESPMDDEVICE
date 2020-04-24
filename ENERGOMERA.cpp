@@ -11,6 +11,7 @@ void EnergomeraInit()
     UART.begin(9600);
     pinMode(DIR, OUTPUT);
     digitalWrite(DIR, HIGH);
+    VersionCode += VersionEnergomera ;
 }
 /*
 struct EnergomeraStruct{

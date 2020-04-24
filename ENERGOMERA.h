@@ -11,6 +11,9 @@
 
 extern HTTPClient http; // веб клиент
 
+extern String VersionCode;
+extern String VersionEnergomera ;
+
 extern long Previous ; 
 extern int Step ;
 

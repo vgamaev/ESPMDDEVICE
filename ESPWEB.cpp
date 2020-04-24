@@ -266,7 +266,7 @@ void handleSetup() {
           <input type= submit name=save value= save ><br/>\
      </form>\
      </br> \
-     Gamaev Vlad Version: ";
+     Gamaev Vlad ";
      temp += VersionCode;
      temp +="</center> \
   </body>\
