@@ -7,7 +7,7 @@ void adcRead()
     static long previousMillis = 0;                             
     long currentMillis = millis();
      
-    if(currentMillis - previousMillis > 1000) 
+    if(currentMillis - previousMillis > ADCInterval) 
     {
       previousMillis = currentMillis;  
         
@@ -36,13 +36,7 @@ void adcRead()
 
 void ADCInit()
 {
-  #ifdef FOTOREZ
-      VersionCode += VersionFOTOREZ ;
-  #endif
-
-  #ifdef MQ135
-        VersionCode += VersionMQ135 ;
-  #endif
-}
+  VersionCode += VersionADC ;
+ }
 
 #endif

@@ -12,8 +12,8 @@
 extern HTTPClient http; // веб клиент
 
 extern String VersionCode;
-extern String VersionFOTOREZ ;
-extern String VersionMQ135 ;
+extern long   ADCInterval ;
+extern String VersionADC ;
 
 extern int adcValue;
 extern int adcValueOld;
