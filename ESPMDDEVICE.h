@@ -1,11 +1,15 @@
 //#define IR_RESIVER   //Собиракм ИК ресивер
-//#define ADC          // Мерим освещеность фоторезистором
+#define ADC          // Использем АЦП
+  #define MQ135        // Дачик CO2 использовать с опцией ADC
+  //#define FOTOREZ      // Мерим освещеность фоторезистором использовать с опцией ADC
+  
 #define WIFI_LED       // Светодиод сети Wi-Fi
 //#define LED_MATRIX       // Информер на светодиодных матрицах MAX7219
 //#define RF433MHZ
 //#define DHT22            // Датчик температуры и влажности DHT22
-//#define KARNIZ           // Управление эдектрокарнизом
-#define BUTTON           // Включаем кнопки
+
+#define KARNIZ           // Управление эдектрокарнизом
+//#define BUTTON           // Включаем кнопки
 //#define BUTTON2           // Включаем кнопки версии 2
 //#define  ENERGOMERA         // Считывае показания электросчетчика Энергомера СЕ102М через jgnjgjhn bkb КЫ485
 

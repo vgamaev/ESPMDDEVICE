@@ -14,6 +14,9 @@
 extern unsigned long StrToULong(char *str);
 extern ESP8266WebServer server; // веб сервер
 
+extern String VersionCode;
+extern String VersionLedMatrix ;
+
 extern int pinCS; // Попробуйте пины. DIN -> GPIO13 (MOSI) SCK -> GPIO14 (SCK) CS -> GPIO15 
 extern int numberOfHorizontalDisplays;
 extern int numberOfVerticalDisplays;

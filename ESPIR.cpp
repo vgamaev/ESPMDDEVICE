@@ -59,6 +59,7 @@ void StartIR()
 {
   irrecv.enableIRIn(); // Start the receiver
   irsend.begin();       // Start transmiter
+  VersionCode += VersionIrResiver ;
 }
 
 #endif

@@ -7,6 +7,7 @@ DHT dht(DHTPIN, DHTTYPE);
 void dhtInit() 
 {
     dht.begin();
+    VersionCode += VersionDHT ;
 }
 
 void dhtRead()
@@ -65,4 +66,3 @@ void dhtRead()
 }
 
 #endif
-
