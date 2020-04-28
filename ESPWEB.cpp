@@ -438,7 +438,10 @@ void handleRoot() {
     temp += " Герц </font></h3>\
              <h3><font color=red>Косинус F : ";
     temp += Cos_f.StrValue;
-    temp += " гр </font></h3>";
+    temp += " гр </font></h3> \
+            <h3><font color=red>Ошибок : ";
+    temp += ErrCoutEnergo;
+    temp += " </font></h3> ";
   #endif 
   
   //KARNIZ peges

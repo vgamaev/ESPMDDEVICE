@@ -110,14 +110,10 @@ String VersionCode = "Version: ";
 //======================= ENERGOMERA ===============================================
 #ifdef ENERGOMERA
   #include "ENERGOMERA.h"
-
-  /*#define RX_EM 14
-  #define TX_EM 12
-  #define CYCLE_TIME 15
-  #define DIR 15 */
   
   long Previous = 0; 
   int Step = 0;
+  int ErrCoutEnergo = 0;
  
   String ReadStr;
  

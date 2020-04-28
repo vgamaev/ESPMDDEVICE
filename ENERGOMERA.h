@@ -16,6 +16,7 @@ extern String VersionEnergomera ;
 
 extern long Previous ; 
 extern int Step ;
+extern int ErrCoutEnergo ;
 
 // открываем сессию
 extern byte CmdOpenSesion[];

@@ -60,6 +60,7 @@ void IfNullValue(EnergomeraStruct *Buffer, EnergomeraStruct *Buffer_old)
   {
     Buffer->FloatValue = Buffer_old->FloatValue ;
     Buffer->StrValue = Buffer_old->StrValue ;
+    ErrCoutEnergo ++ ;
   }
   Buffer_old->FloatValue = Buffer->FloatValue ;
   Buffer_old->StrValue = Buffer->StrValue ;
