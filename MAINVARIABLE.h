@@ -25,8 +25,16 @@ String VersionCode = "Version: ";
   #include "ADC.h"
   int adcValue = 0;
   int adcValueOld = 0;
-  String VersionFOTOREZ = " 1.0 FOTOREZ ";
-  String VersionMQ135 = " 1.1 MQ135 ";
+       
+  #ifdef FOTOREZ
+      long ADCInterval= 1000;
+      String VersionADC = " 1.0 FOTOREZ ";
+  #endif
+
+  #ifdef MQ135
+      long ADCInterval= 60000;
+      String VersionADC = " 1.2 MQ135 ";
+  #endif
 #endif
 
 #ifdef IR_RESIVER
