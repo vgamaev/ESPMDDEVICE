@@ -138,7 +138,7 @@ String VersionCode = "Version: ";
   // cos f  
    byte CmdCos_f[] = {0x81,0xd2,0xb1,0x82,0xc3,0xCF,0x53,0x5F,0x66,0x28,0xa9,0x03,0x03};
   
-   String VersionEnergomera = "2.06 ENERGOMERA";
+   String VersionEnergomera = "2.07 ENERGOMERA";
 #endif
 
 //=======================Светодиод WIFI=========================================
