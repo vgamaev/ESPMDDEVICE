@@ -137,6 +137,12 @@ String VersionCode = "Version: ";
    String VersionEnergomera = "2.07 ENERGOMERA";
 #endif
 
+//======================= Удаленая кнопка ========================================
+#ifdef RMBUTTON
+    #include "RMBUTTON.h"
+    
+  #endif
+
 //=======================Светодиод WIFI=========================================
 long WiFiCheckinterval = 1000; //Интервал проверки WiFi потключения
 int WIWI_Connect=0;

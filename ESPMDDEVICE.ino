@@ -127,4 +127,7 @@ void loop(void) {
   #ifdef ENERGOMERA
     EnergomeraCycle();
   #endif
+  #ifdef RMBUTTON
+    RmButtonRead();
+  #endif
 }
