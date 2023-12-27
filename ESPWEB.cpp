@@ -1,21 +1,22 @@
 #include "ESPWEB.h"
 
 //===================================== WEB Auth=================================================================
-bool WebAuth() {
-
+bool WebAuth()
+{
   if(Config.wwwpass == "on")
   {
-      char www_username[Config.www_username.length()+1];
-      Config.www_username.toCharArray(www_username,Config.www_username.length()+1);
-      char www_password[Config.www_password.length()+1];
-      Config.www_password.toCharArray(www_password,Config.www_password.length()+1);
+    char www_username[Config.www_username.length()+1];
+    Config.www_username.toCharArray(www_username,Config.www_username.length()+1);
+    char www_password[Config.www_password.length()+1];
+    Config.www_password.toCharArray(www_password,Config.www_password.length()+1);
       
-      if(!server.authenticate(www_username, www_password))
-          {
-            server.requestAuthentication();
-            return 0;
-          }
+    if(!server.authenticate(www_username, www_password))
+    {
+       server.requestAuthentication();
+       return 0;
+     }
   } else return 1;
+  return 2;
 }
 
 

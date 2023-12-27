@@ -216,7 +216,7 @@ void SendCurKarnizPosition()
      String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p="+Config.property+"&v="+a;
      Serial.println(post);
      Serial.println(post);
-     http.begin(post);
+     http.begin(client, post);
      int httpCode = http.GET(); 
      http.end();
 }
@@ -225,7 +225,7 @@ void ReadCurPosMD()
 {
   String post = "http://"+Config.serverIP+"/objects/?op=m&object="+Config.name+"&m=StartPos";  
         Serial.println(post);
-        http.begin(post);
+        http.begin(client, post);
         int httpCode = http.GET(); 
         http.end();
 }

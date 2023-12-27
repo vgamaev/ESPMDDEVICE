@@ -12,6 +12,7 @@
 
   extern ESP8266WebServer server; // веб сервер
   extern HTTPClient http; // веб клиент
+  extern WiFiClient client;
 
   extern String VersionCode;
   extern String VersionKARNIZ ;

@@ -150,5 +150,6 @@ const char *password1 = "66666666";
 
 ESP8266WebServer server (80) ; // веб сервер
 HTTPClient http; // веб клиент
+WiFiClient client;
 
 unsigned long StrToULong(char *str);
