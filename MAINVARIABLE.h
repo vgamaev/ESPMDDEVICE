@@ -56,7 +56,7 @@ String VersionCode = "Version: ";
   int can_toggle[MAX_BUTTON];
   int button_state[MAX_BUTTON];
   bool web_button_state[MAX_RELAY];
-  String VersionRelay = "2.05 RELAY TESTER";
+  String VersionRelay = "2.06 RELAY TESTER";
 #endif
 
 #ifdef BUTTON2
@@ -110,14 +110,10 @@ String VersionCode = "Version: ";
 //======================= ENERGOMERA ===============================================
 #ifdef ENERGOMERA
   #include "ENERGOMERA.h"
-
-  /*#define RX_EM 14
-  #define TX_EM 12
-  #define CYCLE_TIME 15
-  #define DIR 15 */
   
   long Previous = 0; 
   int Step = 0;
+  int ErrCoutEnergo = 0;
  
   String ReadStr;
  
@@ -138,7 +134,7 @@ String VersionCode = "Version: ";
   // cos f  
    byte CmdCos_f[] = {0x81,0xd2,0xb1,0x82,0xc3,0xCF,0x53,0x5F,0x66,0x28,0xa9,0x03,0x03};
   
-   String VersionEnergomera = "2.06 ENERGOMERA";
+   String VersionEnergomera = "2.07 ENERGOMERA";
 #endif
 
 //=======================Светодиод WIFI=========================================
@@ -154,5 +150,6 @@ const char *password1 = "66666666";
 
 ESP8266WebServer server (80) ; // веб сервер
 HTTPClient http; // веб клиент
+WiFiClient client;
 
 unsigned long StrToULong(char *str);
