@@ -223,7 +223,7 @@ void sendServer(bool state, int relay_n)
   String post = "http://"+Config.serverIP+"/objects/?object="+ObjectsName+"&op=set&p="+Config.property+"&v=";
   post += (state ? "1" : "0");
   Serial.println(post);
-  http.begin(post);
+  http.begin(client, post);
   int httpCode = http.GET(); 
   http.end();
 }

@@ -10,6 +10,7 @@
 #include "ESPEEPROM.h"
 
 extern HTTPClient http; // веб клиент
+extern WiFiClient client;
 
 extern String VersionCode;
 extern long   ADCInterval ;

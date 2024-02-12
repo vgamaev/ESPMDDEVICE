@@ -12,6 +12,8 @@
 
 extern String VersionCode;
 
+extern int ErrCoutEnergo;
+
 extern String tapeMatrix;
 extern int MatrixCounter;
 

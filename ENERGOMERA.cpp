@@ -2,7 +2,7 @@
 
 #ifdef ENERGOMERA
 
-EnergomeraStruct Etope, Volta, Power, Frequ, Curre, Cos_f;
+EnergomeraStruct Etope, Volta, Power, Frequ, Curre, Cos_f, Etope_old, Volta_old, Power_old, Frequ_old, Curre_old, Cos_f_old;
 
 SoftwareSerial UART(14, 12);  //(RX_EM, TX_EM); //(14, 12)  RX, TX
 
@@ -13,13 +13,6 @@ void EnergomeraInit()
     digitalWrite(DIR, HIGH);
     VersionCode += VersionEnergomera ;
 }
-/*
-struct EnergomeraStruct{
-    String NameParam;
-    String StrValue;
-    float  FloatValue;
-  }Etope, Volta, Power, Curre, Frequ, Cos_f; 
-   */
 
 
 void ValueParser(String inString, String Param, EnergomeraStruct* Buffer)
@@ -61,6 +54,18 @@ void PrintVolume(EnergomeraStruct *Buffer)
    Serial.println(Buffer->FloatValue);           //формат float
 }
 
+void IfNullValue(EnergomeraStruct *Buffer, EnergomeraStruct *Buffer_old)
+{
+  if(Buffer->FloatValue == 0)
+  {
+    Buffer->FloatValue = Buffer_old->FloatValue ;
+    Buffer->StrValue = Buffer_old->StrValue ;
+    ErrCoutEnergo ++ ;
+  }
+  Buffer_old->FloatValue = Buffer->FloatValue ;
+  Buffer_old->StrValue = Buffer->StrValue ;
+}
+
 void SendMDEnergomera(EnergomeraStruct *Buffer)
 {
     String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p="+Buffer->NameParam+"&v="+Buffer->FloatValue;
@@ -82,31 +87,37 @@ void EnergomeraRead()
         case 3:
               ValueParser(ReadStr, "ET0PE", &Etope);
               PrintVolume(&Etope);
+              IfNullValue(&Etope, &Etope_old);
               SendMDEnergomera(&Etope);
         break;
         case 4:
               ValueParser(ReadStr, "VOLTA", &Volta);
               PrintVolume(&Volta);
+              IfNullValue(&Volta, &Volta_old);
               SendMDEnergomera(&Volta);
         break;
         case 5:
               ValueParser(ReadStr, "POWEP", &Power);
               PrintVolume(&Power);
+              IfNullValue(&Power, &Power_old);
               SendMDEnergomera(&Power);
         break;
         case 6:
               ValueParser(ReadStr, "FREQU", &Frequ);
               PrintVolume(&Frequ);
+              IfNullValue(&Frequ, &Frequ_old);
               SendMDEnergomera(&Frequ);
         break;
         case 7:
               ValueParser(ReadStr, "CURRE", &Curre);
               PrintVolume(&Curre);
+              IfNullValue(&Curre, &Curre_old);
               SendMDEnergomera(&Curre);
         break;
         case 8:
               ValueParser(ReadStr, "COS_f", &Cos_f);
               PrintVolume(&Cos_f);
+              IfNullValue(&Cos_f, &Cos_f_old);
               SendMDEnergomera(&Cos_f);
               Serial.println();
         break;

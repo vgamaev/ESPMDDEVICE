@@ -26,7 +26,7 @@ void adcRead()
       { 
         String post = "http://"+Config.serverIP+"/objects/?object="+Config.name+"&op=set&p=ADC&v="+adcValue;
         Serial.println(post);
-        http.begin(post);
+        http.begin(client, post);
         int httpCode = http.GET(); 
         http.end();
         adcValueOld = adcValue;

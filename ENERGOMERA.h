@@ -16,6 +16,7 @@ extern String VersionEnergomera ;
 
 extern long Previous ; 
 extern int Step ;
+extern int ErrCoutEnergo ;
 
 // открываем сессию
 extern byte CmdOpenSesion[];
@@ -43,7 +44,7 @@ extern struct EnergomeraStruct{
     String NameParam;
     String StrValue;
     float  FloatValue;
-  }Etope, Volta, Power, Curre, Frequ, Cos_f; 
+  }Etope, Volta, Power, Curre, Frequ, Cos_f, Etope_old, Volta_old, Power_old, Curre_old, Frequ_old, Cos_f_old; 
 
 
 void EnergomeraInit(); 
@@ -54,6 +55,7 @@ void EnergomeraRead();
 void SendCommand(byte* cmd, int size);
 void EmergomeraWrite();
 void EnergomeraCycle();
+void IfNullValue(EnergomeraStruct *Buffer, EnergomeraStruct *Buffer_old);
 
 #endif
 #endif
